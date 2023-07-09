@@ -16,7 +16,7 @@
               <a class="nav-link" href="donor.php">Donors</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="recepient.php">Recipes</a>
+              <a class="nav-link" href="recepient.php">Recipient</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="appointment.php">Book Appointment</a>

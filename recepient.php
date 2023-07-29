@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VitaCare</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-  
+    <link rel="shortcut icon" href="VitaCare.ico" type="image/x-icon">
      <link rel="stylesheet" href="fontawesome/css/all.min.css">
 
      <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,7 +27,7 @@
         <div class="col-md-6 col-lg-6 col-xl-6 pt-1 w-100">
             <h1 class="text-light fs-auto pt-5">What is blood transfusion</h1>
             <p class="text-light "> A blood transfusion involves the intravenous transfer of blood or blood components from a donor to a recipient. It is typically done to replace blood that has been lost due to injury, surgery, or medical conditions that affect the production or functioning of blood.</p>
-            <a href="recipient-dashboard.php" rel="noopener noreferrer"><button type="button" class="btn btn-outline-light">Get Blood Now</button></a>
+            <a href="RecipientDashboard\Rprofile.php"><button type="button" class="btn btn-outline-light">Get Blood Now</button></a>
         </div>
 
         <table class="table bg-light my-4">
@@ -60,8 +60,7 @@
       <td>B+ B- O+ O-</td>
     </tr>
    
-    <tr>
-    <td>B-</td>
+    <tr>    <td>B-</td>
       <td>B+ B- AB+ AB-</td>
       <td>B- O-</td>
     </tr>

@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VitaCare</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-  
+    <link rel="shortcut icon" href="VitaCare.ico" type="image/x-icon">
      <link rel="stylesheet" href="fontawesome/css/all.min.css">
 
 
 
 </head>
-<body>
+<body class="bd-light">
 
 <!-- this is headiding section -->
   <?php
@@ -26,8 +26,10 @@
         <div class="container">
             <div class="row">
             <div class="col col-sm-5 col-md-6  appo">
+                 
+                  <div class="shadow mb-5 bg-body rounded">
                   <h1 class="fs-auto">Contact Us</h1>
-                  <div class="shadow p-3 mb-5 bg-body rounded"></div>
+                  </div>
                   <!-- form of appointment -->
 
                   <form action="#" class=" row g-2 needs-validation" novalidate>
@@ -37,7 +39,7 @@
                         Please fill you Name
                     </div>
                    
-                    <input type="email" class="form-control  mb-4" id="validationTooltipEmail" aria-describedby="validationTooltipEmail" placeholder="Email" name="email" required>
+                    <input type="email" class="form-control mb-4" id="validationTooltipEmail" aria-describedby="validationTooltipEmail" placeholder="Email" name="email" required>
                     <div class="invalid-feedback">
                         Please fill you Email ID
                     </div>
@@ -52,9 +54,7 @@
                     <span class="ms-2">Send</span>
                     </button>
                   </form>
-
             </div>
-
             <div class="col-sm-5 col-md-6 mt-0 mt-5 appoImg">
                 <img class="img-fluid " src="images/contact.png" alt="appoint Img">
             </div>
@@ -63,7 +63,7 @@
     </div>
 <!-- footer starts here -->
 <?php
-    include 'includes/footer.php'
+    include 'includes/footer.php';
    ?>
 
 

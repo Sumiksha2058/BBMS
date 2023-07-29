@@ -1,0 +1,128 @@
+<?php
+session_start();
+include "includes/config.php";
+
+if (isset($_SESSION['recp_email'])) {
+
+
+    if (isset($_POST['oldpass']) && isset($_POST['npass']) && isset($_POST['cpass'])) {
+        function validate($data) {
+            $data = trim($data);
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;
+        }
+
+        $oldpass = validate($_POST['oldpass']);
+        $npass = validate($_POST['npass']);
+        $cpass = validate($_POST['cpass']);
+
+        if (empty($oldpass)) {
+            header("location: rchangePassword.php?error=Please enter Old Password");
+            exit();
+        } else if (empty($npass)) {
+            header("location: rchangePassword.php?error=Please enter new password");
+            exit();
+        } else if ($npass !== $cpass) {
+            header("location: rchangePassword.php?error=Passwords do not match");
+            exit();
+        } else {
+            $npass = md5($npass);
+            $oldpass = md5($oldpass);
+            $email = $_SESSION['recp_email'];
+
+            $sql = "SELECT password FROM recipient WHERE recp_email = '{$email}' AND recp_password ='{$oldpass}' ";
+            $result = mysqli_query($conn, $sql);
+
+            $sql_2 = "UPDATE recipient SET recp_password = ? WHERE recp_email = ?";
+            $stmt = mysqli_prepare($conn, $sql_2);
+
+            if ($stmt) {
+                mysqli_stmt_bind_param($stmt, "ss", $npass, $email);
+                mysqli_stmt_execute($stmt);
+                header("location: rchangePassword.php?success=Password is successfully changed");
+                exit();
+            } else {
+                header("location: rchangePassword.php?error=Failed to update password");
+                exit();
+            }
+        }
+    }
+} 
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VitaCare</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="fontawesome/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+</head>
+<body>
+
+    <?php 
+    include 'C:\xampp\htdocs\VitaCare\RecipientDashboard\includes\head.php';
+    ?>
+
+    <?php 
+    include 'C:\xampp\htdocs\VitaCare\RecipientDashboard\includes\r_dashboard.php';
+    ?>
+
+<main id="main_container">
+
+<div class="main-area ">
+    <div class="inner-wrapper px-5">
+        <div class="container-fluid text-light">
+
+        <div class="row bg-light w-50 rounded text-dark p-3 items-center mb-3">
+           <h1>Change Password</h1> 
+           <form action="r_dashboard.php" method="post" class="row needs-validation " novalidate>
+            <div class="">
+            <?php if (isset($_GET['error'])) { ?>
+                <p class="alert alert-danger ">  <?php echo $_GET['error']; ?></p>
+            <?php } ?>
+
+            <?php if (isset($_GET['success'])) { ?>
+                <p class="alert alert-success "><?php echo $_GET['success']; ?></p>
+            <?php } ?>
+            </div>
+            <div class="mb-3">
+                <h4><label for="InputOldpassword" class="form-label">Old password</label></h4>
+                <input type="password" name="oldpass" class="form-control" id="InputOldpassword" aria-describedby="emailHelp">
+                <div id="passportHelp" class="form-text text-light">
+                    We'll never share your email with anyone else.
+                </div>
+            </div>
+            <div class="mb-3">
+                <h4><label for="NewInputPassword1" class="form-label">New Password</label></h4>
+                <input type="password" name="npass" class="form-control " id="NewInputPassword1">
+            </div>
+
+            <div class="mb-3">
+                <h4><label for="ConformInputPassword1" class="form-label">Confirm Password</label></h4>
+                <input type="password" name="cpass" class="form-control " id="ConformInputPassword1">
+            </div>
+            <button type="submit" name="changePass" class="btn btn-dark">Submit</button>
+        </form>
+    </div>
+    </div>
+        </div>
+    </div>
+    </div>
+
+</main>
+
+
+
+<script src="fontawesome/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>

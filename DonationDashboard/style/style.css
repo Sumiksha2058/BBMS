@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100;0,500;1,700&family=Lato:wght@100&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #CC6666 !important;
+    padding-top: 85px;
+}
+.navbar{
+    background-color: #2F3936 !important;
+    box-shadow: 0px 2px 7px #cbcfce;
+    padding: .26em 7em !important;
+   
+}
+.nav-link{
+    color: #ffffff !important;
+    margin-right: 5px;
+}
+.nav-link:hover{
+    color: #E2DFD2 !important;
+}
+.main_wapper{
+    background-color: #fff !important;
+}
+/* main{
+    background-color: #DE4A4A;
+} */
+
+
+.row h1,h3,h4{
+font-family: exo;
+
+}
+.row h1{
+    font-style:italic !important;
+}
+
+.divider{
+width: 20%;
+
+}
+.row-cols-2 p{
+    font-family: 'lato',sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    }
+  .row h2, h3{
+    font-style: normal;
+  }
+.style { 
+    height: 30px; 
+    border-style: solid; 
+    border-color: #080808; 
+    border-width: 1px 0 0 0; 
+    border-radius: 20px; 
+  } 
+  .style:before { 
+    display: block; 
+    content: ""; 
+    height: 30px; 
+    margin-top: -31px; 
+    border-style: solid; 
+    border-color: #1b1717; 
+    border-width: 0 0 1px 0; 
+    border-radius: 20px; 
+  }
+  
+/* donation page */
+.container-i{
+margin-left: 3em;
+}
+#row{
+    display: flex;
+    width: 100%;
+}
+#row .col-ms{
+ flex: 33.3%;
+width: auto;
+overflow: hidden;
+height: 100%;
+padding: 4px 19px;
+
+}
+.row .col img{
+    width: 100%;
+    height: 100%;
+}
+.container-fluid{
+    width: auto;
+} 
+
+/* recipient */
+table{
+    border-radius: 5px;
+}
+
+/* appointment page */
+
+
+input[type=text],input[type=email],input[type=date],input[type=time]{
+    border: none;
+    border-bottom: solid 1px #242424;
+}
+
+
+
+footer{
+    background-color: #2F3936;
+}
+
+
+/* footer */
+
+
+#dashbord{
+    padding-top: 2em;
+    background-color: #242424;
+    width: 20%;
+    height: 100% !important;
+    position: fixed;
+    overflow: hidden; 
+    box-shadow: 4px 4px 17px #1b1717;
+    
+}
+.main_container{
+    overflow:auto;
+}
+a#nav-link{
+    font-family: exo;
+    font-style: normal;
+    font-weight: 500;
+}
+#navlink.active{
+    background-color: #DE4A4A !important;
+    color: #fff !important;
+    
+}
+a#nav-link:hover{
+    background-color: #DE4A4A !important;
+    color: #ffffff !important;
+   
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+}
+
+/* registration */
+.active1{
+    background-color: blue;
+    color: white;
+}
+.form-section {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    transition: .5s;
+}
+.toggle-btn{
+    font-size: 22px !important;
+    font-weight: 600 !important;
+    display: flex !important;
+    justify-content: center;
+    width: 15em;
+    margin-right: 5px;
+    transition: .5s;
+}
+
+#main_container{
+    padding-left: 20%;
+}
+
+
+

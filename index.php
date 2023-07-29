@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VitaCare</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-  
+     <link rel="shortcut icon" href="VitaCare.ico" type="image/x-icon">
      <link rel="stylesheet" href="fontawesome/css/all.min.css">
 
      <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,7 +17,7 @@
 </head>
 <body>
   <?php
-    include 'includes/head.php'
+    include 'includes/head.php';
    ?>
     
     <!-- main container starts from here -->
@@ -27,7 +27,7 @@
         <div class="col-md-6 col-lg-6 col-xl-6 pt-1">
             <h1 class="text-light fs-auto pt-5">Unlocking the power of blood for life</h1>
             <p class="text-light">The primary objective of VitaCare is to unlock the life-giving potential of blood, enabling it to be utilized for critical medical interventions and ultimately extending and improving the quality of human life.</p>
-            <a href="donor_dashbord_profile.php" rel="noopener noreferrer"><button type="button" class="btn btn-outline-light">Donate Now</button></a>
+            <a href="login.php" rel="noopener noreferrer"><button type="button" class="btn btn-outline-light">Donate Now</button></a>
         </div>
         <div class="col-md-6 col-lg-6 col-xl-6 pt-4">
             <img class="img-fluid" src="images/donating blood png1.png" alt="Donating Blood">

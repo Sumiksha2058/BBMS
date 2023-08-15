@@ -43,7 +43,7 @@
 
           // Check if password validates 
           if  (!$uppercase || !$lowercase || !$number || !$specialChar) {
-            header("location: register.php?error=Passporshould be: at least 8 characer, one uppercase, one number, one special character");
+            header("location: register.php?error=Password should be: at least 8 character, one uppercase, one number and one special character");
             exit();
         }
         // Check if passwords match

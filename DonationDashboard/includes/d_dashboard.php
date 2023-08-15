@@ -28,6 +28,15 @@
                             </li>
 
                             <li class="nav-item mb-4">
+                                <a href="dontionRequest.php" class="nav-link text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
+                                    <i class="fa fa-clipboard d-inline d-xl-none d-md-none text-center"
+                                        data-bs-toggle="tooltip" data-bs-placement="right" title="Donation Record"
+                                        aria-hidden="false"></i>
+                                    <span class="ms-2 d-none d-md-inline">Donation Request</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item mb-4">
                                 <a href="DdonationRecord.php" class="nav-link text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
                                     <i class="fa fa-clipboard d-inline d-xl-none d-md-none text-center"
                                         data-bs-toggle="tooltip" data-bs-placement="right" title="Donation Record"
@@ -59,7 +68,7 @@
                             </a>
                             </li>
                         </ul>
-                    </div><script type="module" src=""></script>
+                    </div>
                 </div>
             </div>
         </div>

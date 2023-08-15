@@ -5,7 +5,6 @@ include "includes/config.php";
 
 if(isset($_SESSION['email'])){
 
-
     if (isset($_POST['oldpass']) && isset($_POST['npass']) && isset($_POST['cpass'])) {
         function validate($data)
         {
@@ -49,10 +48,7 @@ if(isset($_SESSION['email'])){
                 header("location: ..\DonationDashboard\Dchangepassword.php?error=Failed to update password");
                 exit();
             }
-
-            
-
-            
+           
         }
     }
 

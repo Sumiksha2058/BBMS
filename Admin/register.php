@@ -26,12 +26,18 @@ include 'functions/vc_register.php';
                 <h1 class="text-center">Admin Registration Form</h1>
             </div>
             <form method="POST" action="register.php" class="mt-3 row needs-validation"  novalidate>
-            <?php if (isset($_GET['error'])) { ?>
-                <p class="alert alert-danger ">  <?php echo $_GET['error']; ?></p>
-            <?php } ?>
-            <?php if (isset($_GET['success'])) { ?>
+                <?php
+            if (count($errors) > 0):?>
+            <div class="alert alert-danger">
+                <?php foreach ($errors as $error) : ?>
+                    <p><?php echo $error; ?></p>
+                <?php endforeach; ?>
+            </div>
+       <?php endif ?>
+        <?php if (isset($_GET['success'])) { ?>
                                 <p class="alert alert-success ">  <?php echo $_GET['success']; ?></p>
-            <?php } ?>
+                            <?php } ?>
+            
 
                 <div class="sm-6 mb-3">
                     <label for="vcfullname" class="form-label">Fullname</label>
@@ -65,7 +71,7 @@ include 'functions/vc_register.php';
                     </div>
                 </div>
                 <div class="sm-6 mb-3">
-                    <label for="vc_conpassword" class="form-label">Comform Password</label>
+                    <label for="vc_conpassword" class="form-label">Comfirm Password</label>
                     <div class="input-group">
                         <input type="password" class="form-control" name="vc_conpassword" id="vc_conpassword">
                         <div class="input-group-prepend">
@@ -78,7 +84,7 @@ include 'functions/vc_register.php';
                     </div>
                 </div>
                 <div class="mb-3 text-center">
-                    <span>Already have an account? <a href="register.php"> Login Now</a></span>
+                    <span>Already have an account? <a href="login.php"> Login Now</a></span>
                 </div>
                 <div class="mb-3 text-right">
                     <div class="form-group  float-end">

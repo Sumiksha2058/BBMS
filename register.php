@@ -131,7 +131,7 @@ include 'includes/head.php'
                         </div>   
                 
                 <div class="col md-6">
-                  <label for="DonorConformPassword" class="form-label fs-auto">Conform Password</label>
+                  <label for="DonorConformPassword" class="form-label fs-auto">Confirm Password</label>
                   <div class="input-group">
                   <input type="password" class="form-control " name="con_password" id="DonorConformPassword" placeholder="Re-enter Password" required>
                   <div class="input-group-prepend">
@@ -234,7 +234,7 @@ include 'includes/head.php'
                 </div>
 
                   <div class="col md-6">
-                    <label for="RecipientConformPassword" class="form-label">Password</label>
+                    <label for="RecipientConformPassword" class="form-label">Confirm Password</label>
                     <input type="password" class="form-control" name="recp_cpassword" id="RecipientConformPassword" placeholder="Re-enter Password">
                    
                 </div>

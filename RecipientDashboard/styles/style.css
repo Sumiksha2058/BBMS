@@ -29,11 +29,7 @@ body{
 /* main{
     background-color: #DE4A4A;
 } */
-#tube{
-    width: 358px;
-    height: 534px;
-    border-radius: 2em;
-}
+
 
 .row h1,h3,h4{
 font-family: exo;
@@ -52,7 +48,9 @@ width: 20%;
     font-style: normal;
     font-weight: 700;
     }
-
+  .row h2, h3{
+    font-style: normal;
+  }
 .style { 
     height: 30px; 
     border-style: solid; 
@@ -101,26 +99,13 @@ table{
 }
 
 /* appointment page */
-.appo h1{
-   margin-top: 2.5em !important;
-   color: #CC6666 !important;
-   font-style:normal !important;
-   font-weight: 700;
-}
+
 
 input[type=text],input[type=email],input[type=date],input[type=time]{
     border: none;
     border-bottom: solid 1px #242424;
 }
-.appoImg img{
-    width: 600px;
-    height:550;
-}
 
-.appobtn{
-    background-color: #CC6666 !important;
-    color: #ffffff !important;
-}
 
 
 footer{
@@ -130,10 +115,6 @@ footer{
 
 /* footer */
 
-#dashbord_wapper {
-    margin-left: 0;
-    height: 100vh;
-  }
 
 #dashbord{
     padding-top: 2em;
@@ -150,7 +131,7 @@ footer{
 }
 a#nav-link{
     font-family: exo;
-    font-style: normalS;
+    font-style: normal;
     font-weight: 500;
 }
 #navlink.active{
@@ -188,12 +169,7 @@ a#nav-link:hover{
 
 #main_container{
     padding-left: 20%;
-    padding-top: 95px;
 }
 
 
 
-/* d dashboard */
-#staticBackdrop{
-    margin-top: 6em !important;
-}

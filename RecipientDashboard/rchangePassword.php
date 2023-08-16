@@ -58,7 +58,7 @@ if(isset($_SESSION['recp_email'])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VitaCare</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="fontawesome/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -67,18 +67,18 @@ if(isset($_SESSION['recp_email'])){
 <body>
 
     <?php 
-    include 'C:\xampp\htdocs\VitaCare\RecipientDashboard\includes\head.php';
+    include 'includes\head.php';
     ?>
 
     <?php 
-    include 'C:\xampp\htdocs\VitaCare\RecipientDashboard\includes\r_dashboard.php';
+    include 'includes\r_dashboard.php';
     ?>
 
 <main id="main_container">
 
 <div class="main-area P-4">
     <div class="inner-wrapper px-4">
-        <div class="container-fluid text-light rounded d-flex justify-content-center">
+        <div class="container-fluid text-light mt-5 rounded d-flex justify-content-center">
 
         <div class="row bg-light shadow-lg w-50 rounded text-dark p-3 items-center mb-3">
            <h1>Change Password</h1> 

@@ -45,11 +45,11 @@ if ($result && mysqli_num_rows($result) > 0) {
 <body>
 
 <?php 
-        include ('C:\xampp\htdocs\VitaCare\RecipientDashboard\includes\head.php');
+        include ('C:\xampp\htdocs\VitaCare\BBMS-2\RecipientDashboard\includes\head.php');
     ?>
 
 <?php 
-        include ('includes/r_dashboard.php');
+        include ('includes\r_dashboard.php');
     ?>
 
 <main id="main_container">

@@ -65,7 +65,7 @@ if (isset($_POST['login'])) {
     ?>
     
     <!-- main container starts from here -->
-    <div class="container d-flex justify-content-center">
+    <div class="container d-flex justify-content-center mt-4">
         <div class="row px-6 my-2 text-dark bg-light w-50 md-w-100 shadow p-3 mb-5 bg-body rounded-3" id="login_wrapper">
             <div class="col mt-3 ">
                 <h1 class="text-center">Login</h1>

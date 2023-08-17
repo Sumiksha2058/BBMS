@@ -28,7 +28,7 @@
                             </li>
 
                             <li class="nav-item mb-4">
-                                <a href="dontionRequest.php" class="nav-link text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
+                                <a href="donationRequest.php" class="nav-link text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
                                     <i class="fa fa-clipboard d-inline d-xl-none d-md-none text-center"
                                         data-bs-toggle="tooltip" data-bs-placement="right" title="Donation Record"
                                         aria-hidden="false"></i>

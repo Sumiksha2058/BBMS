@@ -3,12 +3,12 @@
 session_start();
 session_regenerate_id(true);
 
-if(!isset($_SESSION['recp_email']) || ($_SESSION['recp_id'])){
+if(!isset($_SESSION['recp_email'])){
     header("location: .../VitaCare/login.php");  
 }
 include 'includes/config.php';
 // Get the email of the logged-in donor from the session
-$recepient_id = $_SESSION['recp_id'];
+
 $email = $_SESSION['recp_email'];
 // Fetch donor information from the database
 $sql = "SELECT recp_fullname,recp_gender, recp_contact, recp_email FROM recipient WHERE recp_email = '$email'";

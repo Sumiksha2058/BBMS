@@ -36,7 +36,7 @@
                                 <a href="bloodStatus.php" class="nav-link text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
                                     <i class="fa fa-certificate d-inline d-xl-none d-md-none" data-bs-toggle="tooltip"
                                         data-bs-placement="right" title="Request blood" aria-hidden="false"></i>
-                                    <span class="ms-2 d-none d-md-inline">Blood Status</span>
+                                    <span class="ms-2 d-none d-md-inline">Request Status</span>
                                 </a>
                             </li>
 

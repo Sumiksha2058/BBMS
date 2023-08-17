@@ -16,10 +16,6 @@
               </div>
         <ul class="navbar-nav fs-5 ms-auto text-center">
 
-        <li class="nav-item text-light">
-             <a href="register.php">Register</a>
-              
-          </li>
 
         <li class="nav-item  d-flex p-3 ms-3">
               <div class="col ">

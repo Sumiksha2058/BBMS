@@ -136,3 +136,14 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+-
+-- Table structure for table `recipient`
+--
+
+CREATE TABLE `admin` (
+  `admin_id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `admin_fullname` varchar(250) NOT NULL,
+  `a_address` varchar(200) NOT NULL,
+  `a_email` varchar(200) NOT NULL,
+  `a_password` varchar(100) NOT NULL)

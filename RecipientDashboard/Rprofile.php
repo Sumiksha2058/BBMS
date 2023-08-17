@@ -3,11 +3,12 @@
 session_start();
 session_regenerate_id(true);
 
-if(!isset($_SESSION['recp_email'])){
+if(!isset($_SESSION['recp_email']) || ($_SESSION['recp_id'])){
     header("location: .../VitaCare/login.php");  
 }
 include 'includes/config.php';
 // Get the email of the logged-in donor from the session
+$recepient_id = $_SESSION['recp_id'];
 $email = $_SESSION['recp_email'];
 // Fetch donor information from the database
 $sql = "SELECT recp_fullname,recp_gender, recp_contact, recp_email FROM recipient WHERE recp_email = '$email'";
@@ -36,7 +37,7 @@ if ($result && mysqli_num_rows($result) > 0) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VitaCare</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="fontawesome/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,7 +46,11 @@ if ($result && mysqli_num_rows($result) > 0) {
 <body>
 
 <?php 
+<<<<<<< HEAD
         include ('C:\xampp\htdocs\VitaCare\BBMS-2\RecipientDashboard\includes\head.php');
+=======
+        include ('includes\head.php');
+>>>>>>> 1f4076686bf81a8b051894abdcee11ee1eaef157
     ?>
 
 <?php 
@@ -54,10 +59,10 @@ if ($result && mysqli_num_rows($result) > 0) {
 
 <main id="main_container">
 
-    <div class="inner-wrapper p-4">
-        <div class="container-fluid text-light">
-
-            <div class="row">
+        <div class="main-area p-4">
+            <div class="inner-wrapper p-4">
+                <div class="container-fluid text-light">
+                    <div class="row">
                 <div class="col-12 pb-3">
                     <h1>Profile</h1>
                 </div>
@@ -101,7 +106,7 @@ if ($result && mysqli_num_rows($result) > 0) {
 
         </div>
     </div>
-
+</div>
 
 </main>
 

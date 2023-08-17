@@ -2,7 +2,7 @@
 
 include 'function/UserRegister.php';
 
-//filtering donor inpurs
+//filtering donor inputs
 function input_filter($data){
     $data = trim($data);
     $data = stripslashes($data);
@@ -31,11 +31,13 @@ if (isset($_POST['login'])) {
 
     if ($donor_result && mysqli_num_rows($donor_result) == 1) {
         session_start();
+        $_SESSION['d_id'] = $donor_id;
         $_SESSION['email'] = $email;
         header("Location: DonationDashboard\Dprofile.php");
         exit();
     } elseif ($recipient_result && mysqli_num_rows($recipient_result) == 1) {
         session_start();
+        $_SESSION['recp_id'] = $row['recp_id']; // Set the recp_id session variable
         $_SESSION['recp_email'] = $email;
         header("Location: RecipientDashboard\Rprofile.php");
         exit();

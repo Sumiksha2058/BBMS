@@ -14,7 +14,7 @@
 <body>
 
 <?php 
-      include ('C:\xampp\htdocs\VitaCare\RecipientDashboard\includes\head.php');
+      include ('includes\head.php');
 ?>
 
 <?php 

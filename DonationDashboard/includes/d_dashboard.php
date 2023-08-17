@@ -13,8 +13,10 @@
                             <i class="fa fa-dashboard d-inline d-xl-none d-md-none" data-bs-toggle="tooltip"
                                 data-bs-placement="right" title="Tooltip on right" aria-hidden="true"></i>
                             <span class="ms-2  d-none d-md-inline ">Donor Dashboard</span>
+                            
                         </h1>
                     </div>
+                    <hr class="divider">
                     </div>
                     <div class="col md-text-center">
                         <ul class="nav nav-tabs fs-5 flex-column" role="tablist">
@@ -62,7 +64,7 @@
                             </li>
 
                             <li class="nav-item mb-4">
-                            <a href="logout.php" class="nav-link text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
+                            <a href="Dlogout.php" class="nav-link text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
                             <i class="fa fa- d-inline d-xl-none d-md-none" data-bs-toggle="tooltip" data-bs-placement="right" title="Logout" aria-hidden="false"></i>   
                             <span class="ms-2 d-none d-md-inline">logout</span>      
                             </a>
@@ -73,7 +75,3 @@
             </div>
         </div>
       
-<!-- Button trigger modal -->
-
-
-    <!-- dashbord end -->

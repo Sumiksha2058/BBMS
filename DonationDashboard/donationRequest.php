@@ -1,3 +1,29 @@
+<?php
+include 'includes/config.php'; // Include the database connection
+
+session_start(); // Start the session
+
+if (!isset($_SESSION['email'])) {
+    header("Location: ../login.php"); // Redirect to login page if not logged in
+    exit();
+}
+
+if (isset($_POST["submitRequest"])) {
+    $email = $_SESSION['email'];
+
+    $amountRequire = $_POST["amountRequire"];
+ 
+    $insertRequestSql = "INSERT INTO donation_requests(email, amount_to_donate)
+                        VALUES ('$email', '$amountRequire')";
+
+    if (mysqli_query($conn, $insertRequestSql)) {
+        $successMessage = "Donation request submitted successfully.";
+    } else {
+        $errorMessage = "Error: " . mysqli_error($conn);
+    }
+
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,6 +43,7 @@
 
     <?php include 'includes/head.php'; ?>
 
+
     <?php include 'includes/d_dashboard.php'; ?>
 
     <main id="main_container">
@@ -26,39 +53,23 @@
                 <div class="container-fluid text-light">
 
                     <div class="row bg-light w-50 rounded text-dark p-3 items-center">
-                        <h1 class="mb-3 ">Donation Request</h1>
+                        <h3 class="mb-3 ">Donation Request</h3>
+                        <hr class="divider">
+                        <form method="post" action="donationRequest.php">
+                      
+                        <?php if (isset($successMessage)): ?>
+                            <div class="alert alert-success"><?php echo $successMessage; ?></div>
+                        <?php endif; ?>
 
-                        <form action="Dchangepassword.php" method="post" class="row needs-validation " novalidate>
-                            <div class="">
-                            <?php if (isset($_GET['error'])) { ?>
-                                <p class="alert alert-danger ">  <?php echo $_GET['error']; ?></p>
-                            <?php } ?>
+                        <?php if (isset($errorMessage)): ?>
+                            <div class="alert alert-danger"><?php echo $errorMessage; ?></div>
+                        <?php endif; ?>
+                            <label for="amountRequire">Amount to donate(ml):</label>
+                            <input class="form-control" type="number" name="amountRequire" required>
 
-                            <?php if (isset($_GET['success'])) { ?>
-                                <p class="alert alert-success ">  <?php echo $_GET['success']; ?></p>
-                            <?php } ?>
-                            </div>
-                            <div class="mb-3">
-                                <h4><label for="fullname" class="form-label">Full Name</label></h4>
-                                <input type="text" name="fullname" class="form-control" id="fullname" aria-describedby="nameHelp">
-                                
-                            </div>
-                            <div class="mb-3">
-                                <h4><label for="contact" class="form-label">Contact</label></h4>
-                                <input type="text" name="contact" class="form-control" id="contact" aria-describedby="contact">
-                                
-                            </div>
-                            <div class="mb-3">
-                                <h4><label for="bloodgroup" class="form-label">Blood group</label></h4>
-                                <input type="text" name="bloodgroup" class="form-control " id="bloodgroup">
-                            </div>
-
-                            <div class="mb-3">
-                                <h4><label for="quantity" class="form-label">Donation Quantity(ml)</label></h4>
-                                <input type="text" name="quantity" class="form-control " id="quantity">
-                            </div>
-                            <button type="submit" name="request_d" class="btn btn-dark">Submit</button>
+                            <button type="submit" name="submitRequest" class="btn text-light bg-dark mt-2">Request Donation</button>
                         </form>
+
                     </div>
                    
                 </div>

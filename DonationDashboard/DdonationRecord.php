@@ -1,3 +1,22 @@
+<?php
+include 'includes/config.php';
+
+session_start(); // Start the session
+
+if (!isset($_SESSION['email'])) {
+    header("location: .../VitaCare/Rprofile.php");  
+    exit();
+}
+
+$email = $_SESSION['email'];
+
+$query = "SELECT * FROM donation_requests WHERE email = '$email' ORDER BY request_date DESC";
+$result = mysqli_query($conn, $query);
+
+if (!$result) {
+    die("Error: " . mysqli_error($conn));
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,31 +48,32 @@
         <div class="container-fluid text-light">
             <div class="row">
                 <div class="col">
-           <h1>Donation Record</h1>
+           <h1>Donation Staus</h1>
            </div>
 
            <table class="table rounded table-dark table-hover ">
            <thead>
     <tr >
      
-      <th scope="col">Date</th>
-      <th scope="col">Donation Type</th>
+      <th scope="col">Donation Request Date</th> 
       <th scope="col">Amount(ML)</th>
+      <th scope="col">Email</th>
+      <th scope="col">Status</th>
     </tr>
   </thead>
   <tbody>
-  <tr >
-     
-     <th scope="col">2023/01/4</th>
-     <th scope="col">All Type</th>
-     <th scope="col">150</th>
-   </tr>
-   <tr >
-     
-     <th scope="col">2023/02/15</th>
-     <th scope="col">Platelets</th>
-     <th scope="col">100</th>
-   </tr>
+  <?php
+            while($request_data = mysqli_fetch_array($result)){
+              echo "<tr class='p-2'>";
+              echo "<td>".$request_data['request_date']."</td>";
+              echo "<td>".$request_data['amount_to_donate']."</td>";
+              echo "<td>".$request_data['email']."</td>";
+              echo "<td>".$request_data['approval_status']."</td>";
+              
+            }
+
+            ?>
+
   </tbody>
 
             </table>

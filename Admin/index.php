@@ -61,9 +61,21 @@ include 'includes/config.php';
     <div class="col-4 " >
       <div class="shadow-lg p-5 border rounded"style="background-color:#000077;">  
       <div class="text-center pb-1 fs-5 ">Total Donor Requests</div>  
-      <div class="float-end ">
-       <span>4</span>
-    </div>
+      <?php 
+      $dashbard_donationRequest_query = "SELECT * FROM donation_requests";
+      $dashbard_donationRequest_result = mysqli_query($conn, $dashbard_donationRequest_query);
+      if($total_donationRequest = mysqli_num_rows($dashbard_donationRequest_result)){
+        echo '<div class="float-end ">
+        <span>'.$total_donationRequest.'</span>
+     </div>';
+
+      }else{
+        echo '<div class="float-end ">
+        <span>No data</span>
+     </div>';
+      }
+      ?>
+      
     </div>
     </div>
    

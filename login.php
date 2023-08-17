@@ -32,6 +32,7 @@ if (isset($_POST['login'])) {
     if ($donor_result && mysqli_num_rows($donor_result) == 1) {
         session_start();
         $_SESSION['email'] = $email;
+        $_SESSION['d_id'] = $d_id;
         header("Location: DonationDashboard\Dprofile.php");
         exit();
     } elseif ($recipient_result && mysqli_num_rows($recipient_result) == 1) {

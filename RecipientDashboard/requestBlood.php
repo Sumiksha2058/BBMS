@@ -6,7 +6,7 @@ session_start(); // Start the session
 
 if(!isset($_SESSION['recp_email'])){
 
-    header("location: .../VitaCare/Rprofile.php");  
+    header("Location: ../login.php"); 
 }
 
 $successMessage = "";
@@ -71,7 +71,8 @@ if (isset($_POST["request"])) {
     <div class="inner-wrapper p-4">
         <div class="container-fluid shadow-lg bg-light w-50 text-dark py-3 rounded">
             <div class="row  rounded text-dark p-3 items-center mb-3">
-        <h1>Blood Request</h1>
+        <h3>Blood Request</h3>
+        <hr class="divider">
 </div>
         <form method="post" action="requestBlood.php" class="m-3">
             <?php if ($successMessage !== ""): ?>
@@ -82,7 +83,7 @@ if (isset($_POST["request"])) {
                 <div class="alert alert-danger "><?php echo $errorMessage; ?></div>
             <?php endif; ?>
 
-            <label for="requestedBloodGroup" class="form-label">Select Required Blood Group:</label>
+            <h3><label for="requestedBloodGroup" class="form-label">Select Required Blood Group:</label></h3>
             <select class="form-select " name="requestedBloodGroup" id="requestedBloodGroup" required>
                 <option value="" selected>Select blood group</option>
                 <option value="O+">O+</option>
@@ -96,22 +97,22 @@ if (isset($_POST["request"])) {
             </select>
 
             
-            <label for="urgency" class="form-label">Urgency:</label>
-            <select class=" form-select " name="urgency" id="urgency" required>
-                <option value="" selected>Select blood group</option>
+            <h3><label for="urgency" class="form-label">Urgency:</label></h2>
+            <select class=" form-select mb-3" name="urgency" id="urgency" required>
+                <option selected>Select blood group</option>
                 <option value="Urgent">Urgent</option>
                 <option value="Not Urgent">Not urgent</option>
               
             </select>
-            <label for="amountRequire" class="form-label">Blood Require(ML)</label>
-            <input class="form-control " type="text" id="amountRequire" name="amountRequire">
+            <h3><label for="amountRequire" class="form-label">Blood Require(ML)</label></h3>
+            <input class="form-control  mb-3" type="text" id="amountRequire" name="amountRequire">
 
-            <label for="urgency" class="form-label">Message</label>
-            <input class="form-control " type="text" id="message" name="message">
+            <h3><label for="urgency" class="form-label">Message</label></h3>
+            <input class="form-control  mb-3" type="text" id="message" name="message">
 
             
            
-            <button type="submit" name="request" class="btn btn-primary mt-2">Request Blood</button>
+            <button type="submit" name="request" class="btn btn-dark text-light mt-2">Request Blood</button>
         </form>
     </div>
     </div>

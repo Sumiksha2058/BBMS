@@ -1,3 +1,10 @@
+<?php
+include 'includes/config.php';
+$query = "SELECT dr.*,d_id, don.fullname, don.age, don.contact,don.email, dr.request_date
+FROM donation_requests AS dr
+JOIN donor AS don ON dr.email = don.email";
+$result = mysqli_query($conn, $query); 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,63 +53,24 @@
       <th scope="col">Age</th>
       <th scope="col">Contact</th>
       <th scope="col">Email</th>
-      <th scope="col">Reciving Da</th>
+      <th scope="col">Reciving Date</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>9876457598</td>
-      <td>ramkumari345@gmail.com</td>
-      <td>@mdo</td>
-      <td >
-      <button type="button" class="btn btn-danger">Delete</button>
-      <button type="button" class="btn btn-success">Edit</button>
-      </td>
-     
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
-      <td>
-      <button type="button" class="btn btn-danger">Delete</button>
-      <button type="button" class="btn btn-success">Edit</button>
-      </td>
-      
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-      <td>@twitter</td>
-      <td>@twitter</td>
-      <td>
-      <button type="button" class="btn btn-danger">Delete</button>
-      <button type="button" class="btn btn-success">Edit</button>
-      </td>
-    </tr>
-
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-      <td>@twitter</td>
-      <td>@twitter</td>
-      <td>
-      <button type="button" class="btn btn-danger">Delete</button>
-      <button type="button" class="btn btn-success">Edit</button>
-      </td>
-      
-    </tr>
-
-    
+  <?php
+      while($request_data = mysqli_fetch_array($result)){
+        echo "<tr class='p-2'>";
+        echo "<td>".$request_data['d_id']."</td>";
+        echo "<td>".$request_data['fullname']."</td>";
+        echo "<td>".$request_data['age']."</td>";
+        echo "<td>".$request_data['contact']."</td>";
+        echo "<td>".$request_data['email']."</td>";
+        echo "<td>".$request_data['request_date']."</td>";
+        echo "<td><a class='bg-success text-light fs-5 p-2 px-3 ms-2 rounded' href ='edit
+        .php?email=$request_data[email]'>Accept</a><a class='bg-danger text-light fs-5 p-2 px-3 ms-2 rounded' href='delete.php?email=$request_data[email]'>Reject</a></td></tr>";
+      }
+      ?>
   </tbody>
 </table>
         </div>
@@ -110,8 +78,6 @@
 </div>
 
 </main>
-
-
 
 <script src="fontawesome/js/all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>

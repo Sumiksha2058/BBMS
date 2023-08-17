@@ -1,3 +1,6 @@
+<?php
+include 'includes/config.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,10 +36,26 @@
   <div class="row gy-5  text-light" id="small_container" >
     <div class="col-4 " >
       <div class="shadow-lg p-5 border rounded"style="background-color:#000077;">  
-      <div class="text-center pb-1 fs-5 ">Total Users</div>  
-      <div class="float-end ">
-       <span>4</span>
-    </div>
+      <div class="text-center pb-1 fs-5 ">Total Users</div> 
+      <?php
+      $dashbard_user_query = "(SELECT 'recipient' AS user_type, recp_id AS user_id, recp_fullname AS user_name, recp_email AS user_email FROM recipient)
+      UNION
+      (SELECT 'donor' AS user_type, d_id AS user_id, fullname AS name, email AS user_email FROM donor)";
+
+      $dashbard_user_result = mysqli_query($conn, $dashbard_user_query);
+
+      if($total_user = mysqli_num_rows($dashbard_user_result)){
+        echo '<div class="float-end ">
+        <span>'.$total_user.'</span>
+     </div>';
+
+      }else{
+        echo '<div class="float-end ">
+        <span>No data</span>
+     </div>';
+      }
+      ?>
+    
     </div>
     </div>
     <div class="col-4 " >
@@ -51,9 +70,21 @@
     <div class="col-4 " >
       <div class="shadow-lg p-5 border  rounded"style="background-color:#000077;">  
       <div class="text-center pb-1 fs-5 ">Total Blood Request</div> 
-      <div class="float-end ">
-       <span>4</span>
-    </div>
+      <?php 
+      $dashbard_requestBlood_query = "SELECT * FROM blood_requests";
+      $dashbard_requestBlood_result = mysqli_query($conn, $dashbard_requestBlood_query);
+      if($total_requestBlood = mysqli_num_rows($dashbard_requestBlood_result)){
+        echo '<div class="float-end ">
+        <span>'.$total_requestBlood.'</span>
+     </div>';
+
+      }else{
+        echo '<div class="float-end ">
+        <span>No data</span>
+     </div>';
+      }
+      ?>
+      
     </div>
     </div>
 

@@ -1,6 +1,21 @@
 <?php
 include 'includes/config.php';
-$result = mysqli_query($conn,"SELECT * FROM blood_requests ORDER BY recp_email DESC");
+
+session_start(); // Start the session
+
+if (!isset($_SESSION['recp_email'])) {
+    header("location: .../VitaCare/Rprofile.php");  
+    exit();
+}
+
+$recp_email = $_SESSION['recp_email'];
+
+$query = "SELECT * FROM blood_requests WHERE recp_email = '$recp_email' ORDER BY request_date DESC";
+$result = mysqli_query($conn, $query);
+
+if (!$result) {
+    die("Error: " . mysqli_error($conn));
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,11 +48,13 @@ $result = mysqli_query($conn,"SELECT * FROM blood_requests ORDER BY recp_email D
             <div class="row">
                 <div class="col">
            <h1>Request Status</h1>
+</div>
            </div>
-           <table class="table table-light  table-hover">
+           <table class="table table-light table-hover">
            <thead>
             <tr >           
               <th scope="col">Requested Date</th>
+              <th scope="col">Blood Type</th>
               <th scope="col">Request Amount(ml)</th>
               <th scope="col">Email</th>
               <th scope="col">Status</th>
@@ -49,9 +66,10 @@ $result = mysqli_query($conn,"SELECT * FROM blood_requests ORDER BY recp_email D
             while($request_data = mysqli_fetch_array($result)){
               echo "<tr class='p-2'>";
               echo "<td>".$request_data['request_date']."</td>";
+              echo "<td>".$request_data['requested_blood_group']."</td>";
               echo "<td>".$request_data['amount_required']."</td>";
               echo "<td>".$request_data['recp_email']."</td>";
-              echo "<td><span ?id=$request_data[recp_email]'>Pending</span></td></tr>";
+              echo "<td><span class='text-danger' ?id=$request_data[recp_email]'>Pending</span></td></tr>";
             }
 
             ?>
@@ -59,13 +77,11 @@ $result = mysqli_query($conn,"SELECT * FROM blood_requests ORDER BY recp_email D
             </tbody>
         
       </table>
-    </div>
-    
-    </div>
+   
 </div>
 </div>
 </div>
-
+          </div>
 </main>
 
 <script src="fontawesome/js/all.min.js"></script>

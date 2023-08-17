@@ -1,3 +1,10 @@
+<?php
+include 'includes/config.php';
+$query = "SELECT br.*,recp_id, rec.recp_fullname, rec.recp_age, rec.recp_contact,rec.recp_email, br.request_date
+FROM blood_requests AS br
+JOIN recipient AS rec ON br.recp_email = rec.recp_email";
+$result = mysqli_query($conn, $query); 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,14 +37,11 @@
      
         <div class="container overflow-hidden">
         <div class="title text-dark">
-        <h1 class="fs-4">List of Donor's</h1>
-        <div class="add_donor float-end pb-3">
-        <button type="button" class="btn btn-success "style="background-color:#000077;"><i class="fa fa-circle-add"></i>Add Donors</button>
-      
-        </div>
+        <h1 class="fs-4">List of Blood Recivers</h1>
+       
       </div>
 
-      <table class="table table-hover-Info">
+      <table class="table  table-hover">
   <thead>
     <tr class="text-light " style="background-color: #000077; ">
       <th scope="col">User ID</th>
@@ -45,65 +49,28 @@
       <th scope="col">Age</th>
       <th scope="col">Contact</th>
       <th scope="col">Email</th>
-      <th scope="col">Date Of Donation</th>
+      <th scope="col">Date Of Request</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>9876457598</td>
-      <td>ramkumari345@gmail.com</td>
-      <td>@mdo</td>
-      <td >
-      <button type="button" class="btn btn-danger">Delete</button>
-      <button type="button" class="btn btn-success">Edit</button>
-      </td>
-     
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
-      <td>
-      <button type="button" class="btn btn-danger">Delete</button>
-      <button type="button" class="btn btn-success">Edit</button>
-      </td>
-      
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-      <td>@twitter</td>
-      <td>@twitter</td>
-      <td>
-      <button type="button" class="btn btn-danger">Delete</button>
-      <button type="button" class="btn btn-success">Edit</button>
-      </td>
-    </tr>
+  <?php
+            while($request_data = mysqli_fetch_array($result)){
+              echo "<tr class='p-2'>";
+              echo "<td>".$request_data['recp_id']."</td>";
+              echo "<td>".$request_data['recp_fullname']."</td>";
+              echo "<td>".$request_data['recp_age']."</td>";
+              echo "<td>".$request_data['recp_contact']."</td>";
+              echo "<td>".$request_data['recp_email']."</td>";
+              echo "<td>".$request_data['request_date']."</td>";
+              echo "<td><a class='bg-success text-light fs-5 p-2 px-3 ms-2 rounded' href ='edit
+              .php?recp_email=$request_data[recp_email]'>Accept</a><a class='bg-danger text-light fs-5 p-2 px-3 ms-2 rounded' href='delete.php?recp_email=$request_data[recp_email]'>Reject</a></td></tr>";
+            }
 
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-      <td>@twitter</td>
-      <td>@twitter</td>
-      <td>
-      <button type="button" class="btn btn-danger">Delete</button>
-      <button type="button" class="btn btn-success">Edit</button>
-      </td>
-      
-    </tr>
-
-    
+            ?>
   </tbody>
 </table>
+
         
         </div>
     </div> 

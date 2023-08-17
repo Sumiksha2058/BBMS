@@ -1,3 +1,16 @@
+<?php
+include 'includes/config.php';
+
+$query = "(SELECT 'recipient' AS user_type, recp_id AS user_id, recp_fullname AS user_name, recp_email AS user_email FROM recipient)
+          UNION
+          (SELECT 'donor' AS user_type, d_id AS user_id, fullname AS name, email AS user_email FROM donor)";
+
+$result = mysqli_query($conn, $query);
+
+if (!$result) {
+    die("Error: " . mysqli_error($conn));
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,65 +44,36 @@
         <h1 class="fs-4">List of User</h1>
       </div>
 
-      <table class="table table-hover-Info">
+      <table class="table table-hover">
   <thead>
     <tr class="text-light" style="background-color: #000077;">
+      <th scope="col">User Type</th>
       <th scope="col">User ID</th>
-      <th scope="col">Full name</th>
-      <th scope="col">Age</th>
-      <th scope="col">Address</th>
-      <th scope="col">Contact</th>
-      <th scope="col">Email</th>
-      <th scope="col">Handle</th>
+      <th scope="col">User Name</th>
+      <th scope="col">User Email</th>
+ 
     </tr>
+ 
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
-     
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
-      
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-      <td>@twitter</td>
-      <td>@twitter</td>
-      <td>@twitter</td>
-    </tr>
+  <?php
+while($user_data = mysqli_fetch_array($result)){
+  while ($user_data = mysqli_fetch_array($result)) {
+    echo "<tr class='p-2'>";
+    echo "<td>".$user_data['user_type']."</td>";
+    echo "<td>".$user_data['user_id']."</td>";
+    echo "<td>".$user_data['user_name']."</td>";
+    echo "<td>".$user_data['user_email']."</td>";
+    echo "</tr>";
+}
+}
 
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-      <td>@twitter</td>
-      <td>@twitter</td>
-      <td>@twitter</td>
-      
-    </tr>
-
+?>
     
   </tbody>
 </table>
         
-        <div class="container overflow-hidden">
- 
-        </div>
+       
     </div> 
 </div>
 

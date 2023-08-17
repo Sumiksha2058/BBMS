@@ -13,16 +13,17 @@ $successMessage = "";
 $errorMessage = "";
 
 if (isset($_POST["request"])) {
+    $recp_email = $_SESSION['recp_email'];
     $requestedBloodGroup = $_POST["requestedBloodGroup"];
     $urgency = $_POST["urgency"];
     $amountRequire = $_POST["amountRequire"];
     $message = $_POST["message"];
-    $recp_email = $_SESSION['recp_email'];
+    
 
     // Check if the requested blood group is available in the donation table
     $checkAvailabilitySql = "SELECT COUNT(*) FROM donor WHERE donorBlood = '$requestedBloodGroup'";
     $availabilityResult = mysqli_query($conn, $checkAvailabilitySql);
-    $availabilityCount = mysqli_fetch_row($availabilityResult)[0];
+    $availabilityCount = mysqli_fetch_row($availabilityResult)['0'];
 
     if ($availabilityCount > 0) {
         // Inserting blood request into the database
@@ -96,10 +97,10 @@ if (isset($_POST["request"])) {
 
             
             <label for="urgency" class="form-label">Urgency:</label>
-            <select class="form-control form-select " name="urgency" id="urgency" required>
+            <select class=" form-select " name="urgency" id="urgency" required>
                 <option value="" selected>Select blood group</option>
-                <option value="O+">Urgent</option>
-                <option value="O-">Not urgent</option>
+                <option value="Urgent">Urgent</option>
+                <option value="Not Urgent">Not urgent</option>
               
             </select>
             <label for="amountRequire" class="form-label">Blood Require(ML)</label>

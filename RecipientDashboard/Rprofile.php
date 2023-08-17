@@ -46,11 +46,15 @@ if ($result && mysqli_num_rows($result) > 0) {
 <body>
 
 <?php 
+<<<<<<< HEAD
+        include ('C:\xampp\htdocs\VitaCare\BBMS-2\RecipientDashboard\includes\head.php');
+=======
         include ('includes\head.php');
+>>>>>>> 1f4076686bf81a8b051894abdcee11ee1eaef157
     ?>
 
 <?php 
-        include ('includes/r_dashboard.php');
+        include ('includes\r_dashboard.php');
     ?>
 
 <main id="main_container">

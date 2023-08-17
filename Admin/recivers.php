@@ -45,7 +45,7 @@
       <th scope="col">Age</th>
       <th scope="col">Contact</th>
       <th scope="col">Email</th>
-      <th scope="col">Date Of Doation</th>
+      <th scope="col">Date Of Donation</th>
       <th scope="col">Action</th>
     </tr>
   </thead>

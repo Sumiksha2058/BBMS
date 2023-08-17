@@ -39,10 +39,7 @@ $result = mysqli_query($conn, $query);
         <div class="container overflow-hidden">
         <div class="title text-dark">
         <h1 class="fs-4">List of Donor's</h1>
-        <div class="add_donor float-end pb-3">
-        <button type="button" class="btn btn-success "style="background-color:#000077;"><i class="fa fa-circle-add"></i>Add Donors</button>
-      
-        </div>
+        
       </div>
 
       <table class="table table-hover-Info">
@@ -67,10 +64,13 @@ $result = mysqli_query($conn, $query);
         echo "<td>".$request_data['contact']."</td>";
         echo "<td>".$request_data['email']."</td>";
         echo "<td>".$request_data['request_date']."</td>";
-        echo "<td><a class='bg-success text-light fs-5 p-2 px-3 ms-2 rounded' href ='edit
-        .php?email=$request_data[email]'>Accept</a><a class='bg-danger text-light fs-5 p-2 px-3 ms-2 rounded' href='delete.php?email=$request_data[email]'>Reject</a></td></tr>";
+        echo "<td><a class='bg-success text-light fs-5 p-2 px-3 ms-2 rounded' href='functions/approve.php?approve_donor=" . $request_data['email'] . "'>Approve</a>
+        <a class='bg-danger text-light fs-5 p-2 px-3 ms-2 rounded' href='functions/reject.php?reject_donor=" . $request_data['email'] . "'>Reject</a></td></tr>";
+
       }
       ?>
+   
+      
   </tbody>
 </table>
         </div>

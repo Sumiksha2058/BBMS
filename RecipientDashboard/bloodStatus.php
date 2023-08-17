@@ -69,9 +69,10 @@ if (!$result) {
               echo "<td>".$request_data['requested_blood_group']."</td>";
               echo "<td>".$request_data['amount_required']."</td>";
               echo "<td>".$request_data['recp_email']."</td>";
-              echo "<td><span class='text-danger' ?id=$request_data[recp_email]'>Pending</span></td></tr>";
+              echo "<td>".$request_data['approval_status']."</td>";
+         
             }
-
+            
             ?>
 
             </tbody>

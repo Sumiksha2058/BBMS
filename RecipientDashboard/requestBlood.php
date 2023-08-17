@@ -84,7 +84,7 @@ if (isset($_POST["request"])) {
             <?php endif; ?>
 
             <h3><label for="requestedBloodGroup" class="form-label">Select Required Blood Group:</label></h3>
-            <select class="form-select " name="requestedBloodGroup" id="requestedBloodGroup" required>
+            <select class="form-select mb-3" name="requestedBloodGroup" id="requestedBloodGroup" required>
                 <option value="" selected>Select blood group</option>
                 <option value="O+">O+</option>
                 <option value="O-">O-</option>

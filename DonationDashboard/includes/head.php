@@ -9,24 +9,7 @@
         </button>
         <div class="collapse navbar-collapse text-wrap"  id="navbarSupportedContent">
           <ul class="navbar-nav fs-5 ms-auto text-center">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="C:\xampp\htdocs\VitaCare\index.php">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="donor.php">Donors</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="recepient.php">Recipient</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="appointment.php">Book Appointment</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="contact.php">Contact Us</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="register.php">Register Here</a>
-            </li>
+          
             
             
           </ul>

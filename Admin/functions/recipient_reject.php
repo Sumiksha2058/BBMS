@@ -1,6 +1,8 @@
+
 <?php
 include '../includes/config.php';
-$updateQuery = "UPDATE `blood_requests` SET `approval_status` = 'approved' WHERE `blood_requests`.`request_id` = `request_id`;";
+$updateQuery = "UPDATE `blood_requests` SET `approval_status` = 'rejected' WHERE `blood_requests`.`request_id` = `request_id`;";
+
 if (mysqli_query($conn, $updateQuery)) {
     // Success
     header("Location: ../donor.php"); 

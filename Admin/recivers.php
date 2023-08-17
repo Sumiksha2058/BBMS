@@ -63,8 +63,9 @@ $result = mysqli_query($conn, $query);
               echo "<td>".$request_data['recp_contact']."</td>";
               echo "<td>".$request_data['recp_email']."</td>";
               echo "<td>".$request_data['request_date']."</td>";
-              echo "<td><a class='bg-success text-light fs-5 p-2 px-3 ms-2 rounded' href ='edit
-              .php?recp_email=$request_data[recp_email]'>Accept</a><a class='bg-danger text-light fs-5 p-2 px-3 ms-2 rounded' href='delete.php?recp_email=$request_data[recp_email]'>Reject</a></td></tr>";
+              echo "<td><a class='bg-success text-light fs-5 p-2 px-3 ms-2 rounded' href='functions/approve.php?approve_donor=" . $request_data['recp_email'] . "'>Approve</a>
+              <a class='bg-danger text-light fs-5 p-2 px-3 ms-2 rounded' href='functions/recipient_reject.php?reject_donor=" . $request_data['recp_email'] . "'>Reject</a></td></tr>";
+      
             }
 
             ?>

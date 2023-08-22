@@ -16,7 +16,13 @@ if (isset($_POST["request"])) {
     $recp_email = $_SESSION['recp_email'];
     $requestedBloodGroup = $_POST["requestedBloodGroup"];
     $urgency = $_POST["urgency"];
-    $amountRequire = $_POST["amountRequire"];
+    $amountRequire = $_POST["amountRequ
+    The requested URL was not found on this server. The link on the referring page seems to be wrong or outdated. Please inform the author of that page about the error.
+    
+    If you think this is a server error, please contact the webmaster.
+    Error 404
+    localhost
+    Apache/2.4.56 (Unix) OpenSSL/1.1.1t PHP/8.2.4 mod_perl/2.0.12 Perl/v5.34.1 ire"];
     $message = $_POST["message"];
     
 
@@ -58,11 +64,11 @@ if (isset($_POST["request"])) {
 <body>
 
 <?php 
-        include ('includes\head.php');
+      include ('../RecipientDashboard/includes/head.php');
     ?>
 
 <?php 
-        include ('includes/r_dashboard.php');
+        include ('../RecipientDashboard/includes/r_dashboard.php');
     ?>
 
 <main id="main_container">

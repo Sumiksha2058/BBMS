@@ -22,8 +22,8 @@ $result = mysqli_query($conn, $query);
 </head>
 <body>
 
-<?php 
-        include ('includes\head.php');
+<?php  
+include ('../Admin/includes/head.php');
     ?>
 
 <?php 

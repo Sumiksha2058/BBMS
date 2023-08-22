@@ -17,7 +17,7 @@ $result = mysqli_query($conn, $sql);
 if ($result && mysqli_num_rows($result) > 0) {
     $row = mysqli_fetch_assoc($result);
     $fullname = $row['recp_fullname'];
-    $Gender = $row['recp_gender'];
+    $Gender = $row['re   Profilecp_gender'];
     $contact = $row['recp_contact'];
     $email = $row['recp_email'];
  
@@ -35,25 +35,29 @@ if ($result && mysqli_num_rows($result) > 0) {
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viboard.php');
+Profileewport" content="width=device-width, initial-scale=1.0">
     <title>VitaCare</title>
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="fontawesome/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://font/RecipientDashboard/Rprofile.phps.googleapis.com">
+    <link rel="preconnect" href="https://font/RecipientDashboard/Rprofile.phps.googleapis.com">
 </head>
 <body>
 
 <?php 
 
-        include ('includes\head.php');
+include ('../RecipientDashboard/includes/head.php');
 
-    ?>
+    ?>      
+
 
 <?php 
-        include ('includes\r_dashboard.php');
+        include ('../RecipientDashboard/includes/r_dashboard.php'); 
+
     ?>
+
 
 <main id="main_container">
 

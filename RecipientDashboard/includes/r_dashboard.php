@@ -41,7 +41,7 @@
                             </li>
 
                             <li class="nav-item mb-4">
-                                <a href="rchangepassword.php" class="nav-link text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
+                                <a href="../RecipientDashboard/rchangePassword.php" class="nav-link text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
                                     <i class="fa fa-key d-inline d-xl-none d-md-none" data-bs-toggle="tooltip"
                                         data-bs-placement="right" title="Change Password" aria-hidden="false"></i>
                                     <span class="ms-2 d-none d-md-inline">Change Password</span>

@@ -9,6 +9,7 @@
 body{
     background-color: white !important;
     padding-top: 85px;
+   
 }
 .navbar{
     background-color: #3d0606 !important;
@@ -120,14 +121,14 @@ footer{
 
 #dashbord_wapper {
     margin-left: 0;
-    height: 100vh;
+    height: auto;
   }
 
 #dashbord{
     padding-top: 2em;
     background-color: #000077 !important;
     width: 20%;
-    height: 100% !important;
+    height: auto!important;
     position: fixed;
     overflow: hidden; 
     box-shadow: 4px 4px 17px #1b1717;

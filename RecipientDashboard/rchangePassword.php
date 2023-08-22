@@ -51,7 +51,7 @@ if(isset($_SESSION['recp_email'])){
 ?>  
 
 
-<!DOCTYPE html>
+<!DOCTYPE htm../RecipientDashboard/l>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -67,11 +67,11 @@ if(isset($_SESSION['recp_email'])){
 <body>
 
     <?php 
-    include 'includes\head.php';
+    include '../RecipientDashboard/includes\head.php';
     ?>
 
-    <?php 
-    include 'includes\r_dashboard.php';
+    <?php
+    include '../RecipientDashboard/includes\r_dashboard.php';
     ?>
 
 <main id="main_container">

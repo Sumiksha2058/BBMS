@@ -36,7 +36,7 @@ if (isset($_POST['login'])) {
         header("location: login.php?error=Invalid Email or Password");
         exit();
     }
-}
+} include ('includes\head.php');
 ?>
  
 <!DOCTYPE html>
@@ -54,11 +54,11 @@ if (isset($_POST['login'])) {
 <body class="bg-light">
     <!-- this is heading section -->
     <?php
-    include 'includes/head.php';
+     include ('../Admin/includes/head.php');
     ?>
     
-    <!-- main container starts from here -->
-    <div class="container d-flex justify-content-center">
+    <!-- main containinclude 'includes/head.php';er starts from here -->
+    <div class="continclude 'includes/head.php';ainer d-flex justify-content-center">
         <div class="row px-6 my-2 text-dark bg-light w-50 md-w-100 shadow p-3 mb-5 bg-body rounded-3" id="login_wrapper">
             <div class="col mt-3 ">
                 <h1 class="text-center">Login</h1>

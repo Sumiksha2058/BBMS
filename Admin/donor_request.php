@@ -31,53 +31,57 @@ $result = mysqli_query($conn, $query);
     ?>
 
 <main id="main_container">
+        <div class="main-area p-4">
+            <div class="inner-wrapper p-4">
+                <div class="container overflow-hidden">
+                    <div class="title text-dark">
+                        <h1 class="fs-4">List of Donor's</h1>
+                    </div>
+                    <?php
+                    if(mysqli_num_rows($result) > 0) {
+                        echo '<table class="table table-hover">';
+                        echo '<thead>';
+                        echo '<tr class="text-light" style="background-color: #000077;">';
+                        echo '<th scope="col">User ID</th>';
+                        echo '<th scope="col">Full name</th>';
+                        echo '<th scope="col">Age</th>';
+                        echo '<th scope="col">Contact</th>';
+                        echo '<th scope="col">Email</th>';
+                        echo '<th scope="col">Reciving Date</th>';
+                        echo '<th scope="col">Action</th>';
+                        echo '</tr>';
+                        echo '</thead>';
+                        echo '<tbody>';
 
-<div class="main-area p-4">
-    <div class="inner-wrapper p-4">
-    
-        
-        <div class="container overflow-hidden">
-        <div class="title text-dark">
-        <h1 class="fs-4">List of Donor's</h1>
-        
-      </div>
+                        while($request_data = mysqli_fetch_assoc($result)) {
+                            echo "<tr class='p-2'>";
+                            echo "<td>".$request_data['d_id']."</td>";
+                            echo "<td>".$request_data['fullname']."</td>";
+                            echo "<td>".$request_data['age']."</td>";
+                            echo "<td>".$request_data['contact']."</td>";
+                            echo "<td>".$request_data['email']."</td>";
+                            echo "<td>".$request_data['request_date']."</td>";
+                            echo "<td>";
+                            if ($request_data['approval_status'] == 'pending') {
+                                echo "<a class='bg-success text-light fs-5 p-2 px-3 ms-2 rounded' href='functions/approve.php?approve_donor=" . $request_data['email'] . "'>Approve</a>";
+                                echo "<a class='bg-danger text-light fs-5 p-2 px-3 ms-2 rounded' href='functions/reject.php?rejected_donor=" . $request_data['email'] . "'>Reject</a>";
+                            } else {
+                                echo "Processed";
+                            }
+                           
+                            echo "</tr>";
+                        }
 
-      <table class="table table-hover-Info">
-  <thead>
-    <tr class="text-light " style="background-color: #000077; ">
-      <th scope="col">User ID</th>
-      <th scope="col">Full name</th>
-      <th scope="col">Age</th>
-      <th scope="col">Contact</th>
-      <th scope="col">Email</th>
-      <th scope="col">Reciving Date</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-  <?php
-      while($request_data = mysqli_fetch_array($result)){
-        echo "<tr class='p-2'>";
-        echo "<td>".$request_data['d_id']."</td>";
-        echo "<td>".$request_data['fullname']."</td>";
-        echo "<td>".$request_data['age']."</td>";
-        echo "<td>".$request_data['contact']."</td>";
-        echo "<td>".$request_data['email']."</td>";
-        echo "<td>".$request_data['request_date']."</td>";
-        echo "<td><a class='bg-success text-light fs-5 p-2 px-3 ms-2 rounded' href='functions/approve.php?approve_donor=" . $request_data['email'] . "'>Approve</a>
-        <a class='bg-danger text-light fs-5 p-2 px-3 ms-2 rounded' href='functions/reject.php?reject_donor=" . $request_data['email'] . "'>Reject</a></td></tr>";
-
-      }
-      ?>
-   
-      
-  </tbody>
-</table>
+                        echo '</tbody>';
+                        echo '</table>';
+                    } else {
+                        echo "<h3 class='text-center mt-5'>No Data Found</h3>";
+                    }
+                    ?>
+                </div>
+            </div>
         </div>
-    </div> 
-</div>
-
-</main>
+    </main>
 
 <script src="fontawesome/js/all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>

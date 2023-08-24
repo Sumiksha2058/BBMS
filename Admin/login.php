@@ -1,7 +1,6 @@
 <?php
 
 include 'functions\vc_register.php';
-
 //filtering donor inpurs
 function input_filter($data){
     $data = trim($data);
@@ -11,33 +10,31 @@ function input_filter($data){
 }
 
 if (isset($_POST['login'])) {
-    $email = input_filter($_POST['Loginemail']);
+    $a_email = input_filter($_POST['Loginemail']);
     $password = input_filter($_POST['Loginpassword']);
 
     //escaping special symbols used in SQL statement
-    $email = mysqli_real_escape_string($conn, $email);
+    $a_email = mysqli_real_escape_string($conn, $a_email);
     $password = mysqli_real_escape_string($conn, $password);
 
     // Hash the password before comparing it in the query
     $password = md5($password);
 
     //query templates
-    $sql_admin =  "SELECT * FROM vc_admin WHERE a_email = '$email' AND a_password = '$password'";
-   
+    $sql_admin =  "SELECT admin_id, a_email FROM vc_admin WHERE a_email = '$a_email' AND a_password = '$password'";
     // Prepare the statements
     $admin_result = mysqli_query($conn, $sql_admin);
    
     if ($admin_result && mysqli_num_rows($admin_result) == 1) {
         session_start();
-        $_SESSION['a_email'] = $email;
-        $_SESSION['recp_email'] = $email;
+        $_SESSION['a_email'] = $a_email;
         header("Location: index.php");
         exit();
-    } else {
+    } else {      
         header("location: login.php?error=Invalid Email or Password");
         exit();
     }
-} include ('includes\head.php');
+} 
 ?>
  
 <!DOCTYPE html>
@@ -53,16 +50,13 @@ if (isset($_POST['login'])) {
     <link rel="stylesheet" href="fontawesome/css/all.min.css">
 </head>
 <body class="bg-light">
-    <!-- this is heading section -->
-    <?php
-     include ('../Admin/includes/head.php');
-    ?>
-    
+
     <!-- main containin starts from here -->
-    <div class="continclude 'includes/head.php';ainer d-flex justify-content-center">
-        <div class="row px-6 my-2 text-dark bg-light w-50 md-w-100 shadow p-3 mb-5 bg-body rounded-3" id="login_wrapper">
-            <div class="col mt-3 ">
-                <h1 class="text-center">Login</h1>
+    <div class="container  d-flex justify-content-center">
+        <div class="row px-6 my-2 text-dark bg-light shadow w-50 md-w-100 mb-5 bg-body rounded-3" id="login_wrapper">
+            <div class="col py-2 shadow ">
+                <h1 class="text-center">Admin Login</h1>
+
             </div>
             <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" class="mt-3 row needs-validation"  novalidate>
             <?php if (isset($_GET['error'])) { ?>
@@ -88,12 +82,12 @@ if (isset($_POST['login'])) {
                     </div>
                 </div>
                 <div class="mb-3 text-center">
-                    <span>Don't have an account? <a href="register.php">Register Now</a></span>
+                    <p>Don't have an account? <a href="register.php">Register Now</a></p>
                 </div>
-                <div class="mb-3 text-right">
-                    <div class="form-group">
-                        <button type="submit" name="login" class="btn btn-primary mb-3">Login</button>
-                        <button type="reset" class="btn btn-primary mb-3">Cancel</button>
+                <div class=" mb-3 text-center ">
+                    <div class=" form-group ">
+                        <button type="submit" name="login" class="btn btn-dark mb-3 w-100">Login</button>
+                        
                     </div>
                 </div>               
             </form>           

@@ -40,22 +40,22 @@ include ('../Admin/includes/head.php');
         <h1 class="fs-4">List of Blood Requests</h1>
        
       </div>
-
-      <table class="table  table-hover">
-  <thead>
-    <tr class="text-light " style="background-color: #000077; ">
-      <th scope="col">User ID</th>
-      <th scope="col">Full name</th>
-      <th scope="col">Age</th>
-      <th scope="col">Contact</th>
-      <th scope="col">Email</th>
-      <th scope="col">Date Of Request</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-  <?php
-            while($request_data = mysqli_fetch_array($result)){
+      <?php
+    if(mysqli_num_rows($result) > 0){
+    echo '<table class="table  table-hover">';
+    echo '<thead>';
+    echo '<tr class="text-light " style="background-color: #000077;">';
+    echo '<th scope="col">User ID</th>';
+    echo '<th scope="col">Full name</th>';
+    echo '<th scope="col">Age</th>';
+    echo '<th scope="col">Contact</th>';
+    echo '<th scope="col">Email</th>';
+    echo '<th scope="col">Date Of Request</th>';
+    echo '<th scope="col">Action</th>';
+    echo '</tr>';
+    echo '</thead>';
+    echo '<tbody>';
+    while($request_data = mysqli_fetch_assoc($result)) {
               echo "<tr class='p-2'>";
               echo "<td>".$request_data['recp_id']."</td>";
               echo "<td>".$request_data['recp_fullname']."</td>";
@@ -63,11 +63,23 @@ include ('../Admin/includes/head.php');
               echo "<td>".$request_data['recp_contact']."</td>";
               echo "<td>".$request_data['recp_email']."</td>";
               echo "<td>".$request_data['request_date']."</td>";
-              echo "<td><a class='bg-success text-light fs-5 p-2 px-3 ms-2 rounded' href='functions/approve.php?recipient_approved=" . $request_data['recp_email'] . "'>Approve</a>
-              <a class='bg-danger text-light fs-5 p-2 px-3 ms-2 rounded' href='functions/recipient_reject.php?recipient_reject=" . $request_data['recp_email'] . "'>Reject</a></td></tr>";
-      
+              echo "<td>";
+              if ($request_data['approval_status'] == 'pending') {
+                echo "<a class='bg-success text-light fs-5 p-2 px-3 ms-2 rounded' href='functions/recipient_approved.php?recipient_approved=" . $request_data['recp_email'] . "'>Approve</a>";
+                echo "<a class='bg-danger text-light fs-5 p-2 px-3 ms-2 rounded' href='functions/reject.php?recipient_reject=" . $request_data['recp_email'] . "'>Reject</a>";   
+              } else {
+                echo "Processed";
             }
+           
+            echo "</tr>";
+          }
+        echo '</tbody>';
+        echo '</table>';
 
+      } else {
+        echo "<h3 class='text-center mt-5'>No Data Found</h3>";
+    }  
+            
             ?>
   </tbody>
 </table>
@@ -78,8 +90,6 @@ include ('../Admin/includes/head.php');
 </div>
 
 </main>
-
-
 
 <script src="fontawesome/js/all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>

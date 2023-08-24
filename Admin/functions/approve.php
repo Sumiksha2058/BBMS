@@ -1,9 +1,9 @@
 <?php
 include '../includes/config.php';
-$updateQuery = "UPDATE `blood_requests` SET `approval_status` = 'approved' WHERE `blood_requests`.`request_id` = `request_id`;";
+$updateQuery = "UPDATE `donation_requests` SET `approval_status` = 'approved' WHERE `donation_requests`.`donation_request_id` = `donation_request_id`;";
 if (mysqli_query($conn, $updateQuery)) {
     // Success
-    header("Location: ../donor.php"); 
+    header("Location: ../donor_request.php"); 
     exit();
 } else {
     // Error

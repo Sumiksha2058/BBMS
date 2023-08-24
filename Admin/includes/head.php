@@ -30,14 +30,13 @@
             <button class="btn btn-secondary dropdown-toggle text-dark fs-4"style="background-color: #00FFFF; border:none; type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
             Gracey
             </button>
-            <ul class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton1">
-              <li><a class="dropdown-item text-light " href="#">Action</a></li>
-              <li><a class="dropdown-item text-light " href="#">Another action</a></li>
-              <li><a class="dropdown-item text-light " href="#">Something else here</a></li>
+            <ul class="dropdown-menu shadow bg-dark " aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item text-light mb-2 " href="#">Update Profile</a></li>
+              <li><a class="dropdown-item text-light " href="#">Change Password</a></li>
+              <li><hr class="dropdown-divider bg-light"></li>
+              <li><a class="dropdown-item text-light " href="#">Logout</a></li>
             </ul>
-
-                
-                        
+    
               </div>
               
             </li>

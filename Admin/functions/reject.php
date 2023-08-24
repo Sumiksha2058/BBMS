@@ -4,7 +4,7 @@ $updateQuery = "UPDATE `donation_requests` SET `approval_status` = 'rejected' WH
 
 if (mysqli_query($conn, $updateQuery)) {
     // Success
-    header("Location: ../donor.php"); 
+    header("Location: ../donor_request.php"); 
     exit();
 } else {
     // Error

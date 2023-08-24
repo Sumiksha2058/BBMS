@@ -2,7 +2,7 @@
 include 'includes/config.php';
 
 
-$query = "SELECT request_id, recp_email, requested_blood_group, amount_required, request_date FROM blood_requests WHERE approval_status = 'approved'";
+$query = "SELECT donation_request_id, email, amount_to_donate, request_date FROM donation_requests WHERE approval_status = 'approved'";
 $result = mysqli_query($conn, $query);
 
 if (!$result) {
@@ -38,8 +38,8 @@ if (!$result) {
 <div class="main-area p-4">
     <div class="inner-wrapper p-4">
       <div class="title text-dark">
-        <h1 class="fs-4">List of Recipients</h1>
-        <hr class="shadow">
+        <h1 class="fs-4">List of Donor's</h1>
+        <hr>
       </div>
       <?php
 if($request_data = mysqli_fetch_array($result)){
@@ -48,7 +48,6 @@ if($request_data = mysqli_fetch_array($result)){
     echo "<tr class='text-light' style='background-color: #000077;'>";
     echo "<th scope='col'>ID</th>";
     echo "<th scope='col'>Email</th>";
-    echo "<th scope='col'>Blood Type</th>";
     echo "<th scope='col'>Unit</th>";
     echo "<th scope='col'>Recived Date</th>";
      echo "</tr>";
@@ -56,10 +55,9 @@ if($request_data = mysqli_fetch_array($result)){
      echo "<tbody>";
   
     echo "<tr class='p-2'>";
-    echo "<td>".$request_data['request_id']."</td>";
-    echo "<td>".$request_data['recp_email']."</td>";
-    echo "<td>".$request_data['requested_blood_group']."</td>";
-    echo "<td>".$request_data['amount_required']."</td>";
+    echo "<td>".$request_data['donation_request_id']."</td>";
+    echo "<td>".$request_data['email']."</td>";
+    echo "<td>".$request_data['amount_to_donate']."</td>";
     echo "<td>".$request_data['request_date']."</td>";
     echo "</tr>";
 }else{

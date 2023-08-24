@@ -5,7 +5,7 @@ $updateQuery = "UPDATE `blood_requests` SET `approval_status` = 'rejected' WHERE
 
 if (mysqli_query($conn, $updateQuery)) {
     // Success
-    header("Location: ../donor.php"); 
+    header("Location: ../recivers_request.php"); 
     exit();
 } else {
     // Error

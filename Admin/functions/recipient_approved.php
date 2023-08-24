@@ -3,7 +3,7 @@ include '../includes/config.php';
 $updateQuery = "UPDATE `donation_requests` SET `approval_status` = 'approved' WHERE `donation_requests`.`donation_request_id` = `donation_request_id`;";
 if (mysqli_query($conn, $updateQuery)) {
     // Success
-    header("Location: ../recivers.php"); 
+    header("Location: ../recivers_request.php"); 
     exit();
 } else {
     // Error

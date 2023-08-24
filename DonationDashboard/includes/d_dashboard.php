@@ -1,21 +1,15 @@
 
-    <!-- main container starts from here -->
-    <?php
 
-    ?>
         <div class="container-fluid">
-            <div class="row gx-6">
-                <div class="col" id="dashbord">
-
-                    <div class="col mb-4 text-center">
-                    <div class="shadow-lg p-2 rounded">
+            <div class="row  gx-6">
+                <div class="col  overflow-scroll" id="dashbord">
+                    <div class="col text-center shadow-lg pt-3 sticky-sm-top bg-dark rounded">
                         <h1 class="fs-4 text-light">
                             <i class="fa fa-dashboard d-inline d-xl-none d-md-none" data-bs-toggle="tooltip"
                                 data-bs-placement="right" title="Tooltip on right" aria-hidden="true"></i>
-                            <span class="ms-2  d-none d-md-inline ">Donor Dashboard</span>
-                            
+                            <span class=" d-none d-md-inline ">Donor Dashboard</span>  
                         </h1>
-                    </div>
+ 
                     <hr class="divider">
                     </div>
                     <div class="col md-text-center">

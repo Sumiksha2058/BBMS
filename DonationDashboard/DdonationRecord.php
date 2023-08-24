@@ -33,13 +33,10 @@ if (!$result) {
 <body>
 
 <?php 
-        include ('includes\head.php');
-    ?>
-
-
-<?php 
+        include ('./includes/head.php');
         include ('includes/d_dashboard.php');
     ?>
+
 
 <main id="main_container">
 
@@ -56,7 +53,7 @@ if (!$result) {
     <tr >
      
       <th scope="col">Donation Request Date</th> 
-      <th scope="col">Amount(ML)</th>
+      <th scope="col">Unit</th>
       <th scope="col">Email</th>
       <th scope="col">Status</th>
     </tr>

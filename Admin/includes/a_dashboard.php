@@ -31,57 +31,44 @@
                                         data-bs-toggle="tooltip" data-bs-placement="right" title="Donation Record"
                                         aria-hidden="false"></i>
                                     <strong class="ms-2 d-overflow-scrollnone d-md-inline">Users</strong>
-</a>
-
+                                </a>
                             </li>
 
                             <li class="nav-item mb-3">
                                 <a href="donor.php" class="nav-link text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
-                                    <i class="fa fa-certificate d-inline d-xl-none d-md-none" data-bs-toggle="tooltip"
+                                   <i class="fa fa-certificate d-inline d-xl-none d-md-none" data-bs-toggle="tooltip"
                                         data-bs-placement="right" title="Request blood" aria-hidden="false"></i>
                                     <strong class="ms-2 d-none d-md-inline">Donor</strong>
                                 </a>
                             </li>
+
                             <li class="nav-item mb-3">
-                                <a href="donor.php" class="nav-link text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
+                                <a href="recipient_list.php" class="nav-link text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
                                     <i class="fa fa-certificate d-inline d-xl-none d-md-none" data-bs-toggle="tooltip"
                                         data-bs-placement="right" title="Request blood" aria-hidden="false"></i>
                                     <strong class="ms-2 d-none d-md-inline">Recipient</strong>
                                 </a>
                             </li>
+
                             <li class="nav-item mb-3">
-                                <a href="donor.php" class="nav-link text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
+                                <a href="recivers_request.php" class="nav-link text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
+                                    <i class="fa fa-certificate d-inline d-xl-none d-md-none" data-bs-toggle="tooltip"
+                                        data-bs-placement="right" title="Request blood" aria-hidden="false"></i>
+                                    <strong class="ms-2 d-none d-md-inline">Recipient Request</strong>
+                                </a>
+                            </li>
+
+                            <li class="nav-item mb-3">
+                                <a href="donor_request.php" class="nav-link text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
                                     <i class="fa fa-certificate d-inline d-xl-none d-md-none" data-bs-toggle="tooltip"
                                         data-bs-placement="right" title="Request blood" aria-hidden="false"></i>
                                     <strong class="ms-2 d-none d-md-inline">Donor Request</strong>
                                 </a>
                             </li>
-                            <li class="nav-item mb-3">
-                                <a href="donor.php" class="nav-link text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
-                                    <i class="fa fa-certificate d-inline d-xl-none d-md-none" data-bs-toggle="tooltip"
-                                        data-bs-placement="right" title="Request blood" aria-hidden="false"></i>
-                                    <strong class="ms-2 d-none d-md-inline">Recipient</strong>
-                                </a>
-                            </li>
-                            <li class="na<li class="nav-item mb-3">
-                                <a href="donor.php" class="nav-link text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
-                                    <i class="fa fa-certificate d-inline d-xl-none d-md-none" data-bs-toggle="tooltip"
-                                        data-bs-placement="right" title="Request blood" aria-hidden="false"></i>
-                                    <strong class="ms-2 d-none d-md-inline">Recipient</strong>
-                                </a>
-                            </li>v-item mb-3">
-                                <a href="donor.php" class="nav-link text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
-                                    <i class="fa fa-certifica Rejectte d-inline d-xl-none d-md-none" data-bs-toggle="tooltip"
-                                        data-bs-placement="right" title="Request blood" aria-hidden="false"></i>
-                                    <strong c<li class="nav-item mb-3">
-                                <a href="donor.php" class="nav-link text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
-                                    <i class="fa fa-certificate d-inline d-xl-none d-md-none" data-bs-toggle="tooltip"
-                                        data-bs-placement="right" title="Request blood" aria-hidden="false"></i>
-                                    <strong class="ms-2 d-none d-md-inline">Recipient</strong>
-                                </a>
-                            </li>lass="ms-2 d-none d-md-inline">Donor Request</strong>
-                                </a>
-                            </li>
+
+                       
+                          
+
                             <li class="nav-item mb-3">
                                 <a href="request.php" class="nav-link text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
                                     <i class="fa fa-key d-inline d-xl-none d-md-none" data-bs-toggle="tooltip"
@@ -89,6 +76,7 @@
                                     <strong class="ms-2 d-none d-md-inline">Appointment</strong >
                                 </a>
                             </li>
+
                             <li class="nav-item mb-3">
                                 <a href="inventory.php" class="nav-link text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
                                     <i class="fa fa-key d-inline d-xl-none d-md-none" data-bs-toggle="tooltip"

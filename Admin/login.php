@@ -30,6 +30,7 @@ if (isset($_POST['login'])) {
     if ($admin_result && mysqli_num_rows($admin_result) == 1) {
         session_start();
         $_SESSION['a_email'] = $email;
+        $_SESSION['recp_email'] = $email;
         header("Location: index.php");
         exit();
     } else {
@@ -57,7 +58,7 @@ if (isset($_POST['login'])) {
      include ('../Admin/includes/head.php');
     ?>
     
-    <!-- main containinclude 'includes/head.php';er starts from here -->
+    <!-- main containin starts from here -->
     <div class="continclude 'includes/head.php';ainer d-flex justify-content-center">
         <div class="row px-6 my-2 text-dark bg-light w-50 md-w-100 shadow p-3 mb-5 bg-body rounded-3" id="login_wrapper">
             <div class="col mt-3 ">

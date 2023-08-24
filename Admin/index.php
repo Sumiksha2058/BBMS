@@ -19,7 +19,7 @@ include 'includes/config.php';
 <body>
 
 <?php 
-        include ('includes\head.php');
+        include ('../Admin/includes/head.php');
     ?>
 
 <?php 

@@ -55,7 +55,7 @@ if (!$result) {
             <tr >           
               <th scope="col">Requested Date</th>
               <th scope="col">Blood Type</th>
-              <th scope="col">Request Amount(ml)</th>
+              <th scope="col">Request Unit</th>
               <th scope="col">Email</th>
               <th scope="col">Status</th>
             </tr>
@@ -71,14 +71,11 @@ if (!$result) {
               echo "<td>".$request_data['recp_email']."</td>";
               echo "<td>".$request_data['approval_status']."</td>";
          
-            }
-            
+            }            
             ?>
 
             </tbody>
-        
       </table>
-   
 </div>
 </div>
 </div>

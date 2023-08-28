@@ -16,7 +16,7 @@
                         <ul class="nav nav-tabs fs-5 flex-column" role="tablist">
 
                             <li class="nav-item mb-4">
-                                <a href="Rprofile.php" class="nav-link text-light" id="nav-link" data-bs-toggle="tooltip">
+                                <a href="Rprofile.php" class="nav-link  <?php echo (basename($_SERVER['PHP_SELF']) == 'Rprofile.php') ? 'active' : ''; ?>  text-light" id="nav-link" data-bs-toggle="tooltip">
                                     <i class="fa fa-user-circle d-inline d-xl-none d-md-none text-center"
                                         aria-hidden="false"></i>
                                     <span class="ms-2 text-center d-none d-md-inline md-text-center">Profile</span>
@@ -24,7 +24,7 @@
                             </li>
 
                             <li class="nav-item mb-4">
-                                <a href="requestBlood.php" class="nav-link text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
+                                <a href="requestBlood.php" class="nav-link  <?php echo (basename($_SERVER['PHP_SELF']) == 'requestBlood.php') ? 'active' : ''; ?>  text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
                                     <i class="fa fa-clipboard d-inline d-xl-none d-md-none text-center"
                                         data-bs-toggle="tooltip" data-bs-placement="right" title="Donation Record"
                                         aria-hidden="false"></i>
@@ -33,7 +33,7 @@
                             </li>
 
                             <li class="nav-item mb-4">
-                                <a href="bloodStatus.php" class="nav-link text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
+                                <a href="bloodStatus.php" class="nav-link  <?php echo (basename($_SERVER['PHP_SELF']) == 'bloodStatus.php') ? 'active' : ''; ?>  text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
                                     <i class="fa fa-certificate d-inline d-xl-none d-md-none" data-bs-toggle="tooltip"
                                         data-bs-placement="right" title="Request blood" aria-hidden="false"></i>
                                     <span class="ms-2 d-none d-md-inline">Request Status</span>
@@ -41,7 +41,7 @@
                             </li>
 
                             <li class="nav-item mb-4">
-                                <a href="../RecipientDashboard/rchangePassword.php" class="nav-link text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
+                                <a href="../RecipientDashboard/rchangePassword.php" class="nav-link  <?php echo (basename($_SERVER['PHP_SELF']) == 'rchangePassword.php') ? 'active' : ''; ?>  text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
                                     <i class="fa fa-key d-inline d-xl-none d-md-none" data-bs-toggle="tooltip"
                                         data-bs-placement="right" title="Change Password" aria-hidden="false"></i>
                                     <span class="ms-2 d-none d-md-inline">Change Password</span>
@@ -49,7 +49,7 @@
                             </li>
 
                             <li class="nav-item mb-4">
-                            <a href="Rlogout.php" class="nav-link text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
+                            <a href="Rlogout.php" class="nav-link  <?php echo (basename($_SERVER['PHP_SELF']) == 'Rlogout.php') ? 'active' : ''; ?>  text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
                             <i class="fa fa- d-inline d-xl-none d-md-none" data-bs-toggle="tooltip" data-bs-placement="right" title="Logout" aria-hidden="false"></i>   
                             <span class="ms-2 d-none d-md-inline">logout</span>      
                             </a>

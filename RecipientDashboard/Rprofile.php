@@ -42,7 +42,7 @@ Profileewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="fontawesome/css/all.min.css">
     <link rel="preconnect" href="https://font/RecipientDashboard/Rprofile.phps.googleapis.com">
-    <link rel="preconnect" href="https://font/RecipientDashboard/Rprofile.phps.googleapis.com">
+    <script src="javascript/jquery.js"></script>
 </head>
 <body>
 
@@ -111,7 +111,7 @@ include ('../RecipientDashboard/includes/head.php');
 </div>
 
 </main>
-
+<script src="javascript/activeHover.js"></script>
 <script src="fontawesome/js/all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
 

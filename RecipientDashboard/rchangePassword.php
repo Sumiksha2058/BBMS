@@ -129,7 +129,7 @@ if(isset($_SESSION['recp_email'])){
 
 </main>
 
-
+<script src="javascript/activeHover.js"></script>
 <script src="javascript\passport_hide_show.js"></script>
 <script src="fontawesome/js/all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>

@@ -9,10 +9,8 @@
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
      <link rel="shortcut icon" href="VitaCare.ico" type="image/x-icon">
      <link rel="stylesheet" href="fontawesome/css/all.min.css">
+  
 
-     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,500;1,700&family=Lato:wght@100&display=swap" rel="stylesheet">
      
 </head>
 <body>
@@ -56,9 +54,10 @@
 <?php
     include 'includes/footer.php'
    ?>
-
-
+ <script src="javascript/jquery.js"></script>  
+<script src="javascript/activeHover.js"></script>
 <script src="fontawesome/js/all.min.js"></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+
 </body>
 </html>

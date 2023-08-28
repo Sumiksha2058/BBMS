@@ -94,7 +94,8 @@
     include 'includes/footer.php'
    ?>
 
-
+<script src="javascript/jquery.js"></script>  
+<script src="javascript/activeHover.js"></script>
 <script src="fontawesome/js/all.min.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
 </body>

@@ -16,7 +16,7 @@
                         <ul class="nav nav-tabs fs-5 flex-column" role="tablist">
 
                             <li class="nav-item mb-4">
-                                <a href="Dprofile.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'Dprofile.php') ? 'active' : ''; ?> text-light" id="nav-link" data-bs-toggle="tooltip">
+                                <a href="Dprofile.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'Dprofile.php') ? 'active' : ''; ?> text-light" data-bs-toggle="tooltip">
                                     <i class="fa fa-user-circle d-inline d-xl-none d-md-none text-center"
                                         aria-hidden="false"></i>
                                     <span class="ms-2 text-center d-none d-md-inline md-text-center">Profile</span>

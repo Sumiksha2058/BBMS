@@ -18,7 +18,7 @@
                         <ul class="nav nav-tabs fs-4 flex-column" role="tablist">
 
                             <li class="nav-item mb-3">
-                                <a href="index.php" class="nav-link text-light" id="nav-link" da000077toptopta-bs-toggle="tooltip">
+                                <a href="index.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'index.php') ? 'active' : ''; ?>  text-light" id="nav-link" da000077toptopta-bs-toggle="tooltip">
                                     <i class="fa fa-user-circle d-inline d-xl-none d-md-none text-center"
                                         aria-hidden="false"></i>
                                     <strong class="ms-2 text-center d-none d-md-inline md-text-center">Home</strong>
@@ -26,7 +26,7 @@
                             </li>
 
                             <li class="nav-item mb-3">
-                                <a href="user.php" class="nav-link text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
+                                <a href="user.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'user.php') ? 'active' : ''; ?>  text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
                                     <i class="fa fa-clipboard d-inline d-xl-none d-md-none text-center"
                                         data-bs-toggle="tooltip" data-bs-placement="right" title="Donation Record"
                                         aria-hidden="false"></i>
@@ -35,7 +35,7 @@
                             </li>
 
                             <li class="nav-item mb-3">
-                                <a href="donor_list.php" class="nav-link text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
+                                <a href="donor_list.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'donor_list.php') ? 'active' : ''; ?>  text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
                                    <i class="fa fa-certificate d-inline d-xl-none d-md-none" data-bs-toggle="tooltip"
                                         data-bs-placement="right" title="Request blood" aria-hidden="false"></i>
                                     <strong class="ms-2 d-none d-md-inline">Donor</strong>
@@ -43,7 +43,7 @@
                             </li>
 
                             <li class="nav-item mb-3">
-                                <a href="recipient_list.php" class="nav-link text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
+                                <a href="recipient_list.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'recipient_list.php') ? 'active' : ''; ?>  text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
                                     <i class="fa fa-certificate d-inline d-xl-none d-md-none" data-bs-toggle="tooltip"
                                         data-bs-placement="right" title="Request blood" aria-hidden="false"></i>
                                     <strong class="ms-2 d-none d-md-inline">Recipient</strong>
@@ -51,7 +51,7 @@
                             </li>
 
                             <li class="nav-item mb-3">
-                                <a href="recivers_request.php" class="nav-link text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
+                                <a href="recivers_request.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'recivers_request.php') ? 'active' : ''; ?>  text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
                                     <i class="fa fa-certificate d-inline d-xl-none d-md-none" data-bs-toggle="tooltip"
                                         data-bs-placement="right" title="Request blood" aria-hidden="false"></i>
                                     <strong class="ms-2 d-none d-md-inline">Recipient Request</strong>
@@ -59,7 +59,7 @@
                             </li>
 
                             <li class="nav-item mb-3">
-                                <a href="donor_request.php" class="nav-link text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
+                                <a href="donor_request.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'donor_request.php') ? 'active' : ''; ?>  text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
                                     <i class="fa fa-certificate d-inline d-xl-none d-md-none" data-bs-toggle="tooltip"
                                         data-bs-placement="right" title="Request blood" aria-hidden="false"></i>
                                     <strong class="ms-2 d-none d-md-inline">Donor Request</strong>
@@ -67,7 +67,7 @@
                             </li>
 
                             <li class="nav-item mb-3">
-                                <a href="request.php" class="nav-link text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
+                                <a href="request.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'request.php') ? 'active' : ''; ?>  text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
                                     <i class="fa fa-key d-inline d-xl-none d-md-none" data-bs-toggle="tooltip"
                                         data-bs-placement="right" title="Change Password" aria-hidden="false"></i>
                                     <strong class="ms-2 d-none d-md-inline">Appointment</strong >
@@ -75,7 +75,7 @@
                             </li>
 
                             <li class="nav-item mb-3">
-                                <a href="inventory.php" class="nav-link text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
+                                <a href="inventory.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'inventory.php') ? 'active' : ''; ?>  text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
                                     <i class="fa fa-key d-inline d-xl-none d-md-none" data-bs-toggle="tooltip"
                                         data-bs-placement="right" title="Change Password" aria-hidden="false"></i>
                                     <strong class="ms-2 d-none d-md-inline">Inventory</strong>

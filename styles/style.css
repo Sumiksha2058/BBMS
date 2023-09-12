@@ -18,7 +18,7 @@ body{
 }
 .nav-link{
     color: #E5E4E2 !important;
-    margin-right: 5px;
+    margin-right: 7px;
 }
 
 .main_wapper{
@@ -154,14 +154,14 @@ a#nav-link{
     font-weight: 500;
 }
 a.nav-link.active{
-    color: #FFD580, !important;
-
+    color: white !important;
+    background-color: #141418 !important;
+    border-radius: 12px !important;
     
 }
-a.nav-link:hover{
-    color: #FFD580, !important;
-    
-}
+/* a#nav-link:hover{
+   
+} */
 
 
 

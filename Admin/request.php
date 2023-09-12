@@ -1,3 +1,13 @@
+<?php
+include 'includes/config.php';
+
+$query = "SELECT appo_id, appo_name, appo_email, appo_phone, appo_date, appo_time FROM vc_appointment; ";
+$result = mysqli_query($conn, $query);
+
+if (!$result) {
+    die("Error: ".mysqli_error($conn)); 
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,8 +19,7 @@
     <link rel="stylesheet" href="includes/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="fontawesome/css/all.min.css">
-    <link rel="preconnec
-        include ('includes\head.php');t" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 </head>
@@ -31,7 +40,7 @@
      
         <div class="container overflow-hidden">
         <div class="title text-dark">
-        <h1 class="fs-4">Reciver's request</h1>
+        <h1 class="fs-4">Appointment Request</h1>
       </div>
 
       <table class="table table-hover-Info">
@@ -39,71 +48,31 @@
     <tr class="text-light " style="background-color: #000077; ">
       <th scope="col">User ID</th>
       <th scope="col">Full name</th>
-      <th scope="col">Age</th>
-      <th scope="col">Contact</th>
       <th scope="col">Email</th>
-      <th scope="col">Date Of Doation</th>
-      <th scope="col">Action</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Date</th>
+      <th scope="col">Time</th>
+   
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>9876457598</td>
-      <td>ramkumari345@gmail.com</td>
-      <td>@mdo</td>
-      <td >
-      <button type="button" class="btn btn-danger">Reject</button>
-      <button type="button" class="btn btn-success">Accept</button>
-      </td>
-     
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
-      <td>
-      <button type="button" class="btn btn-danger">Reject</button>
-      <button type="button" class="btn btn-success">Accept</button>
-      </td>
-      
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td >Larry the Bird</td>
-      <td>@twitter</td>
-      <td>@twitter</td>
-      <td>@twitter</td>
-      <td>@mdo</td>
-      <td>
-      <button type="button" class="btn btn-danger">Reject</button>
-      <button type="button" class="btn btn-success">Accept</button>
-      </td>
-    </tr>
-
-    <tr>
-      <th scope="row">3</th>
-      <td >Larry the Bird</td>
-      <td>@twitter</td>
-      <td>@mdo</td>
-      <td>@twitter</td>
-      <td>@twitter</td>
-      <td>
-      <button type="button" class="btn btn-danger">Reject</button>
-      <button type="button" class="btn btn-success">Accept</button>
-      </td>
-      
-    </tr>
-
-    
+  <tbody>
+  <?php
+while($user_data = mysqli_fetch_array($result)){
+  while ($user_data = mysqli_fetch_array($result)) {
+    echo "<tr class='p-2'>";
+    echo "<td>".$user_data['appo_id']."</td>";
+    echo "<td>".$user_data['appo_name']."</td>";
+    echo "<td>".$user_data['appo_email']."</td>";
+    echo "<td>".$user_data['appo_phone']."</td>";
+    echo "<td>".$user_data['appo_date']."</td>";
+    echo "<td>".$user_data['appo_time']."</td>";
+    echo "</tr>";
+}
+}
+?>
   </tbody>
 </table>
-        
         </div>
     </div> 
 </div>

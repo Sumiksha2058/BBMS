@@ -1,3 +1,6 @@
+<?php
+include 'function/ReqAppointment.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,8 +33,19 @@
                  
                   <!-- form of appointment -->
 
-                  <form action="#" class="mt-3 row g-3 needs-validation" novalidate>
-                   
+                  <form action="appointment.php" method="post" class="mt-3 row g-3 needs-validation" novalidate>
+                  <?php
+            if (count($errors) > 0):?>
+            <div class="alert alert-danger">
+                <?php foreach ($errors as $error) : ?>
+                    <p><?php echo $error; ?></p>
+                <?php endforeach; ?>
+            </div>
+       <?php endif ?>
+        <?php if (isset($_GET['success'])) { ?>
+                                <p class="alert alert-success ">  <?php echo $_GET['success']; ?></p>
+                            <?php } ?>
+                            
                     <input  type="text" class="form-control  mb-4"id="validationTooltipName" aria-describedby="validationTooltipNamePrepend" placeholder="Name" name="name" required>
                     <div class="invalid-feedback">
                         Please fill you Name
@@ -44,14 +58,14 @@
                    
                     <input type="text" class="form-control mb-4" placeholder="Phone" name="phone"required>
                    
-                    <input type="text" class="form-control mb-4" placeholder="Blood Group" name="bloodGroup"required>
+                    <input type="text" class="form-control mb-4" placeholder="Blood Group" name="bloodGroup" required>
                    
-                    <input type="date" class="form-control mb-4" placeholder="Appointment Date" name="date"required>
+                    <input type="date" class="form-control mb-4" placeholder="Appointment Date" name="date" required>
                     
                     <input type="time" class="form-control  mb-3" placeholder="Appointment Time" name="time"required>
                    
         
-                    <button type="submit" class="btn btn-#CC6666 mt-3 appobtn">Book Appointment</button>
+                    <button type="submit"name="submitappo" class="btn btn-#CC6666 mt-3 appobtn">Book Appointment</button>
                   </form>
 
             </div>

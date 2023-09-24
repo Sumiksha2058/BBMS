@@ -36,7 +36,127 @@ $result = mysqli_query($conn, $query);
                 <div class="container overflow-hidden">
                     <div class="title text-dark">
                         <h1 class="fs-4">List of Donor's</h1>
+                       
+                      <hr>
+                   <!-- Button trigger modal -->
+                   <div class="mb-2">
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <i class="fa fa-add me-2"></i>Add Donor
+                    </button>
                     </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Register Donor</h5>
+                            <button type="button" class="btn-close shadow-none btn-text-right" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- form content -->
+                        <form method="post" action="donor_request.php" id="registrationForm"  class="row needs-validation" novalidate >      
+                            <!-- Dysplaying validation -->
+                                <div class="form-section ms-3" id="donor">
+                                
+                                    <div class="col md-6">
+                                        <label for="donorName" class="form-label fs-auto ">Full Name</label>
+                                        <input type="text" name="fullname" class="form-control"  id="donorName" placeholder="Enter your full name" required>
+                                    </div>
+                    
+                                    <div class="col md-6">
+                                        <label  class="form-label">Gender</label>
+                                        <div class="form-check">
+                                        <input class="form-check-input" type="radio" value="Male" name="gender" id="gender" >
+                                        <label class="form-check-label"  for="gender">
+                                            Male
+                                        </label>
+                                        </div>
+                                        <div class="form-check">
+                                        <input class="form-check-input" type="radio" value="Female" name="gender" id="flexRadioDisabled" >
+                                        <label class="form-check-label" for="flexRadioDisabled">
+                                            Female
+                                        </label>
+                                        </div>
+                                        <div class="form-check">
+                                        <input class="form-check-input" type="radio" value="Other" name="gender" id="flexRadioDisabled">
+                                        <label class="form-check-label" for="flexRadioDisabled">
+                                            Other
+                                        </label>
+                                        </div>
+                                    </div>
+                    
+                                    <div class="col md-6">
+                                        <label for="donoAge" class="form-label fs-auto ">Age</label>
+                                        <input type="number" class="form-control" name="age" id="donoAge" placeholder="Enter Your" required>
+                                    </div>
+                    
+                                    <div class="col md-6">
+                                        <label for="donorEmail" class="form-label fs-auto">Email</label>
+                                        <input type="email" class="form-control" name="email" id="donorEmail" placeholder="Enter your email" required>
+                                    </div>
+                                    <div class="col md-6">
+                                        <label for="donorContact" class="form-label fs-auto">Contact</label>
+                                        <input type="text" class="form-control" name="contact" id="donorContact" placeholder="Enter your contact number" required>
+                                    </div>
+                                    <div class="col md-6">
+                                        <label for="donorBloodGroup" class="form-label fs-auto">Blood Group</label>
+                                        <select class="form-select" name="donorBlood" id="donorBloodGroup" required>
+                                            <option selected>Select blood group</option>
+                                            <option value="O+">O+</option>
+                                            <option value="O-">O-</option>
+                                            <option value="A+">A+</option>
+                                            <option value="A-">A-</option>
+                                            <option value="B+">B+</option>
+                                            <option value="B-">B-</option>
+                                            <option value="AB+">AB+</option>
+                                            <option value="AB-">AB-</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="col md-6">
+                                        <label for="DonorPassword" class="form-label fs-auto">Password</label>
+                                        <div class="input-group">
+                                        <input type="password" class="form-control" name="password" id="DonorPassword" placeholder="Password" required>
+                                        <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <a href="#" class="text-dark" id="click-eye">
+                                                        <i class="fa fa-eye color-dark" id="icon" aria-hidden="true"></i>
+                                                    </a>
+                                                </div>
+                                                </div>
+                                                
+                                            </div>
+                                            <div id="passwordHelpBlock" class="form-text">
+                                                <?php if (isset($_GET['error'])) { ?>
+                                                    <p class="text-danger ">  <?php echo $_GET['error']; ?></p>
+                                                <?php } ?>
+                                            </div>
+                                            </div>   
+                                    
+                                    <div class="col md-6">
+                                        <label for="DonorConformPassword" class="form-label fs-auto">Confirm Password</label>
+                                        <div class="input-group">
+                                        <input type="password" class="form-control " name="con_password" id="DonorConformPassword" placeholder="Re-enter Password" required>
+                                        <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <a href="#" class="text-dark" id="click-eye">
+                                                        <i class="fa fa-eye color-dark" id="icon" aria-hidden="true"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            </div>
+                                                </div>
+                                                </div>
+                                        </form>  
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" name="register" class="btn btn-primary">Add donor</button>
+                                    </div>
+                                    </div>
+                                </div>  
+                                </div>
+
                     <?php
                     if(mysqli_num_rows($result) > 0) {
                         echo '<table class="table table-hover">';

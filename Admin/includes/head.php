@@ -19,7 +19,11 @@
 
         <li class="nav-item  d-flex p-3 ms-3">
               <div class="col ">
-                 <i class="fa fa-bell fs-5 text-light" aria-hidden = "true"></i>             
+                 <i class="fa fa-bell fs-4 text-light position-relative"  type="button"  aria-hidden = "true">
+                  <span class="position-absolute top-0 start-100 fs-5 translate-middle p-2 bg-danger border border-light rounded-circle">2
+                  <span class="visually-hidden">New alerts</span>
+                    </span>
+                 </i>             
               </div>
               
             </li>

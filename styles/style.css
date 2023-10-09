@@ -150,13 +150,14 @@ footer{
 }
 a#nav-link{
     font-family: exo;
-    font-style: normalS;
+    font-style: normal;
     font-weight: 500;
 }
 a.nav-link.active{
-    color: white !important;
-    background-color: #141418 !important;
+    color: #fff !important;
+    background-color: #14141869 !important;
     border-radius: 12px !important;
+    
     
 }
 /* a#nav-link:hover{

@@ -31,10 +31,8 @@ body{
 /* main{
     background-color: #DE4A4A;
 } */
-#tube{
-    width: 358px;
-    height: 534px;
-    border-radius: 2em;
+.btn:focus{
+    box-shadow: none !important ;
 }
 
 .row h1,h3,h4{

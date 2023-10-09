@@ -39,10 +39,8 @@ include 'includes/config.php';
       <div class="shadow-lg p-5 border rounded"style="background-color:#000077;">  
       <div class="text-center pb-1 fs-5 ">Total Users</div> 
       <?php
-      $dashbard_user_query = "(SELECT 'recipient' AS user_type, recp_id AS user_id, recp_fullname AS user_name, recp_email AS user_email FROM recipient)
-      UNION
-      (SELECT 'donor' AS user_type, d_id AS user_id, fullname AS name, email AS user_email FROM donor)";
-
+      $dashbard_user_query = "(SELECT user_type, user_id, fullname, email FROM users)";
+      
       $dashbard_user_result = mysqli_query($conn, $dashbard_user_query);
 
       if($total_user = mysqli_num_rows($dashbard_user_result)){
@@ -104,9 +102,21 @@ include 'includes/config.php';
     <div class="col-4 " >
       <div class="shadow-lg p-5 border rounded"style="background-color:#000077;">  
       <div class="text-center pb-1 fs-5 ">Total Quantity of Blood</div>  
-      <div class="float-end ">
-       <span>4</span>
-    </div>
+      <?php 
+      $dashbard_bloodUnit_query = "SELECT `requested_blood_group`, COUNT(*) AS `total_units` FROM `blood_requests` WHERE `approval_status` = 'approved' GROUP BY `requested_blood_group`";
+      $dashbard_bloodUnit_result = mysqli_query($conn, $dashbard_bloodUnit_query);
+      if($total_bloodUnit = mysqli_num_rows($dashbard_bloodUnit_result)){
+        echo '<div class="float-end ">
+        <span>'.$dashbard_bloodUnit_result.'</span>
+     </div>';
+
+      }else{
+        echo '<div class="float-end ">
+        <span>No data</span>
+     </div>';
+      }
+      ?>
+      
     </div>
     </div>
     
@@ -122,9 +132,23 @@ include 'includes/config.php';
     <div class="col-4 " >
       <div class="shadow-lg p-5 border rounded"style="background-color:#000077;">  
       <div class="text-center pb-1 fs-5  ">Total Appointments</div>  
-      <div class="float-end ">
-       <span>4</span>
-    </div>
+      <?php
+      $dashbard_appo_query = "SELECT appo_id, appo_name, appo_email, appo_phone, appo_bloodtype, appo_date,appo_time FROM vc_appointment; ";
+
+      $dashbard_appo_result = mysqli_query($conn, $dashbard_appo_query);
+
+      if($total_appo = mysqli_num_rows($dashbard_appo_result)){
+        echo '<div class="float-end ">
+        <span>'.$total_appo.'</span>
+     </div>';
+
+      }else{
+        echo '<div class="float-end ">
+        <span>No data</span>
+     </div>';
+      }
+      ?>
+     
     </div>
     </div>
     

@@ -16,13 +16,7 @@ if (isset($_POST["request"])) {
     $recp_email = $_SESSION['recp_email'];
     $requestedBloodGroup = $_POST["requestedBloodGroup"];
     $urgency = $_POST["urgency"];
-    $amountRequire = $_POST["amountRequ
-    The requested URL was not found on this server. The link on the referring page seems to be wrong or outdated. Please inform the author of that page about the error.
-    
-    If you think this is a server error, please contact the webmaster.
-    Error 404
-    localhost
-    Apache/2.4.56 (Unix) OpenSSL/1.1.1t PHP/8.2.4 mod_perl/2.0.12 Perl/v5.34.1 ire"];
+    $amountRequire = $_POST["amountRequire"];
     $message = $_POST["message"];
     
 
@@ -110,8 +104,8 @@ if (isset($_POST["request"])) {
                 <option value="Not Urgent">Not urgent</option>
               
             </select>
-            <h3><label for="amountRequire" class="form-label">Blood Require(ML)</label></h3>
-            <input class="form-control  mb-3" type="text" id="amountRequire" name="amountRequire">
+            <h3><label for="amountRequire" class="form-label">Blood Unit</label></h3>
+            <input class="form-control mb-3" type="number" id="amountRequire" name="amountRequire">
 
             <h3><label for="urgency" class="form-label">Message</label></h3>
             <input class="form-control  mb-3" type="text" id="message" name="message">

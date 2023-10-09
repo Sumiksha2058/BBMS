@@ -1,9 +1,7 @@
 <?php
 include 'includes/config.php';
 
-$query = "(SELECT 'recipient' AS user_type, recp_id AS user_id, recp_fullname AS user_name, recp_email AS user_email FROM recipient)
-          UNION
-          (SELECT 'donor' AS user_type, d_id AS user_id, fullname AS name, email AS user_email FROM donor)";
+$query = "(SELECT user_type, user_id, fullname, email FROM users)";
 
 $result = mysqli_query($conn, $query);
 
@@ -29,9 +27,6 @@ if (!$result) {
 
 <?php 
         include ('../Admin/includes/head.php');
-    ?>
-
-<?php 
         include ('includes/a_dashboard.php');
     ?>
 
@@ -41,47 +36,50 @@ if (!$result) {
     <div class="inner-wrapper p-4">
       <div class="title text-dark">
         <h1 class="fs-4">List of User</h1>
+        <hr>
       </div>
 
       <table class="table table-hover">
-  <thead>
-    <tr class="text-light" style="background-color: #000077;">
-      <th scope="col">User Type</th>
-      <th scope="col">User ID</th>
-      <th scope="col">User Name</th>
-      <th scope="col">User Email</th>
- 
-    </tr>
- 
-  </thead>
-  <tbody>
-  <?php
-while($user_data = mysqli_fetch_array($result)){
-  while ($user_data = mysqli_fetch_array($result)) {
-    echo "<tr class='p-2'>";
-    echo "<td>".$user_data['user_type']."</td>";
-    echo "<td>".$user_data['user_id']."</td>";
-    echo "<td>".$user_data['user_name']."</td>";
-    echo "<td>".$user_data['user_email']."</td>";
-    echo "</tr>";
-}
-}
-
-?>
-    
-  </tbody>
-</table>
+      <?php
+            if (mysqli_num_rows($result) > 0) {
+                ?>
+                <table class="table table-hover">
+                    <thead>
+                        <tr class="text-light" style="background-color: #000077;">
+                            <th scope="col">User Type</th>
+                            <th scope="col">User ID</th>
+                            <th scope="col">User Name</th>
+                            <th scope="col">User Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    while ($user_data = mysqli_fetch_array($result)) {
+                        echo "<tr class='p-2'>";
+                        echo "<td>" . $user_data['user_type'] . "</td>";
+                        echo "<td>" . $user_data['user_id'] . "</td>";
+                        echo "<td>" . $user_data['fullname'] . "</td>";
+                        echo "<td>" . $user_data['email'] . "</td>";
+                        echo "</tr>";
+                    }
+                    ?>
+                    </tbody>
+                </table>
+                <?php
+            } else {
+                echo "<p class='text-center mt-5'>No Data Found</p>";
+            }
+            ?>
+  
+      </table>
         
-       
     </div> 
 </div>
 
 </main>
 
-
-
 <script src="fontawesome/js/all.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
 
 </body>
 </html>

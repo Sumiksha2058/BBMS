@@ -1,3 +1,14 @@
+<?php
+// Include the database configuration file
+include 'includes/config.php';
+
+// Create an SQL query to fetch the required columns from the 'blood_requests' table
+$query = "SELECT `requested_blood_group`, `urgency`, `amount_required`, `request_date`, `approval_status` FROM `blood_requests`";
+
+// Execute the query
+$result = mysqli_query($conn, $query);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,86 +27,61 @@
 <body>
 
 <?php 
-        include ('includes\head.php');
-    ?>
+include ('includes\head.php');
+?>
 
 <?php 
-        include ('includes/a_dashboard.php');
-    ?>
+include ('includes/a_dashboard.php');
+?>
 
 <main id="main_container">
+    <div class="main-area p-4">
+        <div class="inner-wrapper p-4">
+            <div class="container overflow-hidden">
+                <div class="title text-dark">
+                    <h1 class="fs-4">List of Blood Requests</h1>
+                </div>
 
-<div class="main-area p-4">
-    <div class="inner-wrapper p-4">
-     
-        <div class="container overflow-hidden">
-        <div class="title text-dark">
-        <h1 class="fs-4">List of Donor's</h1>
-      </div>
+                <table class="table table-hover-Info">
+                    <thead>
+                        <tr class="text-light" style="background-color: #000077;">
+                            <th scope="col">Blood Type</th>
+                            <th scope="col">Rh-factor</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Expiry Date</th>
+                            <th scope="col">Storage Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        // Check if there are any records in the result set
+                        if (mysqli_num_rows($result) > 0) {
+                            // Loop through the records and display them in the table
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo '<tr>';
+                                echo '<td>' . $row['requested_blood_group'] . '</td>';
+                                echo '<td>' . $row['urgency'] . '</td>';
+                                echo '<td>' . $row['amount_required'] . '</td>';
+                                echo '<td>' . $row['request_date'] . '</td>';
+                                echo '<td>' . $row['approval_status'] . '</td>';
+                                echo '</tr>';
+                            }
+                        } else {
+                            echo '<tr><td colspan="5">No blood requests found.</td></tr>';
+                        }
 
-      <table class="table table-hover-Info">
-  <thead>
-    <tr class="text-light " style="background-color: #000077; ">
-      <th scope="col">Blood Unit ID</th>
-      <th scope="col">Blood Type</th>
-      <th scope="col">Rh-factor</th>
-      <th scope="col">Quantity</th>
-      <th scope="col">Expiry Date</th>
-      <th scope="col">Storage Date</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>9876457598</td>
-      <td>@mdo</td>
-      <td >87</td>
-     
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>@fat</td>
-      <td>@mdo</td>
-      <td>@mdo</td>
-      <td>Jacob</td>
-      
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td >Larry the Bird</td>
-      <td>@twitter</td>
-      <td>@twitter</td>
-      <td>@twitter</td>
-      <td>twitter</td>
-    </tr>
-
-    <tr>
-      <th scope="row">3</th>
-      <td >Larry the Bird</td>
-      <td>@twitter</td>
-      <td>@twitter</td>
-      <td>@twitter</td>
-      <td>twitter</td>
-      
-    </tr>
-
-    
-  </tbody>
-</table>
-        
+                        // Close the database connection
+                        mysqli_close($conn);
+                        ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div> 
-</div>
-
+    </div>
 </main>
 
-
-
 <script src="fontawesome/js/all.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
 
 </body>
 </html>

@@ -1,9 +1,11 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 
 include 'function/UserRegister.php';
 
-//filtering donor inpurs
-function input_filter($data){
+// Define the input_filter function
+function input_filter($data) {
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
@@ -11,41 +13,56 @@ function input_filter($data){
 }
 
 if (isset($_POST['login'])) {
+    // Check if the database connection is properly configured
+    $conn = mysqli_connect("localhost", "root", "", "vitacare_db");
+    if (!$conn) {
+        die("Database connection failed: " . mysqli_connect_error());
+    }
+
+    $userType = input_filter($_POST['userType']); // Get the selected user type
     $email = input_filter($_POST['Loginemail']);
     $password = input_filter($_POST['Loginpassword']);
 
-    //escaping special symbols used in SQL statement
+    // Escape special characters to prevent SQL injection
     $email = mysqli_real_escape_string($conn, $email);
-    $password = mysqli_real_escape_string($conn, $password);
 
     // Hash the password before comparing it in the query
     $password = md5($password);
 
-    //query templates
-    $sql_donor =  "SELECT * FROM donor WHERE email = '$email' AND password = '$password'";
-    $sql_recipient = "SELECT recp_id, recp_email FROM recipient WHERE recp_email = '$email' AND recp_password = '$password'"; 
+    // Query template
+    $sql = "SELECT * FROM users WHERE email = '$email' AND password = '$password' AND user_type = '$userType'";
 
-    // Prepare the statements
-    $donor_result = mysqli_query($conn, $sql_donor);
-    $recipient_result = mysqli_query($conn, $sql_recipient);
+    // Execute the query
+    $result = mysqli_query($conn, $sql);
 
-    if ($donor_result && mysqli_num_rows($donor_result) == 1) {
-        session_start();
-        $_SESSION['email'] = $email;
-        $_SESSION['d_id'] = $d_id;
-        header("Location: DonationDashboard\Dprofile.php");
-        exit();
-    } elseif ($recipient_result && mysqli_num_rows($recipient_result) == 1) {
-        session_start();
-        $_SESSION['recp_id'] = $recp_id;
-        $_SESSION['recp_email'] = $email;
-        header("Location: RecipientDashboard\Rprofile.php");
-        exit();
-    } else {
-        header("location: login.php?error=Invalid Email or Password");
-        exit();
+    if (!$result) {
+        die("Database query failed: " . mysqli_error($conn));
     }
+
+    // Check if a single row was returned
+    if (mysqli_num_rows($result) == 1) {
+        // Login successful
+        session_start();
+        $_SESSION['user_type'] = $userType;
+        $_SESSION['email'] = $email;
+
+        // Redirect based on user type
+        if ($userType === 'donor') {
+            header("Location: DonationDashboard/Dprofile.php");
+            exit();
+        } elseif ($userType === 'recipient') {
+            header("Location: RecipientDashboard/Rprofile.php");
+            exit();
+        }
+    } else {
+        // Login failed
+        $error_message = "Invalid Email or Password";
+    }
+
+    // Close the database connection
+    mysqli_close($conn);
 }
+
 ?>
  
 <!DOCTYPE html>
@@ -76,6 +93,14 @@ if (isset($_POST['login'])) {
             <?php if (isset($_GET['error'])) { ?>
                                 <p class="alert alert-danger ">  <?php echo $_GET['error']; ?></p>
                             <?php } ?>
+                <div class="mb-3">
+                    <label for="userType" class="form-label">User Type</label>
+                    <select class="form-select" id="userType" name="userType">
+                        <option value="donor">Donor</option>
+                        <option value="recipient">Recipient</option>
+                    </select>
+                </div>
+
                 <div class="sm-6 mb-3">
                     <label for="LoginEmail1" class="form-label">Email address</label>
                     <div class="form-group">
@@ -110,7 +135,7 @@ if (isset($_POST['login'])) {
         </div>
     </div>
   
-<!-- Rest of your HTML code remains the same -->
+
 
     <!-- footer starts here -->
     <?php

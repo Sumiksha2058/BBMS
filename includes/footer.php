@@ -7,7 +7,7 @@
           </div>
           <div class="col-12 col-md-6 col-lg-3 text-center mt-4 mt-md-0 fs-2">
               <h4 class="text-light">Join Us On</h4>
-              <a href="#"><i class="fab fa-facebook-square" style="color: #3b5998;"></i></a>
+              <a href="https://www.facebook.com/"><i class="fab fa-facebook-square" style="color: #3b5998;"></i></a>
               <a href="#"><i class="fab fa-youtube-square" style="color: #c4302b;"></i></a>
           
           </div>

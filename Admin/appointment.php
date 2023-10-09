@@ -1,7 +1,7 @@
 <?php
 include 'includes/config.php';
 
-$query = "SELECT appo_id, appo_name, appo_email, appo_phone, appo_date, appo_time FROM vc_appointment; ";
+$query = "SELECT appo_id, appo_name, appo_email, appo_phone, appo_bloodtype, appo_date,appo_time FROM vc_appointment; ";
 $result = mysqli_query($conn, $query);
 
 if (!$result) {
@@ -41,48 +41,47 @@ if (!$result) {
         <div class="container overflow-hidden">
         <div class="title text-dark">
         <h1 class="fs-4">Appointment Request</h1>
+        <hr>
       </div>
 
       <table class="table table-hover-Info">
-  <thead>
-    <tr class="text-light " style="background-color: #000077; ">
-      <th scope="col">User ID</th>
-      <th scope="col">Full name</th>
-      <th scope="col">Email</th>
-      <th scope="col">Phone</th>
-      <th scope="col">Date</th>
-      <th scope="col">Time</th>
-   
-    </tr>
-  </thead>
-  <tbody>
-  <tbody>
-  <?php
-while($user_data = mysqli_fetch_array($result)){
-  while ($user_data = mysqli_fetch_array($result)) {
-    echo "<tr class='p-2'>";
-    echo "<td>".$user_data['appo_id']."</td>";
-    echo "<td>".$user_data['appo_name']."</td>";
-    echo "<td>".$user_data['appo_email']."</td>";
-    echo "<td>".$user_data['appo_phone']."</td>";
-    echo "<td>".$user_data['appo_date']."</td>";
-    echo "<td>".$user_data['appo_time']."</td>";
-    echo "</tr>";
-}
-}
-?>
-  </tbody>
-</table>
-        </div>
-    </div> 
-</div>
+      <?php
+if($appo_data = mysqli_fetch_array($result)){
+  echo '<thead>';
+  echo'<tr class="text-light " style="background-color: #000077;">';
+  echo '<th scope="col">User ID</th>';
+  echo '<th scope="col">Full name</th>';
+  echo '<th scope="col">Email</th>';
+  echo '<th scope="col">Phone</th>';
+  echo '<th scope="col">Date</th>';
+  echo '<th scope="col">Time</th>';
+  echo '</tr>';
 
+  echo '</thead>';
+  echo '<tbody>';
+  echo '<tbody>';
+  echo "<tr class='p-2'>";
+  echo "<td>".$appo_data['appo_id']."</td>";
+  echo "<td>".$appo_data['appo_name']."</td>";
+  echo "<td>".$appo_data['appo_email']."</td>";
+  echo "<td>".$appo_data['appo_phone']."</td>";
+  echo "<td>".$appo_data['appo_date']."</td>";
+  echo "<td>".$appo_data['appo_time']."</td>";
+  echo "</tr>";
+}
+else{
+  echo "<h3 class='text-center mt-5'>No Data Found</h3>";
+}
+echo '</tbody>';
+?>
+</table>
+</div>
+</div> 
+</div>
 </main>
 
-
-
 <script src="fontawesome/js/all.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
 
 </body>
 </html>

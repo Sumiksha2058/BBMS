@@ -13,7 +13,7 @@ include 'includes/config.php';
 $email = $_SESSION['email'];
 
 // Fetch donor information from the database
-$sql = "SELECT fullname, contact, email, donorBlood FROM donor WHERE email = '$email'";
+$sql = "SELECT fullname, contact, email, blood_group FROM users WHERE email = '$email';";
 $result = mysqli_query($conn, $sql);
 
 if ($result && mysqli_num_rows($result) > 0) {

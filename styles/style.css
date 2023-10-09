@@ -154,15 +154,13 @@ a#nav-link{
     font-weight: 500;
 }
 a.nav-link.active{
-    color: #fff !important;
-    background-color: #14141869 !important;
+    color: #FFDB58 !important;
+    /* background-color: #14141869 !important; */
     border-radius: 12px !important;
     
     
 }
-/* a#nav-link:hover{
-   
-} */
+
 
 
 

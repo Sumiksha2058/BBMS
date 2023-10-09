@@ -39,7 +39,7 @@ if (!$result) {
     <div class="inner-wrapper p-4">
       <div class="title text-dark">
         <h1 class="fs-4">List of Recipients</h1>
-        <hr class="shadow">
+        <hr>
       </div>
       <?php
 if($request_data = mysqli_fetch_array($result)){

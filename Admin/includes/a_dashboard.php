@@ -65,15 +65,6 @@
                                     <strong class="ms-2 d-none d-md-inline">Donor Request</strong>
                                 </a>
                             </li>
-
-                            <li class="nav-item mb-3">
-                                <a href="request.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'request.php') ? 'active' : ''; ?>  text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
-                                    <i class="fa fa-key d-inline d-xl-none d-md-none" data-bs-toggle="tooltip"
-                                        data-bs-placement="right" title="Change Password" aria-hidden="false"></i>
-                                    <strong class="ms-2 d-none d-md-inline">Appointment</strong >
-                                </a>
-                            </li>
-
                             <li class="nav-item mb-3">
                                 <a href="inventory.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'inventory.php') ? 'active' : ''; ?>  text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
                                     <i class="fa fa-key d-inline d-xl-none d-md-none" data-bs-toggle="tooltip"
@@ -81,7 +72,15 @@
                                     <strong class="ms-2 d-none d-md-inline">Inventory</strong>
                                 </a>
                             </li>
-                            
+                            <li class="nav-item mb-3">
+                                <a href="appointment.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'appointment.php') ? 'active' : ''; ?>  text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
+                                    <i class="fa fa-key d-inline d-xl-none d-md-none" data-bs-toggle="tooltip"
+                                        data-bs-placement="right" title="Change Password" aria-hidden="false"></i>
+                                    <strong class="ms-2 d-none d-md-inline">Appointment</strong >
+                                </a>
+                            </li>
+
+                          
                             
                         </ul>
                     </div>

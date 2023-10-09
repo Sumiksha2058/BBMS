@@ -3,23 +3,23 @@
 session_start();
 session_regenerate_id(true);
 
-if(!isset($_SESSION['recp_email'])){
+if(!isset($_SESSION['email'])){
     header("location: .../VitaCare/login.php");  
 }
 include 'includes/config.php';
 // Get the email of the logged-in donor from the session
 
-$email = $_SESSION['recp_email'];
+$email = $_SESSION['email'];
 // Fetch donor information from the database
-$sql = "SELECT recp_fullname,recp_gender, recp_contact, recp_email FROM recipient WHERE recp_email = '$email'";
+$sql = "SELECT fullname, contact, email, blood_group FROM users WHERE email = '$email';";;
 $result = mysqli_query($conn, $sql);
 
 if ($result && mysqli_num_rows($result) > 0) {
     $row = mysqli_fetch_assoc($result);
-    $fullname = $row['recp_fullname'];
-    $Gender = $row['re   Profilecp_gender'];
-    $contact = $row['recp_contact'];
-    $email = $row['recp_email'];
+    $fullname = $row['fullname'];
+    $Gender = $row['gender'];
+    $contact = $row['contact'];
+    $email = $row['email'];
  
 } else {
     // Handle the case when donor information is not found in the database
@@ -35,8 +35,7 @@ if ($result && mysqli_num_rows($result) > 0) {
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viboard.php');
-Profileewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viwport" content="width=device-width, initial-scale=1.0">
     <title>VitaCare</title>
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css">

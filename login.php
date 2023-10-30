@@ -1,8 +1,6 @@
 <?php
-error_reporting(E_ALL);
 ini_set('display_errors', '1');
-
-include 'function/UserRegister.php';
+error_reporting(E_ALL);
 
 // Define the input_filter function
 function input_filter($data) {
@@ -26,11 +24,11 @@ if (isset($_POST['login'])) {
     // Escape special characters to prevent SQL injection
     $email = mysqli_real_escape_string($conn, $email);
 
-    // Hash the password before comparing it in the query
-    $password = md5($password);
+    // Update the hashing method to password_hash
+    $password = password_hash($password, PASSWORD_DEFAULT);
 
     // Query template
-    $sql = "SELECT * FROM users WHERE email = '$email' AND password = '$password' AND user_type = '$userType'";
+    $sql = "SELECT * FROM users WHERE email = '$email' AND user_type = '$userType'";
 
     // Execute the query
     $result = mysqli_query($conn, $sql);
@@ -64,7 +62,6 @@ if (isset($_POST['login'])) {
 }
 
 ?>
- 
 <!DOCTYPE html>
 <html lang="en">
 <head>

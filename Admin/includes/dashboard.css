@@ -3,11 +3,10 @@
         padding-top: 2em;
         background-color: #000077 !important;
         width: 20%;
-        height: 100% !important;
+        height:auto !important;
         position: fixed;
-        overflow: hidden;
+        overflow: auto;
         box-shadow: 4px 4px 17px #1b1717;
-
 }
 .title{
     color: #00FFFF;

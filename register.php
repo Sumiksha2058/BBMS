@@ -20,9 +20,10 @@ include 'includes/config.php';
 <?php 
 include 'includes/head.php'
 ?>
-    
-<div class="container shadow-lg bg-body w-50 my-3 rounded d-flex justify-content-center">
-    <div class="row m-4 ms-3  justify-content-center">
+
+<div class="container shadow-lg bg-body w-50 my-3 rounded d-flex justify-content-center image" id="image">
+   
+<div class="row m-4 ms-3  justify-content-right">
         <div class="col-md-6 w-100 "> <!-- Define the column width -->
             <h1 class="text-center mt-3 fs-auto">Registration Form</h1>
             <hr>

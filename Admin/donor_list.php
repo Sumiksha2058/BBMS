@@ -1,8 +1,8 @@
 <?php
 include 'includes/config.php';
+include 'functions/add_donor.php';
 
-
-$query = "SELECT donation_request_id, email, amount_to_donate, request_date FROM donation_requests WHERE approval_status = 'approved'";
+$query = "SELECT d_id, email, requested_date FROM donor_request WHERE approval_status = 'approved'";
 $result = mysqli_query($conn, $query);
 
 if (!$result) {
@@ -48,7 +48,6 @@ if($request_data = mysqli_fetch_array($result)){
     echo "<tr class='text-light' style='background-color: #000077;'>";
     echo "<th scope='col'>ID</th>";
     echo "<th scope='col'>Email</th>";
-    echo "<th scope='col'>Unit</th>";
     echo "<th scope='col'>Recived Date</th>";
      echo "</tr>";
      echo "</thead>";
@@ -57,7 +56,6 @@ if($request_data = mysqli_fetch_array($result)){
     echo "<tr class='p-2'>";
     echo "<td>".$request_data['donation_request_id']."</td>";
     echo "<td>".$request_data['email']."</td>";
-    echo "<td>".$request_data['amount_to_donate']."</td>";
     echo "<td>".$request_data['request_date']."</td>";
     echo "</tr>";
 }else{

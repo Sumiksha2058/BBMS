@@ -123,15 +123,27 @@ include 'includes/config.php';
     <div class="col-4 " >
       <div class="shadow-lg p-5 border rounded"style="background-color:#000077;">  
       <div class="text-center pb-1 fs-5 ">Available Blood Groups</div>  
-      <div class="float-end ">
-       <span>4</span>
-    </div>
+      <?php 
+      $dashbard_bloodGroup_query = "SELECT `requested_blood_group`, COUNT(*) AS `total_units` FROM `blood_requests` WHERE `approval_status` = 'approved' GROUP BY `requested_blood_group`";
+      $dashbard_bloodGroup_result = mysqli_query($conn, $dashbard_bloodGroup_query);
+      if($total_bloodGroup = mysqli_num_rows($dashbard_bloodGroup_result)){
+        echo '<div class="float-end ">
+        <span>'.$dashbard_bloodGroup_result.'</span>
+     </div>';
+
+      }else{
+        echo '<div class="float-end ">
+        <span>No data</span>
+     </div>';
+      }
+      ?>
+
     </div>
     </div>
     
     <div class="col-4 " >
       <div class="shadow-lg p-5 border rounded"style="background-color:#000077;">  
-      <div class="text-center pb-1 fs-5  ">Total Appointments</div>  
+      <div class="text-center pb-1 fs-5  ">Total <br> Appointments</div>  
       <?php
       $dashbard_appo_query = "SELECT appo_id, appo_name, appo_email, appo_phone, appo_bloodtype, appo_date,appo_time FROM vc_appointment; ";
 
@@ -154,7 +166,7 @@ include 'includes/config.php';
     
   </div>
 </div>
-        </div>
+</div>
     
 </div>
 

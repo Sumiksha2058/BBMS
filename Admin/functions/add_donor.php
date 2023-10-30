@@ -25,6 +25,8 @@ $age = "";
 $email = "";
 $contact = "";
 $blood_group = "";
+$approval_status = "";
+$requested_date = "";
 
 if (isset($_POST['submitForm'])) {
     if (isset($_POST['userType'])) {
@@ -58,8 +60,8 @@ if (isset($_POST['submitForm'])) {
 
             if ($userType === 'donor') {
                 // Proceed with the INSERT query
-                $insert_sql = "INSERT INTO users (user_type, fullname, gender, age, email, contact, blood_group, password)
-                        VALUES ('$userType', '$fullname', '$gender', '$age', '$email', '$contact', '$blood_group', '$password')";
+                $insert_sql = "INSERT INTO users (user_type, fullname, gender, age, email, contact, blood_group, password, approval_status, requested_date)
+                        VALUES ('$userType', '$fullname', '$gender', '$age', '$email', '$contact', '$blood_group', '$password', '$approval_status', '$requested_date')";
 
                 if (count($errors) == 0) {
                     // Execute the query

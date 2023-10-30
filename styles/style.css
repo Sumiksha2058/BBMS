@@ -126,7 +126,9 @@ input[type=text],input[type=email],input[type=date],input[type=time]{
 footer{
     background-color: #2F3936;
 }
-
+.image{
+    background-image: url(images/reg.png) !important;
+}
 
 /* footer */
 

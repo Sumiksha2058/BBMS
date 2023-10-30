@@ -1,15 +1,26 @@
 <?php
-// Include the database configuration file
 include 'includes/config.php';
 include 'functions/add_donor.php';
+
+// Initialize the $errors array
+$errors = [];
+
+// Provide initial values for variables
+$userTypeValue = '';
+$fullnameValue = '';
+$ageValue = '';
+$emailValue = '';
+$contactValue = '';
+
 // Create the SQL query to fetch data
-$query = "SELECT d.donation_request_id, d.email, d.phone, d.donation_unit, d.request_date, d.approval_status,
-                 u.user_id, u.fullname, u.age, u.contact, u.blood_group
-          FROM donation_requests d
-          JOIN users u ON d.email = u.email
-          WHERE d.approval_status = 'pending'";
+$query = "SELECT * FROM users WHERE user_type = 'donor' AND approval_status = 'pending'";
+
 // Execute the query
 $result = mysqli_query($conn, $query);
+
+if (!$result) {
+    die("Query failed: " . mysqli_error($conn));
+}
 ?>
 
 <!DOCTYPE html>
@@ -187,12 +198,12 @@ include ('includes/a_dashboard.php');
                     </div>
                     </div>
                     <?php
+
 if (mysqli_num_rows($result) > 0) {
     echo '<table class="table table-hover">';
-    // Add table header here
     echo '<thead>';
     echo '<tr class="text-light" style="background-color: #000077;">';
-    echo '<th scope="col">Donation Request ID</th>';
+    echo '<th scope="col">Request ID</th>';
     echo '<th scope="col">Full Name</th>';
     echo '<th scope="col">Age</th>';
     echo '<th scope="col">Contact</th>';
@@ -204,16 +215,17 @@ if (mysqli_num_rows($result) > 0) {
     echo '<tbody>';
     while ($row = mysqli_fetch_assoc($result)) {
         echo "<tr class='p-2'>";
-        echo "<td>" . $row['donation_request_id'] . "</td>";
+        echo "<td>" . $row['user_id'] . "</td>"; // Updated to 'd_id'
         echo "<td>" . $row['fullname'] . "</td>";
         echo "<td>" . $row['age'] . "</td>";
         echo "<td>" . $row['contact'] . "</td>";
         echo "<td>" . $row['email'] . "</td>";
-        echo "<td>" . $row['request_date'] . "</td>";
+        echo "<td>" . $row['requested_date'] . "</td>"; // Updated to 'requested_date'
         echo "<td>";
-        // Add accept and reject buttons here, using $row['donation_request_id'] as needed
-        echo "<a class='bg-success text-light fs-5 p-2 px-3 ms-2 rounded' href='functions/approve.php?approve_donor=" . $row['donation_request_id'] . "'>Accept</a>";
-        echo "<a class='bg-danger text-light fs-5 p-2 px-3 ms-2 rounded' href='functions/reject.php?rejected_donor=" . $row['donation_request_id'] . "'>Reject</a>";
+        echo "<a class='bg-success text-light fs-5 p-2 px-3 ms-2 rounded' href='functions/approve.php?approve_donor=" . $row['user_id'] . "'>Accept</a>";
+        echo "<a class='bg-danger text-light fs-5 p-2 px-3 ms-2 rounded' href='functions/reject.php?rejected_donor=" . $row['user_id'] . "'>Reject</a>";
+
+
         echo "</td>";
         echo "</tr>";
     }

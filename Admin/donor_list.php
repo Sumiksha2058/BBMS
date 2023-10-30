@@ -2,7 +2,7 @@
 include 'includes/config.php';
 include 'functions/add_donor.php';
 
-$query = "SELECT d_id, email, requested_date FROM donor_request WHERE approval_status = 'approved'";
+$query = "SELECT user_id, email, requested_date FROM users WHERE approval_status = 'approved' AND `user_type` = 'donor';;";
 $result = mysqli_query($conn, $query);
 
 if (!$result) {
@@ -54,9 +54,9 @@ if($request_data = mysqli_fetch_array($result)){
      echo "<tbody>";
   
     echo "<tr class='p-2'>";
-    echo "<td>".$request_data['donation_request_id']."</td>";
+    echo "<td>".$request_data['user_id']."</td>";
     echo "<td>".$request_data['email']."</td>";
-    echo "<td>".$request_data['request_date']."</td>";
+    echo "<td>".$request_data['requested_date']."</td>";
     echo "</tr>";
 }else{
     echo "<h3 class='text-center mt-5'>No Data Found</h3>";

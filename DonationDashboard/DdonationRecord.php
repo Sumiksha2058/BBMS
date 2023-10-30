@@ -10,7 +10,7 @@ if (!isset($_SESSION['email'])) {
 
 $email = $_SESSION['email'];
 
-$query = "SELECT * FROM donation_requests WHERE email = '$email' ORDER BY request_date DESC";
+$query = "SELECT * FROM users WHERE email = '$email' ORDER BY requested_date DESC";
 $result = mysqli_query($conn, $query);
 
 if (!$result) {

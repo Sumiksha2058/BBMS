@@ -109,7 +109,16 @@ if ($result && mysqli_num_rows($result) > 0) {
 
 
 <script src="fontawesome/js/all.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+
+
+
+
+
+
+
 
 </body>
 </html>

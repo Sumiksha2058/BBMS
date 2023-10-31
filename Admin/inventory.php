@@ -1,13 +1,14 @@
+
 <?php
 // Include the database configuration file
 include 'includes/config.php';
 
-// Create an SQL query to fetch the required columns from the 'blood_requests' table
-$query = "SELECT `requested_blood_group`, `urgency`, `amount_required`, `request_date`, `approval_status` FROM `blood_requests`";
-
+// Create an SQL query to fetch the required columns from the 'users' table
+$query = "SELECT `blood_group`, SUBSTRING(`blood_group`, 2) AS blood_rh_factor, `age`, `email`, `contact`, `approval_status`, `requested_date`, `requested_date`, DATE_ADD(`requested_date`, INTERVAL 1 YEAR) AS expiry_date FROM `users` WHERE user_type = 'donor' AND approval_status = 'approved'";
 // Execute the query
 $result = mysqli_query($conn, $query);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,8 +28,8 @@ $result = mysqli_query($conn, $query);
 <body>
 
 <?php 
-include ('includes\head.php');
-?>
+        include ('../Admin/includes/head.php');
+    ?>
 
 <?php 
 include ('includes/a_dashboard.php');
@@ -53,26 +54,27 @@ include ('includes/a_dashboard.php');
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        // Check if there are any records in the result set
-                        if (mysqli_num_rows($result) > 0) {
-                            // Loop through the records and display them in the table
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                echo '<tr>';
-                                echo '<td>' . $row['requested_blood_group'] . '</td>';
-                                echo '<td>' . $row['urgency'] . '</td>';
-                                echo '<td>' . $row['amount_required'] . '</td>';
-                                echo '<td>' . $row['request_date'] . '</td>';
-                                echo '<td>' . $row['approval_status'] . '</td>';
-                                echo '</tr>';
-                            }
-                        } else {
-                            echo '<tr><td colspan="5">No blood requests found.</td></tr>';
-                        }
+                    <?php
+    // Check if there are any records in the result set
+    if (mysqli_num_rows($result) > 0) {
+        // Loop through the records and display them in the table
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo '<tr>';
+            echo '<td>' . $row['blood_group'] . '</td>';
+            echo '<td>' . $row['blood_rh_factor'] . '</td>';
+            echo '<td>' . $row['age'] . '</td>';
+            echo '<td>' . $row['expiry_date'] . '</td>';
+            echo '<td>' . $row['requested_date'] . '</td>';
+          
+            echo '</tr>';
+        }
+    } else {
+        echo '<tr><td colspan="7">No users found.</td></tr>';
+    }
 
-                        // Close the database connection
-                        mysqli_close($conn);
-                        ?>
+    // Close the database connection
+    mysqli_close($conn);
+    ?>
                     </tbody>
                 </table>
             </div>

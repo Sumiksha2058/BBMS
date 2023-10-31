@@ -10,10 +10,11 @@
         <div class="collapse navbar-collapse text-wrap"  id="navbarSupportedContent">
           <ul class="navbar-nav fs-5 ms-auto text-center">
             <li class="nav-item">
-            <form class="d-flex mr-5">
-      <input class="form-control me-2" type="search" placeholder="Search Donors" aria-label="Search">
-      <button class="btn btn-outline-primary fs-auto" type="submit">Search</button>
-    </form>
+            <form class="d-flex mr-5" id="searchForm">
+              <input class="form-control me-2" type="search" placeholder="Search Donors" id="searchInput" aria-label="Search">
+              <button class="btn btn-outline-primary fs-auto" type="submit">Search</button>
+            </form>
+            
             </li>
           
             

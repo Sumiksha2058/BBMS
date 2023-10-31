@@ -1,10 +1,12 @@
 <?php
 error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 include 'includes/config.php'; // Include the database connection
 
 session_start(); // Start the session
 
-if(!isset($_SESSION['recp_email'])){
+if(!isset($_SESSION['email'])){
 
     header("Location: ../login.php"); 
 }
@@ -13,32 +15,35 @@ $successMessage = "";
 $errorMessage = "";
 
 if (isset($_POST["request"])) {
-    $recp_email = $_SESSION['recp_email'];
+    $recp_email = $_SESSION['email'];
     $requestedBloodGroup = $_POST["requestedBloodGroup"];
     $urgency = $_POST["urgency"];
     $amountRequire = $_POST["amountRequire"];
     $message = $_POST["message"];
     
-
-    // Check if the requested blood group is available in the donation table
-    $checkAvailabilitySql = "SELECT COUNT(*) FROM donor WHERE donorBlood = '$requestedBloodGroup'";
+    $checkAvailabilitySql = "SELECT COUNT(*) FROM users WHERE user_type = 'donor' AND blood_group = '$requestedBloodGroup'";
     $availabilityResult = mysqli_query($conn, $checkAvailabilitySql);
-    $availabilityCount = mysqli_fetch_row($availabilityResult)['0'];
 
-    if ($availabilityCount > 0) {
-        // Inserting blood request into the database
-        $insertRequestSql = "INSERT INTO blood_requests(recp_email, requested_blood_group, urgency, amount_required, message, request_date)
-                            VALUES ('$recp_email', '$requestedBloodGroup', '$urgency', '$amountRequire', '$message', NOW())";
-        
-        if (mysqli_query($conn, $insertRequestSql)) {
-            $successMessage = "Blood request submitted successfully.";
+    if ($availabilityResult) {
+        $availabilityCount = mysqli_fetch_row($availabilityResult)[0];
+
+        if ($availabilityCount > 0) {
+            // Inserting blood request into the database
+            $insertRequestSql = "INSERT INTO blood_requests(email, requested_blood_group, urgency, amount_required, message, request_date, approval_status)
+            VALUES ('$recp_email', '$requestedBloodGroup', '$urgency', $amountRequire, '$message', NOW(), 'pending')";
+
+            if (mysqli_query($conn, $insertRequestSql)) {
+                $successMessage = "Blood request submitted successfully.";
+            } else {
+                $errorMessage = "Error: " . mysqli_error($conn);
+            }
         } else {
-            $errorMessage = "Error: " . mysqli_error($conn);
-          
+            $errorMessage = "Blood not available for the requested blood group.";
         }
     } else {
-        $errorMessage = "Blood not available for the requested blood group.";
+        $errorMessage = "Error: " . mysqli_error($conn);
     }
+
 }
 ?>
 

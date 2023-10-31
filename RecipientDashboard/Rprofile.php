@@ -48,16 +48,9 @@ if ($result && mysqli_num_rows($result) > 0) {
 <body>
 <div class="col col-md-4 float-end" id="searchResults"></div>
 <?php 
-
 include ('../RecipientDashboard/includes/head.php');
-
-    ?>      
-
-
-<?php 
-        include ('../RecipientDashboard/includes/r_dashboard.php'); 
-
-    ?>
+include ('../RecipientDashboard/includes/r_dashboard.php'); 
+?>      
 
 
 <main id="main_container">
@@ -112,27 +105,11 @@ include ('../RecipientDashboard/includes/head.php');
 </div>
 
 </main>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $('#searchForm').submit(function(e){
-                e.preventDefault();
-                var searchValue = $('#searchInput').val();
-                $.ajax({
-                    type: 'POST',
-                    url: 'functions/search.php',
-                    data: { search: searchValue },
-                    success: function(response){
-                        $('#searchResults').html(response);
-                    }
-                });
-            });
-        });
-    </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="javascript/search.js"></script>
 <script src="javascript/activeHover.js"></script>
 <script src="fontawesome/js/all.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
 
 </body>
 </html>

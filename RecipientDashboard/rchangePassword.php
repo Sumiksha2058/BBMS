@@ -65,17 +65,14 @@ if(isset($_SESSION['recp_email'])){
     <link rel="preconnect" href="https://fonts.googleapis.com">
 </head>
 <body>
+<div class="col col-md-4 float-end" id="searchResults"></div>
 
-    <?php 
-    include '../RecipientDashboard/includes\head.php';
-    ?>
-
-    <?php
-    include '../RecipientDashboard/includes\r_dashboard.php';
-    ?>
+<?php 
+include ('../RecipientDashboard/includes/head.php');
+include ('../RecipientDashboard/includes/r_dashboard.php'); 
+?>  
 
 <main id="main_container">
-
 <div class="main-area P-4">
     <div class="inner-wrapper px-4">
         <div class="container-fluid text-light mt-5 rounded d-flex justify-content-center">
@@ -133,6 +130,6 @@ if(isset($_SESSION['recp_email'])){
 <script src="javascript\passport_hide_show.js"></script>
 <script src="fontawesome/js/all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
-
+    <script src="javascript/search.js"></script>
 </body>
 </html>

@@ -29,8 +29,8 @@ if (isset($_POST["request"])) {
 
         if ($availabilityCount > 0) {
             // Inserting blood request into the database
-            $insertRequestSql = "INSERT INTO blood_requests(email, requested_blood_group, urgency, amount_required, message, request_date, approval_status)
-            VALUES ('$recp_email', '$requestedBloodGroup', '$urgency', $amountRequire, '$message', NOW(), 'pending')";
+            $insertRequestSql = "INSERT INTO blood_requests(recp_email, requested_blood_group, urgency, amount_required, message, request_date, approval_status)
+            SELECT email, '$requestedBloodGroup', '$urgency', $amountRequire, '$message', NOW(), 'pending' FROM users WHERE email = '$recp_email'";
 
             if (mysqli_query($conn, $insertRequestSql)) {
                 $successMessage = "Blood request submitted successfully.";

@@ -31,17 +31,13 @@ if (!$result) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
 </head>
 <body>
-
+<div class="col col-md-4 float-end" id="searchResults"></div>
 <?php 
-      include ('includes\head.php');
-?>
-
-<?php 
-  include ('includes/r_dashboard.php');
-?>
+include ('../RecipientDashboard/includes/head.php');
+include ('../RecipientDashboard/includes/r_dashboard.php'); 
+?>  
 
 <main id="main_container">
-
 <div class="main-area p-4">
     <div class="inner-wrapper p-4 ">
         <div class="container-fluid text-light">
@@ -84,7 +80,7 @@ if (!$result) {
 <script src="javascript/activeHover.js"></script>
 <script src="fontawesome/js/all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
-
+    <script src="javascript/search.js"></script>
 </body>
 </html>
 

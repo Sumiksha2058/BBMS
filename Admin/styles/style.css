@@ -8,7 +8,7 @@
 
 body{
     background-color: white !important;
-    padding-top: 85px;
+    padding-top: 60px;
    
 }
 .navbar{
@@ -86,7 +86,7 @@ margin-left: 3em;
 width: auto;
 overflow: hidden;
 height: 100%;
-padding: 4px 19px;
+/* padding: 4px 19px; */
 }
 
 .row .col img{

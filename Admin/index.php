@@ -1,6 +1,12 @@
 <?php
 session_start();
-include 'includes/config.php';
+session_regenerate_id(true);
+
+if (!isset($_SESSION['a_email'])) {
+    header("location: Admin/login.php");
+    exit();
+}
+include("includes/config.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,7 +67,7 @@ include 'includes/config.php';
       <div class="shadow-lg p-5 border rounded"style="background-color:#000077;">  
       <div class="text-center pb-1 fs-5 ">Total Donor Requests</div>  
       <?php 
-      $dashbard_donationRequest_query = "SELECT * FROM donation_requests";
+      $dashbard_donationRequest_query = "SELECT * FROM users WHERE user_type='donor' AND approval_status='approved'";
       $dashbard_donationRequest_result = mysqli_query($conn, $dashbard_donationRequest_query);
       if($total_donationRequest = mysqli_num_rows($dashbard_donationRequest_result)){
         echo '<div class="float-end ">
@@ -102,20 +108,11 @@ include 'includes/config.php';
     <div class="col-4 " >
       <div class="shadow-lg p-5 border rounded"style="background-color:#000077;">  
       <div class="text-center pb-1 fs-5 ">Total Quantity of Blood</div>  
-      <?php 
-      $dashbard_bloodUnit_query = "SELECT `requested_blood_group`, COUNT(*) AS `total_units` FROM `blood_requests` WHERE `approval_status` = 'approved' GROUP BY `requested_blood_group`";
-      $dashbard_bloodUnit_result = mysqli_query($conn, $dashbard_bloodUnit_query);
-      if($total_bloodUnit = mysqli_num_rows($dashbard_bloodUnit_result)){
-        echo '<div class="float-end ">
-        <span>'.$dashbard_bloodUnit_result.'</span>
-     </div>';
+      <div class="float-end">
+        <span>jewishtojd</span>
+     </div>
 
-      }else{
-        echo '<div class="float-end ">
-        <span>No data</span>
-     </div>';
-      }
-      ?>
+     
       
     </div>
     </div>
@@ -123,20 +120,9 @@ include 'includes/config.php';
     <div class="col-4 " >
       <div class="shadow-lg p-5 border rounded"style="background-color:#000077;">  
       <div class="text-center pb-1 fs-5 ">Available Blood Groups</div>  
-      <?php 
-      $dashbard_bloodGroup_query = "SELECT `requested_blood_group`, COUNT(*) AS `total_units` FROM `blood_requests` WHERE `approval_status` = 'approved' GROUP BY `requested_blood_group`";
-      $dashbard_bloodGroup_result = mysqli_query($conn, $dashbard_bloodGroup_query);
-      if($total_bloodGroup = mysqli_num_rows($dashbard_bloodGroup_result)){
-        echo '<div class="float-end ">
-        <span>'.$dashbard_bloodGroup_result.'</span>
-     </div>';
-
-      }else{
-        echo '<div class="float-end ">
-        <span>No data</span>
-     </div>';
-      }
-      ?>
+      <div class="float-end">
+        <span>jewishtojd</span>
+     </div>
 
     </div>
     </div>

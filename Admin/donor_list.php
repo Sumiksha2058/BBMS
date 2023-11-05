@@ -2,7 +2,7 @@
 include 'includes/config.php';
 include 'functions/add_donor.php';
 
-$query = "SELECT user_id, email, requested_date FROM users WHERE approval_status = 'approved' AND `user_type` = 'donor';;";
+$query = "SELECT user_id, email, blood_group, requested_date FROM users WHERE approval_status = 'approved' AND `user_type` = 'donor'";
 $result = mysqli_query($conn, $query);
 
 if (!$result) {
@@ -48,6 +48,7 @@ if($request_data = mysqli_fetch_array($result)){
     echo "<tr class='text-light' style='background-color: #000077;'>";
     echo "<th scope='col'>ID</th>";
     echo "<th scope='col'>Email</th>";
+    echo "<th scope='col'>Blood Type</th>";
     echo "<th scope='col'>Recived Date</th>";
      echo "</tr>";
      echo "</thead>";
@@ -56,6 +57,7 @@ if($request_data = mysqli_fetch_array($result)){
     echo "<tr class='p-2'>";
     echo "<td>".$request_data['user_id']."</td>";
     echo "<td>".$request_data['email']."</td>";
+    echo "<td>".$request_data['blood_group']."</td>";
     echo "<td>".$request_data['requested_date']."</td>";
     echo "</tr>";
 }else{

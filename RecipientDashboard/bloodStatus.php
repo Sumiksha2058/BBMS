@@ -3,12 +3,12 @@ include 'includes/config.php';
 
 session_start(); // Start the session
 
-if (!isset($_SESSION['recp_email'])) {
+if (!isset($_SESSION['email'])) {
     header("location: .../VitaCare/Rprofile.php");  
     exit();
 }
 
-$recp_email = $_SESSION['recp_email'];
+$recp_email = $_SESSION['email'];
 
 $query = "SELECT * FROM blood_requests WHERE recp_email = '$recp_email' ORDER BY request_date DESC";
 $result = mysqli_query($conn, $query);

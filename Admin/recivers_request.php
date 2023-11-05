@@ -1,9 +1,9 @@
 <?php
 include 'includes/config.php';
-$query = "SELECT br.*,recp_id, rec.recp_fullname, rec.recp_age, rec.recp_contact,rec.recp_email, br.request_date
+$query = "SELECT br.*,recp_id, rec.recp_fullname, rec.recp_age, rec.recp_contact,rec.recp_email, br.request_date, br.approval_status
 FROM blood_requests AS br
 JOIN recipient AS rec ON br.recp_email = rec.recp_email";
-$result = mysqli_query($conn, $query); 
+$result = mysqli_query($conn, $query);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -66,7 +66,10 @@ include ('../Admin/includes/head.php');
               echo "<td>";
               if ($request_data['approval_status'] == 'pending') {
                 echo "<a class='bg-success text-light fs-5 p-2 px-3 ms-2 rounded' href='functions/recipient_approved.php?recipient_approved=" . $request_data['recp_email'] . "'>Approve</a>";
-                echo "<a class='bg-danger text-light fs-5 p-2 px-3 ms-2 rounded' href='functions/reject.php?recipient_reject=" . $request_data['recp_email'] . "'>Reject</a>";   
+                echo "<a class='bg-danger text-light fs-5 p-2 px-3 ms-2 rounded' href='functions/recipient_reject.php?recipient_reject=" . $request_data['recp_email'] . "'>Reject</a>";   
+             
+             
+             
               } else {
                 echo "Processed";
             }

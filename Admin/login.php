@@ -9,7 +9,7 @@ function input_filter($data){
     return $data;
 }
 
-if (isset($_POST['login'])) {
+if (isset($_POST['loginAdmin'])) {
     $a_email = input_filter($_POST['Loginemail']);
     $password = input_filter($_POST['Loginpassword']);
 
@@ -18,9 +18,9 @@ if (isset($_POST['login'])) {
     $password = mysqli_real_escape_string($conn, $password);
 
     // Hash the password before comparing it in the query
-    $password = md5($password);
+    // $password = md5($password);
 
-    //query templates
+    //query 
     $sql_admin =  "SELECT admin_id, a_email FROM vc_admin WHERE a_email = '$a_email' AND a_password = '$password'";
     // Prepare the statements
     $admin_result = mysqli_query($conn, $sql_admin);
@@ -28,10 +28,10 @@ if (isset($_POST['login'])) {
     if ($admin_result && mysqli_num_rows($admin_result) == 1) {
         session_start();
         $_SESSION['a_email'] = $a_email;
-        header("Location: index.php");
+        header("Location: ../Admin/index.php");
         exit();
     } else {      
-        header("location: login.php?error=Invalid Email or Password");
+        header("location: ../Admin/login.php?error=Invalid Email or Password");
         exit();
     }
 } 
@@ -58,7 +58,7 @@ if (isset($_POST['login'])) {
                 <h1 class="text-center">Admin Login</h1>
 
             </div>
-            <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" class="mt-3 row needs-validation"  novalidate>
+            <form method="POST" action="login.php" class="mt-3 row needs-validation"  novalidate>
             <?php if (isset($_GET['error'])) { ?>
                                 <p class="alert alert-danger ">  <?php echo $_GET['error']; ?></p>
                             <?php } ?>
@@ -86,7 +86,7 @@ if (isset($_POST['login'])) {
                 </div>
                 <div class=" mb-3 text-center ">
                     <div class=" form-group ">
-                        <button type="submit" name="login" class="btn btn-dark mb-3 w-100">Login</button>
+                        <button type="submit" name="loginAdmin" class="btn btn-dark mb-3 w-100">Login</button>
                         
                     </div>
                 </div>               

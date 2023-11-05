@@ -13,7 +13,7 @@ include 'includes/config.php';
 $email = $_SESSION['email'];
 
 // Fetch donor information from the database
-$sql = "SELECT fullname, contact, email, blood_group FROM users WHERE email = '$email';";
+$sql = "SELECT fullname, user_type, contact, email, blood_group FROM users WHERE email = '$email';";
 $result = mysqli_query($conn, $sql);
 
 if ($result && mysqli_num_rows($result) > 0) {
@@ -22,24 +22,28 @@ if ($result && mysqli_num_rows($result) > 0) {
     $contact = $row['contact'];
     $email = $row['email'];
     $bloodType = $row['donorBlood'];
+    $userType = $row['user_type'];
 } else {
     // Handle the case when donor information is not found in the database
     $fullname = "N/A";
     $contact = "N/A";
     $email = "N/A";
     $bloodType = "N/A";
+    $userType = "N/A";
 }
 
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
-<head> 
+
+<head>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VitaCare</title>
+    <link rel="stylesheet" href="style/profile.css">
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="fontawesome/css/all.min.css">
@@ -47,8 +51,9 @@ if ($result && mysqli_num_rows($result) > 0) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 </head>
-<body>
 
+
+<body> 
 <?php 
         include ('../DonationDashboard/includes/head.php');
     ?>
@@ -56,63 +61,59 @@ if ($result && mysqli_num_rows($result) > 0) {
 <?php 
         include ('includes/d_dashboard.php');
     ?>
-
 <main id="main_container">
 
-        <div class="main-area p-4">
-            <div class="inner-wrapper p-4">
-                <div class="container-fluid text-light">
-                    <div class="row">
-                        <div class="col-12 pb-3">
-                            <h1>Profile</h1>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-9">
-                            <h3 class="fs-2">
-                                <span><i class="fa fa-user" aria-hidden="true"></i> <?php echo $fullname; ?></span>
-                            </h3>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <h3 class="fs-4">Contact No</h3>
-                        </div>
-                        <div class="col-lg-9">
-                            <h4><?php echo $contact; ?></h4>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <h3 class="fs-4">Email</h3>
-                        </div>
-                        <div class="col-lg-9">
-                            <h4><?php echo $email; ?></h4>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <h3 class="fs-4">Blood Type</h3>
-                        </div>
-                        <div class="col-lg-9">
-                            <h4><?php echo $bloodType; ?></h4>
-                        </div>
-                    </div>
+<div class="main-area p-4">
+    <div class="inner-wrapper p-4">
+    <div class="container-fluid text-light">
+        <div class="profile-card text-dark">
+            <h2> <?php echo $userType; ?> Profile</h2>
+            <div class="user-name"><i class="fa fa-user" aria-hidden="true"></i> <?php echo $fullname; ?></div>
+            <p><strong>Blood Type:</strong> <?php echo $bloodType; ?></p>
+            <p><strong>Email ID:</strong><?php echo $email; ?></p>
+            <button type="submit" class="btn btn-primary">Edit Profile</button>
+            <button type="button" class="btn btn-danger mt-3" data-toggle="modal" data-target="#deleteModal">Delete Account</button>
+        </div>
+
+        <div class="recent-donors">
+            <div class="section-title">Recent Donors with the Same Blood Type:</div>
+            <div class="donor">Jane Smith</div>
+            <div class="donor">Michael Johnson</div>
+            <div class="donor">Sarah Williams</div>
+            <!-- Add more donors here as needed -->
+        </div>
+    </div>
+
+    <!-- Delete Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete your account?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger">Delete</button>
                 </div>
             </div>
         </div>
-    </main>
-
-
-
-    
-
-
-<script src="fontawesome/js/all.min.js"></script>
-
+    </div>
+    </div>
+</div>
+</main>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-</html>
 
+</html>
 
 
 

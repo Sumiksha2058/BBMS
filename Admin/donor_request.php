@@ -1,3 +1,4 @@
+
 <?php
 include 'includes/config.php';
 include 'functions/add_donor.php';
@@ -222,7 +223,7 @@ if (mysqli_num_rows($result) > 0) {
         echo "<td>" . $row['email'] . "</td>";
         echo "<td>" . $row['requested_date'] . "</td>"; // Updated to 'requested_date'
         echo "<td>";
-        echo "<a class='bg-success text-light fs-5 p-2 px-3 ms-2 rounded' href='functions/approve.php?approve_donor=" . $row['user_id'] . "'>Accept</a>";
+        echo "<a class='bg-success text-light fs-5 p-2 px-3 ms-2 rounded' href='functions/approve.php?approve_donor=" . $row['user_id'] . "&email=" . $row['email'] . "'>Accept</a>";
         echo "<a class='bg-danger text-light fs-5 p-2 px-3 ms-2 rounded' href='functions/reject.php?rejected_donor=" . $row['user_id'] . "'>Reject</a>";
 
 

@@ -79,9 +79,9 @@ if(isset($_SESSION['email'])){
 
     <?php include 'includes/d_dashboard.php'; ?>
 
-    <main id="main_container">
+    <main id="main_container" >
 
-        <div class="main-area p-4 ">
+        <div class="main-area p-4 " style="background-color: #f8f9fa;">
             <div class="inner-wrapper  p-4">
                 <div class="container-fluid text-light">
 

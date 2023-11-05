@@ -35,6 +35,7 @@ if (isset($_POST['submitForm'])) {
         $age = mysqli_real_escape_string($conn, $_POST['age']);
         $email = mysqli_real_escape_string($conn, $_POST['email']);
         $contact = mysqli_real_escape_string($conn, $_POST['contact']);
+        $blood_group = mysqli_real_escape_string($conn, $_POST['donorBlood']);
         $password = mysqli_real_escape_string($conn, $_POST['password']);
         $con_password = mysqli_real_escape_string($conn, $_POST['con_password']);
 
@@ -47,18 +48,20 @@ if (isset($_POST['submitForm'])) {
         $check_duplicate_sql = "SELECT * FROM users WHERE email = '$email'";
         $result = mysqli_query($conn, $check_duplicate_sql);
         if (!preg_match('/^(98|97)\d{8}$/', $contact)) {
-            array_push($errors, "Invalid Nepali phone number format");
+            array_push($errors, "Invalid phone number format");
         }
         if (mysqli_num_rows($result) > 0) {
-            array_push($errors, "Error: You are already login");
+            array_push($errors, "Error: Account already exit!");
         } else {
             // Hash the password (you may want to use a more secure hashing method)
             $password = md5($password);
 
             if ($userType === 'donor' || $userType === 'recipient') {
                 // Proceed with the INSERT query
-                $insert_sql = "INSERT INTO users (user_type, fullname, gender, age, email, contact, blood_group, password)
-                        VALUES ('$userType', '$fullname', '$gender', '$age', '$email', '$contact', '$blood_group', '$password')";
+                $present_date = date('Y-m-d'); // Get the present date in the format 'YYYY-MM-DD'
+                $insert_sql = "INSERT INTO users (user_type, fullname, gender, age, email, contact, blood_group, password, approval_status, requested_date)
+                                        VALUES ('$userType', '$fullname', '$gender', '$age', '$email', '$contact', '$blood_group', '$password', 'pending', '$present_date')";
+                
 
                 if (count($errors) == 0) {
                     // Execute the query

@@ -63,7 +63,7 @@ if ($result && mysqli_num_rows($result) > 0) {
     ?>
 <main id="main_container">
 
-<div class="main-area p-4">
+<div class="main-area p-4" style="background-color: #f8f9fa;">
     <div class="inner-wrapper p-4">
     <div class="container-fluid text-light">
         <div class="profile-card text-dark">
@@ -73,14 +73,6 @@ if ($result && mysqli_num_rows($result) > 0) {
             <p><strong>Email ID:</strong><?php echo $email; ?></p>
             <button type="submit" class="btn btn-primary">Edit Profile</button>
             <button type="button" class="btn btn-danger mt-3" data-toggle="modal" data-target="#deleteModal">Delete Account</button>
-        </div>
-
-        <div class="recent-donors">
-            <div class="section-title">Recent Donors with the Same Blood Type:</div>
-            <div class="donor">Jane Smith</div>
-            <div class="donor">Michael Johnson</div>
-            <div class="donor">Sarah Williams</div>
-            <!-- Add more donors here as needed -->
         </div>
     </div>
 

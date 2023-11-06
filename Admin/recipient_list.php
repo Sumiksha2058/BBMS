@@ -2,7 +2,7 @@
 include 'includes/config.php';
 
 
-$query = "SELECT request_id, recp_email, requested_blood_group, amount_required, request_date FROM blood_requests WHERE approval_status = 'approved'";
+$query = "SELECT request_id, email, requested_blood_group, amount_required, request_date FROM blood_requests WHERE approval_status = 'approved'";
 $result = mysqli_query($conn, $query);
 
 if (!$result) {
@@ -57,7 +57,7 @@ if($request_data = mysqli_fetch_array($result)){
   
     echo "<tr class='p-2'>";
     echo "<td>".$request_data['request_id']."</td>";
-    echo "<td>".$request_data['recp_email']."</td>";
+    echo "<td>".$request_data['email']."</td>";
     echo "<td>".$request_data['requested_blood_group']."</td>";
     echo "<td>".$request_data['amount_required']."</td>";
     echo "<td>".$request_data['request_date']."</td>";

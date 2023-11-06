@@ -1,10 +1,12 @@
 <?php
 include 'includes/config.php';
-$query = "SELECT br.*,recp_id, rec.recp_fullname, rec.recp_age, rec.recp_contact,rec.recp_email, br.request_date, br.approval_status
+$query = "SELECT br.request_id, br.email, br.requested_blood_group, br.urgency, br.amount_required, br.message, br.request_date, br.approval_status, u.user_id, u.fullname, u.age, u.contact
 FROM blood_requests AS br
-JOIN recipient AS rec ON br.recp_email = rec.recp_email";
+JOIN users AS u ON br.user_id = u.user_id";
 $result = mysqli_query($conn, $query);
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +40,7 @@ include ('../Admin/includes/head.php');
         <div class="container overflow-hidden">
         <div class="title text-dark">
         <h1 class="fs-4">List of Blood Requests</h1>
-       
+       <hr>
       </div>
       <?php
     if(mysqli_num_rows($result) > 0){
@@ -57,11 +59,11 @@ include ('../Admin/includes/head.php');
     echo '<tbody>';
     while($request_data = mysqli_fetch_assoc($result)) {
               echo "<tr class='p-2'>";
-              echo "<td>".$request_data['recp_id']."</td>";
-              echo "<td>".$request_data['recp_fullname']."</td>";
-              echo "<td>".$request_data['recp_age']."</td>";
-              echo "<td>".$request_data['recp_contact']."</td>";
-              echo "<td>".$request_data['recp_email']."</td>";
+              echo "<td>".$request_data['request_id']."</td>";
+              echo "<td>".$request_data['fullname']."</td>";
+              echo "<td>".$request_data['age']."</td>";
+              echo "<td>".$request_data['contact']."</td>";
+              echo "<td>".$request_data['email']."</td>";
               echo "<td>".$request_data['request_date']."</td>";
               echo "<td>";
               if ($request_data['approval_status'] == 'pending') {

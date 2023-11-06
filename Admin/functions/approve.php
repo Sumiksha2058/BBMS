@@ -4,8 +4,6 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// phpinfo();
-
 include '../includes/config.php'; //  database configuration file
 
 if (isset($_GET['approve_donor']) && isset($_GET['email'])) {
@@ -16,6 +14,30 @@ if (isset($_GET['approve_donor']) && isset($_GET['email'])) {
     $updateQuery = "UPDATE users SET approval_status = 'approved' WHERE user_id = '$donorId'";
 
     if (mysqli_query($conn, $updateQuery)) {
+        $request_approval_status = 'approved'; // Assuming this variable contains the request approval status
+        $approved_user_id = $donorId; // Assuming this variable contains the approved user's ID
+
+        if ($request_approval_status === 'approved') {
+            $user_id = $approved_user_id; // Obtain the approved user's ID
+            $donation_date = date("Y-m-d"); // Get the current date
+
+            // Insert into the donors table
+            $blood_units_donated = 1; // Assuming one unit of blood is donated each time
+            $donor_insert_query = "INSERT INTO donors (user_id, donation_date, blood_units_donated) VALUES ('$user_id', '$donation_date', '$blood_units_donated')";
+
+            // Execute the query
+            if (mysqli_query($conn, $donor_insert_query)) {
+                // The insertion was successful
+                // You can perform any necessary actions here
+            } else {
+                // The insertion failed
+                // Handle the error as needed
+            }
+        } else {
+            // The donation request was not approved
+            // Handle this case appropriately
+        }
+
         // Sending the email
         $to = $email;
         $subject = "Donation Accepted";
@@ -37,4 +59,3 @@ if (isset($_GET['approve_donor']) && isset($_GET['email'])) {
     }
 }
 ?>
-    

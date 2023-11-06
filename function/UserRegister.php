@@ -60,9 +60,8 @@ if (isset($_POST['submitForm'])) {
                 // Proceed with the INSERT query
                 $present_date = date('Y-m-d'); // Get the present date in the format 'YYYY-MM-DD'
                 $insert_sql = "INSERT INTO users (user_type, fullname, gender, age, email, contact, blood_group, password, approval_status, requested_date)
-                                        VALUES ('$userType', '$fullname', '$gender', '$age', '$email', '$contact', '$blood_group', '$password', 'pending', '$present_date')";
-                
-
+                VALUES ('$userType', '$fullname', '$gender', '$age', '$email', '$contact', '$blood_group', '$password', 'pending', '$present_date')";
+  
                 if (count($errors) == 0) {
                     // Execute the query
                     if (mysqli_query($conn, $insert_sql)) {

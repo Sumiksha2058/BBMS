@@ -4,7 +4,8 @@
 include 'includes/config.php';
 
 // Create an SQL query to fetch the required columns from the 'users' table
-$query = "SELECT `blood_group`, SUBSTRING(`blood_group`, 2) AS blood_rh_factor, `age`, `email`, `contact`, `approval_status`, `requested_date`, `requested_date`, DATE_ADD(`requested_date`, INTERVAL 1 YEAR) AS expiry_date FROM `users` WHERE user_type = 'donor' AND approval_status = 'approved'";
+$query = "SELECT u.blood_group, SUBSTRING(u.blood_group, 2) AS blood_rh_factor, d.blood_units_donated, u.email, u.contact, u.approval_status, u.requested_date, DATE_ADD(u.requested_date, INTERVAL 1 YEAR) AS expiry_date FROM users u LEFT JOIN donors d ON u.user_id = d.user_id WHERE u.user_type = 'donor' AND u.approval_status = 'approved'";
+
 // Execute the query
 $result = mysqli_query($conn, $query);
 ?>
@@ -62,7 +63,7 @@ include ('includes/a_dashboard.php');
             echo '<tr>';
             echo '<td>' . $row['blood_group'] . '</td>';
             echo '<td>' . $row['blood_rh_factor'] . '</td>';
-            echo '<td>' . $row['age'] . '</td>';
+            echo '<td>' . $row['blood_units_donated'] . '</td>';
             echo '<td>' . $row['expiry_date'] . '</td>';
             echo '<td>' . $row['requested_date'] . '</td>';
           

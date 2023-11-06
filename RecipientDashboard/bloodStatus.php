@@ -10,7 +10,7 @@ if (!isset($_SESSION['email'])) {
 
 $recp_email = $_SESSION['email'];
 
-$query = "SELECT * FROM blood_requests WHERE recp_email = '$recp_email' ORDER BY request_date DESC";
+$query = "SELECT * FROM blood_requests WHERE email = '$recp_email' ORDER BY request_date DESC";
 $result = mysqli_query($conn, $query);
 
 if (!$result) {
@@ -64,7 +64,7 @@ include ('../RecipientDashboard/includes/r_dashboard.php');
               echo "<td>".$request_data['request_date']."</td>";
               echo "<td>".$request_data['requested_blood_group']."</td>";
               echo "<td>".$request_data['amount_required']."</td>";
-              echo "<td>".$request_data['recp_email']."</td>";
+              echo "<td>".$request_data['email']."</td>";
               echo "<td>".$request_data['approval_status']."</td>";
          
             }            

@@ -62,7 +62,7 @@ if (!$result) {
   <?php
             while($request_data = mysqli_fetch_array($result)){
               echo "<tr class='p-2'>";
-              echo "<td>".$request_data['request_date']."</td>";
+              echo "<td>".$request_data['requested_date']."</td>";
               echo "<td>".$request_data['amount_to_donate']."</td>";
               echo "<td>".$request_data['email']."</td>";
               echo "<td>".$request_data['approval_status']."</td>";

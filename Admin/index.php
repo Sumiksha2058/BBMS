@@ -121,7 +121,26 @@ include("includes/config.php");
       <div class="shadow-lg p-5 border rounded"style="background-color:#000077;">  
       <div class="text-center pb-1 fs-5 ">Available Blood Groups</div>  
       <div class="float-end">
-        <span>jewishtojd</span>
+      <?php 
+      ob_start();
+      error_reporting(E_ALL);
+      ini_set('display_errors', 1);
+      $dashbard_AvailabletBlood_query = "SELECT count( distinct blood_group) as total  FROM `users`  where approval_status = 'approved' and user_type = 'donor'";
+      $dashbard_AvailabletBlood_result = mysqli_query($conn, $dashbard_AvailabletBlood_query);
+      $row = mysqli_fetch_assoc( $dashbard_AvailabletBlood_result);
+      $total = $row["total"];
+      // if( $total_AvailabletBlood=  $dashbard_AvailabletBlood_result){
+        echo '<div class="float-end ">
+        <span>'.$total.'</span>
+        </div>';
+
+    //   }else{
+    //     echo '<div class="float-end ">
+    //     <span>No data</span>
+    //  </div>';
+    //   }
+    
+      ?>
      </div>
 
     </div>

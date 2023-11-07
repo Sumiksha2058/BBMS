@@ -1,8 +1,7 @@
 <?php
 include 'includes/config.php';
-$query = "SELECT br.request_id, br.email, br.requested_blood_group, br.urgency, br.amount_required, br.message, br.request_date, br.approval_status, u.user_id, u.fullname, u.age, u.contact
-FROM blood_requests AS br
-JOIN users AS u ON br.user_id = u.user_id";
+$query = "SELECT request_id, email, requested_blood_group, urgency, amount_required, message, request_date, approval_status 
+FROM blood_requests";
 $result = mysqli_query($conn, $query);
 ?>
 
@@ -49,9 +48,6 @@ include ('../Admin/includes/head.php');
     echo '<tr class="text-light " style="background-color: #000077;">';
     echo '<th scope="col">User ID</th>';
     echo '<th scope="col">Full name</th>';
-    echo '<th scope="col">Age</th>';
-    echo '<th scope="col">Contact</th>';
-    echo '<th scope="col">Email</th>';
     echo '<th scope="col">Date Of Request</th>';
     echo '<th scope="col">Action</th>';
     echo '</tr>';
@@ -60,9 +56,6 @@ include ('../Admin/includes/head.php');
     while($request_data = mysqli_fetch_assoc($result)) {
               echo "<tr class='p-2'>";
               echo "<td>".$request_data['request_id']."</td>";
-              echo "<td>".$request_data['fullname']."</td>";
-              echo "<td>".$request_data['age']."</td>";
-              echo "<td>".$request_data['contact']."</td>";
               echo "<td>".$request_data['email']."</td>";
               echo "<td>".$request_data['request_date']."</td>";
               echo "<td>";

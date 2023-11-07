@@ -42,7 +42,7 @@ include("includes/config.php");
         <div class="container overflow-hidden">
   <div class="row gy-5  text-light" id="small_container" >
     <div class="col-4 " >
-      <div class="shadow-lg p-5 border rounded"style="background-color:#000077;">  
+      <div class="shadow-sm p-5 border rounded"style="background-color:#000077;">  
       <div class="text-center pb-1 fs-5 ">Total Users</div> 
       <?php
       $dashbard_user_query = "(SELECT user_type, user_id, fullname, email FROM users)";
@@ -64,7 +64,7 @@ include("includes/config.php");
     </div>
     </div>
     <div class="col-4 " >
-      <div class="shadow-lg p-5 border rounded"style="background-color:#000077;">  
+      <div class="shadow-sm p-5 border rounded"style="background-color:#000077;">  
       <div class="text-center pb-1 fs-5 ">Total Donor Requests</div>  
       <?php 
       $dashbard_donationRequest_query = "SELECT * FROM users WHERE user_type='donor' AND approval_status='approved'";
@@ -85,7 +85,7 @@ include("includes/config.php");
     </div>
    
     <div class="col-4 " >
-      <div class="shadow-lg p-5 border  rounded"style="background-color:#000077;">  
+      <div class="shadow-sm p-5 border  rounded"style="background-color:#000077;">  
       <div class="text-center pb-1 fs-5 ">Total Blood Request</div> 
       <?php 
       $dashbard_requestBlood_query = "SELECT * FROM blood_requests";
@@ -106,7 +106,7 @@ include("includes/config.php");
     </div>
 
     <div class="col-4 " >
-      <div class="shadow-lg p-5 border rounded"style="background-color:#000077;">  
+      <div class="shadow-sm p-5 border rounded"style="background-color:#000077;">  
       <div class="text-center pb-1 fs-5 ">Total <br> Unit of Blood</div>  
       <div class="float-end">
       <?php 
@@ -133,7 +133,7 @@ include("includes/config.php");
     </div>
     
     <div class="col-4 " >
-      <div class="shadow-lg p-5 border rounded"style="background-color:#000077;">  
+      <div class="shadow-sm p-5 border rounded"style="background-color:#000077;">  
       <div class="text-center pb-1 fs-5 ">Available Blood Groups</div>  
       <div class="float-end">
       <?php 
@@ -158,7 +158,7 @@ include("includes/config.php");
     </div>
     
     <div class="col-4 " >
-      <div class="shadow-lg p-5 border rounded"style="background-color:#000077;">  
+      <div class="shadow-sm p-5 border rounded"style="background-color:#000077;">  
       <div class="text-center pb-1 fs-5  ">Total <br> Appointments</div>  
       <?php
       $dashbard_appo_query = "SELECT appo_id, appo_name, appo_email, appo_phone, appo_bloodtype, appo_date,appo_time FROM vc_appointment; ";

@@ -53,24 +53,24 @@ include ('../Admin/includes/head.php');
     echo '</tr>';
     echo '</thead>';
     echo '<tbody>';
-    while($request_data = mysqli_fetch_assoc($result)) {
-              echo "<tr class='p-2'>";
-              echo "<td>".$request_data['request_id']."</td>";
-              echo "<td>".$request_data['email']."</td>";
-              echo "<td>".$request_data['request_date']."</td>";
-              echo "<td>";
-              if ($request_data['approval_status'] == 'pending') {
-                echo "<a class='bg-success text-light fs-5 p-2 px-3 ms-2 rounded' href='functions/recipient_approved.php?recipient_approved=" . $request_data['recp_email'] . "'>Approve</a>";
-                echo "<a class='bg-danger text-light fs-5 p-2 px-3 ms-2 rounded' href='functions/recipient_reject.php?recipient_reject=" . $request_data['recp_email'] . "'>Reject</a>";   
-             
-             
-             
-              } else {
-                echo "Processed";
-            }
-           
-            echo "</tr>";
-          }
+
+    while($row = mysqli_fetch_assoc($result)) {
+      echo "<tr class='p-2'>";
+      echo "<td>".$row['request_id']."</td>";
+      echo "<td>".$row['email']."</td>";
+      echo "<td>".$row['request_date']."</td>";
+      echo "<td>";
+      if ($row['approval_status'] == 'pending') {
+          echo "<a class='bg-success text-light fs-5 p-2 px-3 ms-2 rounded' href='functions/recipient_approved.php?request_recipient=" . $row['request_id'] ."&email=" . $row['email'] . "'>Approve</a>";
+          echo "<a class='bg-danger text-light fs-5 p-2 px-3 ms-2 rounded' href='functions/recipient_reject.php?request_recipient=" . $row['request_id'] . "'>Reject</a>";   
+     
+
+        } else {
+          echo "Processed";
+      }
+      echo "</td>";
+      echo "</tr>";
+  }
         echo '</tbody>';
         echo '</table>';
 

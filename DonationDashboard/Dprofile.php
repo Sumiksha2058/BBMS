@@ -34,6 +34,7 @@ if ($result && mysqli_num_rows($result) > 0) {
 
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -71,32 +72,97 @@ if ($result && mysqli_num_rows($result) > 0) {
             <div class="user-name"><i class="fa fa-user" aria-hidden="true"></i> <?php echo $fullname; ?></div>
             <p><strong>Blood Type:</strong> <?php echo $bloodType; ?></p>
             <p><strong>Email ID:</strong><?php echo $email; ?></p>
-            <button type="submit" class="btn btn-primary">Edit Profile</button>
+            <button type="button" class="btn btn-primary mt-3" data-toggle="modal" data-target="#editModal">Edit Account</button>
             <button type="button" class="btn btn-danger mt-3" data-toggle="modal" data-target="#deleteModal">Delete Account</button>
         </div>
     </div>
+<!-- Edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Edit Account</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <?php
 
-    <!-- Delete Modal -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Are you sure you want to delete your account?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger">Delete</button>
-                </div>
+
+include 'includes/config.php';
+if (isset($_POST['submit'])) {
+    // Get the values from the form
+    $fullname = $_POST['fullname'];
+    $contact = $_POST['contact'];
+    $email = $_POST['email'];
+
+    // Prepare and bind the update statement
+    $stmt = $conn->prepare("UPDATE users SET fullname = ?, contact = ?, email = ? WHERE user_type = 'donor'");
+    $stmt->bind_param("ssss", $fullname, $contact, $email, $userType);
+
+    // Execute the update statement
+    if ($stmt->execute()) {
+        // Update successful
+        echo "Record updated successfully";
+    } else {
+        // Error in update
+        echo "Error updating record: " . $conn->error;
+    }
+
+    // Close statement
+    $stmt->close();
+}
+
+// Rest of your existing code...
+?>
+                <form action="edit_profile.php" method="POST">
+                    <div class="form-group">
+                        <label for="fullname">Full Name:</label>
+                        <input type="text" class="form-control" id="fullname" name="fullname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact">Contact:</label>
+                        <input type="text" class="form-control" id="contact" name="contact" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <button type="submit" name="submit" class="btn btn-primary">Save Changes</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
+</div>
+
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Delete Account</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete your account?</p>
+            </div>
+         
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary " data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
     </div>
 </div>
 </main>

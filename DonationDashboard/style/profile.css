@@ -42,36 +42,3 @@ body {
     color: #555;
     transition: color 0.3s;
 }
-
-.donor:hover {
-    color: #e74a3b;
-    cursor: pointer;
-}
-
-.btn-primary {
-    background-color: #4e73df;
-    border-color: #4e73df;
-    border-radius: 20px;
-    padding: 10px 20px;
-    margin-top: 20px;
-    width: 100%;
-}
-
-.btn-primary:hover {
-    background-color: #2e59d9;
-    border-color: #2e59d9;
-}
-
-.btn-danger {
-    background-color: #e74a3b;
-    border-color: #e74a3b;
-    border-radius: 20px;
-    padding: 10px 20px;
-    margin-top: 20px;
-    width: 100%;
-}
-
-.btn-danger:hover {
-    background-color: #dc3545;
-    border-color: #dc3545;
-}

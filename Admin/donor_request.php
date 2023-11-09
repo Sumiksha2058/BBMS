@@ -56,7 +56,7 @@ include ('includes/a_dashboard.php');
         <div class="inner-wrapper p-4">
             <div class="container overflow-hidden">
                 <div class="title text-dark">
-                    <h1 class="fs-4">List of Donors</h1>
+                    <h1 class="fs-4">List of Donors Request</h1>
                     <hr>
                     <!-- Button trigger modal -->
                     <div class="mb-2 float-end">

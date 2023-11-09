@@ -6,7 +6,10 @@ include 'includes/config.php';
 // Create an SQL query to fetch the required columns from the 'users' table
 $query = "SELECT u.blood_group, 
 SUBSTRING(u.blood_group, 2) AS blood_rh_factor, 
-SUM(d.blood_units_donated) AS total_units_donated 
+(SUM(d.blood_units_donated) - COALESCE((SELECT SUM(br.amount_required) 
+                                       FROM blood_requests br 
+                                       WHERE br.approval_status = 'approved' 
+                                       AND br.requested_blood_group = u.blood_group), 0)) AS total_units_donated 
 FROM users u 
 LEFT JOIN donors d ON u.user_id = d.user_id 
 WHERE u.user_type = 'donor' 

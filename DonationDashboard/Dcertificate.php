@@ -62,43 +62,7 @@ if ($result && mysqli_num_rows($result) > 0) {
         include ('includes/d_dashboard.php');
     ?>
 <main id="main_container">
-
-<div class="main-area p-4">
-    <div class="inner-wrapper p-4">
-    <div class="container-fluid text-light">
-
-        <div class="recent-donors">
-            <div class="section-title">Recent Donors with the Same Blood Type:</div>
-            <div class="donor">Jane Smith</div>
-            <div class="donor">Michael Johnson</div>
-            <div class="donor">Sarah Williams</div>
-            <!-- Add more donors here as needed -->
-        </div>
-    </div>
-
-    <!-- Delete Modal -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Are you sure you want to delete your account?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger">Delete</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-</div>
+<a href="functions/generate_certificate.php">Download Certificate</a>
 </main>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>

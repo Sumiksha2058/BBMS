@@ -42,7 +42,7 @@ if (!$result) {
         <hr>
       </div>
       <?php
-if($request_data = mysqli_fetch_array($result)){
+     if(mysqli_num_rows($result) > 0) {
      echo "<table class='table table-hover'>";
      echo "<thead>";
     echo "<tr class='text-light' style='background-color: #000077;'>";
@@ -54,7 +54,7 @@ if($request_data = mysqli_fetch_array($result)){
      echo "</tr>";
      echo "</thead>";
      echo "<tbody>";
-  
+     while($request_data = mysqli_fetch_array($result)) {
     echo "<tr class='p-2'>";
     echo "<td>".$request_data['request_id']."</td>";
     echo "<td>".$request_data['email']."</td>";
@@ -62,6 +62,7 @@ if($request_data = mysqli_fetch_array($result)){
     echo "<td>".$request_data['amount_required']."</td>";
     echo "<td>".$request_data['request_date']."</td>";
     echo "</tr>";
+     }
 }else{
     echo "<h3 class='text-center mt-5'>No Data Found</h3>";
 }

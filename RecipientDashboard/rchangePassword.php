@@ -79,6 +79,7 @@ include ('../RecipientDashboard/includes/r_dashboard.php');
 
         <div class="row bg-light shadow-lg w-50 rounded text-dark p-3 items-center mb-3">
            <h1>Change Password</h1> 
+           <hr>
            <?php if (isset($_GET['error'])) { ?>
                 <p class="alert alert-danger ">  <?php echo $_GET['error']; ?></p>
             <?php } ?>

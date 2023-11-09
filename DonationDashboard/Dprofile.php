@@ -55,12 +55,11 @@ if ($result && mysqli_num_rows($result) > 0) {
 
 
 <body> 
-<?php 
+<?php   
         include ('../DonationDashboard/includes/head.php');
+        include ('includes/d_dashboard.php');
     ?>
 
-<?php 
-        include ('includes/d_dashboard.php');
     ?>
 <main id="main_container">
 
@@ -73,7 +72,7 @@ if ($result && mysqli_num_rows($result) > 0) {
             <p><strong>Blood Type:</strong> <?php echo $bloodType; ?></p>
             <p><strong>Email ID:</strong><?php echo $email; ?></p>
             <!-- <button type="button" class="btn btn-primary mt-3" data-toggle="modal" data-target="#editModal">Edit Account</button> -->
-            <button type="button" class="btn btn-danger mt-3" onclick="location.href='functions/delete.php'">Delete Account</button>
+            <button type="button" class="btn btn-danger mt-3" onclick="location.href='delete.php'">Delete Account</button>
 
         </div>
     </div>

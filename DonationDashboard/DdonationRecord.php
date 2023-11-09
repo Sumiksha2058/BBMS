@@ -37,7 +37,6 @@ if (!$result) {
         include ('includes/d_dashboard.php');
     ?>
 
-
 <main id="main_container">
 
 <div class="main-area p-4">
@@ -46,10 +45,11 @@ if (!$result) {
             <div class="row">
                 <div class="col">
            <h1>Donation Staus</h1>
+           <hr>
            </div>
 
-           <table class="table rounded table-dark table-hover ">
-           <thead>
+           <table class="table rounded table-hover ">
+           <thead class="table-dark ">
     <tr >
      
       <th scope="col">Donation Request Date</th> 

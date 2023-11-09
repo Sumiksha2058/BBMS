@@ -24,6 +24,7 @@ if (!$result) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VitaCare</title>
+    <link rel="stylesheet" href="style/profile.css">
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="fontawesome/css/all.min.css">
@@ -40,14 +41,15 @@ include ('../RecipientDashboard/includes/r_dashboard.php');
 <main id="main_container">
 <div class="main-area p-4">
     <div class="inner-wrapper p-4 ">
-        <div class="container-fluid text-light">
+        <div class="container-fluid text-dark">
             <div class="row">
                 <div class="col">
            <h1>Request Status</h1>
+           <hr>
 </div>
            </div>
-           <table class="table table-light table-hover">
-           <thead>
+           <table class="table table-hover">
+           <thead class="table-dark ">
             <tr >           
               <th scope="col">Requested Date</th>
               <th scope="col">Blood Type</th>

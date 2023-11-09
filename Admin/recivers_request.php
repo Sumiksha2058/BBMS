@@ -5,7 +5,6 @@ FROM blood_requests";
 $result = mysqli_query($conn, $query);
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,12 +35,12 @@ include ('../Admin/includes/head.php');
 <div class="main-area p-4">
     <div class="inner-wrapper p-4">
      
-        <div class="container overflow-hidden">
-        <div class="title text-dark">
-        <h1 class="fs-4">List of Blood Requests</h1>
-       <hr>
-      </div>
-      <?php
+    <div class="container overflow-hidden">
+    <div class="title text-dark">
+    <h1 class="fs-4">List of Blood Requests</h1>
+    <hr>
+    </div>
+    <?php
     if(mysqli_num_rows($result) > 0){
     echo '<table class="table  table-hover">';
     echo '<thead>';

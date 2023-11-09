@@ -20,15 +20,18 @@ if (isset($_GET['approve_donor']) && isset($_GET['email'])) {
         if ($request_approval_status === 'approved') {
             $user_id = $approved_user_id; // Obtain the approved user's ID
             $donation_date = date("Y-m-d"); // Get the current date
+            $bloodStorage_date = date("Y-m-d"); // Set the blood storage date as the current date
+            $expiryDate = date('Y-m-d', strtotime($donation_date. ' + 42 days')); // Set the blood expiry date 42 days from the donation date
 
             // Insert into the donors table
             $blood_units_donated = 1; // Assuming one unit of blood is donated each time
-            $donor_insert_query = "INSERT INTO donors (user_id, donation_date, blood_units_donated) VALUES ('$user_id', '$donation_date', '$blood_units_donated')";
+            $donor_insert_query = "INSERT INTO donors (user_id, donation_date, blood_units_donated, bloodStorage_date, bloodExpiry_date) 
+                                   VALUES ('$user_id', '$donation_date', '$blood_units_donated', '$bloodStorage_date', '$expiryDate')";
 
             // Execute the query
             if (mysqli_query($conn, $donor_insert_query)) {
                 // The insertion was successful
-        
+
             } else {
                 // The insertion failed
                 // Handle the error as needed
@@ -46,4 +49,3 @@ if (isset($_GET['approve_donor']) && isset($_GET['email'])) {
         exit();
     }
 }
-?>

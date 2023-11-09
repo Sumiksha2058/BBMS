@@ -1,13 +1,25 @@
-
 <?php
 // Include the database configuration file
 include 'includes/config.php';
 
-// Create an SQL query to fetch the required columns from the 'users' table
-$query = "SELECT u.blood_group, SUBSTRING(u.blood_group, 2) AS blood_rh_factor, d.blood_units_donated, u.email, u.contact, u.approval_status, u.requested_date, DATE_ADD(u.requested_date, INTERVAL 1 YEAR) AS expiry_date FROM users u LEFT JOIN donors d ON u.user_id = d.user_id WHERE u.user_type = 'donor' AND u.approval_status = 'approved'";
 
-// Execute the query
+// Create an SQL query to fetch the required columns from the 'users' table
+$query = "SELECT u.blood_group, 
+SUBSTRING(u.blood_group, 2) AS blood_rh_factor, 
+SUM(d.blood_units_donated) AS total_units_donated 
+FROM users u 
+LEFT JOIN donors d ON u.user_id = d.user_id 
+WHERE u.user_type = 'donor' 
+AND u.approval_status = 'approved' 
+GROUP BY u.blood_group;";
+
 $result = mysqli_query($conn, $query);
+
+// Check for errors during the query execution
+if (!$result) {
+    printf("Error: %s\n", mysqli_error($conn));
+    exit();
+}
 ?>
 
 
@@ -44,38 +56,35 @@ include ('includes/a_dashboard.php');
                     <h1 class="fs-4">List of Blood Requests</h1>
                 </div>
 
-                <table class="table table-hover-Info">
+                <table class="table table-hover-In  fo">
                     <thead>
                         <tr class="text-light" style="background-color: #000077;">
                             <th scope="col">Blood Type</th>
                             <th scope="col">Rh-factor</th>
                             <th scope="col">Quantity</th>
-                            <th scope="col">Expiry Date</th>
-                            <th scope="col">Storage Date</th>
+
                         </tr>
                     </thead>
                     <tbody>
                     <?php
-    // Check if there are any records in the result set
-    if (mysqli_num_rows($result) > 0) {
-        // Loop through the records and display them in the table
-        while ($row = mysqli_fetch_assoc($result)) {
-            echo '<tr>';
-            echo '<td>' . $row['blood_group'] . '</td>';
-            echo '<td>' . $row['blood_rh_factor'] . '</td>';
-            echo '<td>' . $row['blood_units_donated'] . '</td>';
-            echo '<td>' . $row['expiry_date'] . '</td>';
-            echo '<td>' . $row['requested_date'] . '</td>';
-          
-            echo '</tr>';
-        }
-    } else {
-        echo '<tr><td colspan="7">No users found.</td></tr>';
+// Check if there are any records in the result set
+if (mysqli_num_rows($result) > 0) {
+    // Loop through the records and display them in the table
+    while ($row = mysqli_fetch_assoc($result)) {
+        echo '<tr>';
+        echo '<td>' . $row['blood_group'] . '</td>';
+        echo '<td>' . $row['blood_rh_factor'] . '</td>';
+        echo '<td>' . $row['total_units_donated'] . '</td>';
+        echo '</tr>';
     }
+} else {
+    echo '<tr><td colspan="3">No users found.</td></tr>';
+}
 
-    // Close the database connection
-    mysqli_close($conn);
-    ?>
+// Close the database connection
+mysqli_close($conn);
+?>
+
                     </tbody>
                 </table>
             </div>

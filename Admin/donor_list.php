@@ -2,7 +2,10 @@
 include 'includes/config.php';
 include 'functions/add_donor.php';
 
-$query = "SELECT user_id, email, blood_group, requested_date FROM users WHERE approval_status = 'approved' AND `user_type` = 'donor'";
+$query = "SELECT u.user_id, u.email, u.blood_group, u.requested_date, d.bloodStorage_date, d.bloodExpiry_date, u.* 
+          FROM donors d 
+          JOIN users u ON d.user_id = u.user_id
+          WHERE u.approval_status = 'approved' AND u.user_type = 'donor'";
 $result = mysqli_query($conn, $query);
 
 if (!$result) {
@@ -34,41 +37,46 @@ if (!$result) {
     ?>
 
 <main id="main_container">
+    <div class="main-area p-4">
+        <div class="inner-wrapper p-4">
+            <div class="title text-dark">
+                <h1 class="fs-4">List of Donors</h1>
+                <hr>
+            </div>
+            <?php
+            if(mysqli_num_rows($result) > 0) {
+                echo "<table class='table table-hover'>";
+                echo "<thead>";
+                echo "<tr class='text-light' style='background-color: #000077;'>";
+                echo "<th scope='col'>ID</th>";
+                echo "<th scope='col'>Email</th>";
+                echo "<th scope='col'>Blood Type</th>";
+                echo "<th scope='col'>Received Date</th>";
+                echo "<th scope='col'>Storage Date</th>";
+                echo "<th scope='col'>Expiry Date</th>";
+                // Add more table headers for the user data if needed
+                echo "</tr>";
+                echo "</thead>";
+                echo "<tbody>";
 
-<div class="main-area p-4">
-    <div class="inner-wrapper p-4">
-      <div class="title text-dark">
-        <h1 class="fs-4">List of Donor's</h1>
-        <hr>
-      </div>
-      <?php
-if($request_data = mysqli_fetch_array($result)){
-     echo "<table class='table table-hover'>";
-     echo "<thead>";
-    echo "<tr class='text-light' style='background-color: #000077;'>";
-    echo "<th scope='col'>ID</th>";
-    echo "<th scope='col'>Email</th>";
-    echo "<th scope='col'>Blood Type</th>";
-    echo "<th scope='col'>Recived Date</th>";
-     echo "</tr>";
-     echo "</thead>";
-     echo "<tbody>";
-  
-    echo "<tr class='p-2'>";
-    echo "<td>".$request_data['user_id']."</td>";
-    echo "<td>".$request_data['email']."</td>";
-    echo "<td>".$request_data['blood_group']."</td>";
-    echo "<td>".$request_data['requested_date']."</td>";
-    echo "</tr>";
-}else{
-    echo "<h3 class='text-center mt-5'>No Data Found</h3>";
-}
-
-?>
-    
-  </tbody>
-</table>     
-    </div> 
+                while($request_data = mysqli_fetch_array($result)) {
+                    echo "<tr class='p-2'>";
+                    echo "<td>".$request_data['user_id']."</td>";
+                    echo "<td>".$request_data['email']."</td>";
+                    echo "<td>".$request_data['blood_group']."</td>";
+                    echo "<td>".$request_data['requested_date']."</td>";
+                    echo "<td>".$request_data['bloodStorage_date']."</td>";
+                    echo "<td>".$request_data['bloodExpiry_date']."</td>";
+                    // Add more table cells for the user data if needed
+                    echo "</tr>";
+                }
+            } else {
+                echo "<h3 class='text-center mt-5'>No Data Found</h3>";
+            }
+            ?>
+        </tbody>
+    </table>     
+</div> 
 </div>
 </main>
 <script src="fontawesome/js/all.min.js"></script>

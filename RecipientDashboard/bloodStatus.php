@@ -49,7 +49,9 @@ include ('../RecipientDashboard/includes/r_dashboard.php');
 </div>
            </div>
            <table class="table table-hover">
-           <thead class="table-dark ">
+           <?php
+           if(mysqli_num_rows($result) > 0) {
+          echo '<thead class="table-dark ">
             <tr >           
               <th scope="col">Requested Date</th>
               <th scope="col">Blood Type</th>
@@ -59,8 +61,8 @@ include ('../RecipientDashboard/includes/r_dashboard.php');
             </tr>
             </thead>
             
-            <tbody>
-            <?php
+            <tbody>';
+            
             while($request_data = mysqli_fetch_array($result)){
               echo "<tr class='p-2'>";
               echo "<td>".$request_data['request_date']."</td>";
@@ -70,6 +72,9 @@ include ('../RecipientDashboard/includes/r_dashboard.php');
               echo "<td>".$request_data['approval_status']."</td>";
          
             }            
+        }else {
+            echo "<h3 class='text-center mt-5'>No Data Found</h3>";
+        }
             ?>
 
             </tbody>

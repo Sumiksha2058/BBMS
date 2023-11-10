@@ -51,24 +51,27 @@ if (!$result) {
            <table class="table rounded table-hover ">
            <thead class="table-dark ">
     <tr >
-     
-      <th scope="col">Donation Request Date</th> 
-      <th scope="col">Unit</th>
-      <th scope="col">Email</th>
-      <th scope="col">Status</th>
-    </tr>
-  </thead>
-  <tbody>
-  <?php
+    <?php
+    if(mysqli_num_rows($result) > 0) {
+     echo '<th scope="col">Donation Request Date</th>'; 
+     echo '<th scope="col">Email</th>';
+     echo '<th scope="col">Blood Type</th>';
+     echo '<th scope="col">Status</th>';
+   echo '</tr>';
+ echo '</thead>';
+ echo '<tbody>';
+
             while($request_data = mysqli_fetch_array($result)){
               echo "<tr class='p-2'>";
               echo "<td>".$request_data['requested_date']."</td>";
-              echo "<td>".$request_data['amount_to_donate']."</td>";
               echo "<td>".$request_data['email']."</td>";
+              echo "<td>".$request_data['blood_group']."</td>";
               echo "<td>".$request_data['approval_status']."</td>";
               
             }
-
+        }else {
+            echo "<h3 class='text-center mt-5'>No Data Found</h3>";
+        }
             ?>
 
   </tbody>

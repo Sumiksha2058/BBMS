@@ -1,7 +1,7 @@
 <?php
 include 'includes/config.php';
 
-$query = "(SELECT user_type, user_id, fullname, email FROM users)";
+$query = "(SELECT user_type, user_id, fullname, email,contact FROM users)";
 
 $result = mysqli_query($conn, $query);
 
@@ -49,6 +49,7 @@ if (!$result) {
                             <th scope="col">User Type</th>
                             <th scope="col">User ID</th>
                             <th scope="col">User Name</th>
+                            <th scope="col">Contact No.</th>
                             <th scope="col">User Email</th>
                         </tr>
                     </thead>
@@ -59,6 +60,7 @@ if (!$result) {
                         echo "<td>" . $user_data['user_type'] . "</td>";
                         echo "<td>" . $user_data['user_id'] . "</td>";
                         echo "<td>" . $user_data['fullname'] . "</td>";
+                        echo "<td>" . $user_data['contact'] . "</td>";
                         echo "<td>" . $user_data['email'] . "</td>";
                         echo "</tr>";
                     }

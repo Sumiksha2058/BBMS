@@ -2,7 +2,7 @@
   session_start();
 include "includes/config.php";
 
-if(isset($_SESSION['recp_email'])){
+if(isset($_SESSION['email'])){
     if(isset($_POST['changePass'])){
     function validate($data){
         $data = trim($data);
@@ -27,12 +27,12 @@ if(isset($_SESSION['recp_email'])){
     }else {
         $npass = md5($npass);
         $oldpass = md5($oldpass);
-        $email = $_SESSION['recp_email'];
+        $email = $_SESSION['email'];
 
-        $sql = "SELECT recp_password FROM recipient WHERE recp_email = '{$email}' AND recp_password ='{$oldpass}' ";
+        $sql = "SELECT password FROM users WHERE email = '{$email}' AND password ='{$oldpass}' ";
         $result = mysqli_query($conn, $sql);
 
-        $sql_2 = "UPDATE recipient SET recp_password = ? WHERE recp_email = ?";
+        $sql_2 = "UPDATE users SET password = ? WHERE email = ?";
          $stmt = mysqli_prepare($conn, $sql_2);
 
          if ($stmt) {

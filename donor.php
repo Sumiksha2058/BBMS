@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,53 +9,106 @@
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="shortcut icon" href="VitaCare.ico" type="image/x-icon">
-     <link rel="stylesheet" href="fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="fontawesome/css/all.min.css">
+    <style>
+        /* Additional styles for the hover effect */
+        .card-img-overlay {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            cursor: pointer;
+        }
 
-   
-
+        .card:hover .card-img-overlay {
+            opacity: 1;
+        }
+       
+    
+    </style>
 </head>
 <body>
-  <?php
-    include 'includes/head.php'
-   ?>
-    
+    <?php include 'includes/head.php' ?>
+
     <!-- main container starts from here -->
-<main class="pt-2 m-6">
-<div class="container-fluid ">      
-  <div class="row row-md-2 mt-5 mx-5">
-    <div class="col">
-        <h1 class=" fs-auto text-light">Every Contribution Counts:<br/>  Join us in Making a Difference!</h1>
-        <p class=" fs-auto text-light"> Your contribution of a single blood donation can save multiple lives. Whether it's whole blood, platelets, or plasma, every donation holds the power to bring hope and healing to those facing medical challenges. Each time you donate, you are directly impacting the lives of individuals in need.</p>
-        <a href="login.php"><button type="button"  class="btn btn-outline-light">Donate Now</button></a>
-    </div> 
-</div>
-<div class="row row-md mt-5 " id="row">
-    <div class="col-md text-center ">     
-        <div class="shadow-sm  mb-3 rounded w-50 text-center"> <h1 class="text-light ">Join With US</h1></div>
+    <main class="pt-2 m-6">
+        <div class="container-fluid">
+            <div class="row row-md-2 mt-5 mx-5">
+                <div class="col">
+                    <h1 class=" fs-auto text-light">Every Contribution Counts:<br/>  Join us in Making a Difference!</h1>
+                    <p class=" fs-auto text-light"> Your contribution of a single blood donation can save multiple lives. Whether it's whole blood, platelets, or plasma, every donation holds the power to bring hope and healing to those facing medical challenges. Each time you donate, you are directly impacting the lives of individuals in need.</p>
+                    <a href="login.php"><button type="button"  class="btn btn-outline-light">Donate Now</button></a>
+                </div>
+            </div>
+
+            <div class="row row-md mt-5 " id="row">
+    <div class="col-md d-flex justify-content-center">     
+        <div class="shadow-sm mb-3 rounded w-50 text-center">
+            <h1 class="text-light">Join With US</h1>
+        </div>
     </div>
 </div>
 
-<!-- image gallary -->
-<div class="row row-md-6 mt-2 text-center mx-5 d-flex justify-content-center" id="dgallary">
-    <div class="col-md mb-3 width-auto">
-        <img class="img-fluid pb-1 px-4 xl-3" src="images/b1.png" alt="">
-        <img class="img-fluid pb-1 px-4 xl-3" src="images/b4.png" alt="">   
-    </div>
-    <div class="col-md mb-3">
-        <img class="img-fluid pb-1 px-4 xl-3" src="images/b2.png" alt="">
-        <img  class="img-fluid pb-1 px-4 xl-3" src="images/b5.png" alt="">      
-    </div>
-    <div class="col-md mb-3">
-        <img class="img-fluid pb-1 px-4 xl-3" src="images/b3.png" alt="">
-        <img  class="img-fluid pb-1 px-4 xl-3" src="images/b6.png" alt="">
-    </div>
-</div>
 
-<div class="row row-cols-1 row-cols-md-2 mt-5 mx-5">
-    
-    <div class="col-md w-100 text-light">
-        <h3 >Criteria to donate blood</h3>
-       <ul>
+
+            <!-- Image gallery with Bootstrap cards -->
+            <div class="row row-md-6 mt-2 text-center mx-5 d-flex justify-content-center " id="dgallary">
+                <div class="col-md mb-3 width-auto">
+                    <div class="card">
+                        <img class="card-img-top img-fluid" src="images/b1.png" alt="">
+                        <div class="card-img-overlay">
+                            <h5 class="card-title">"Donate Blood, Save Lives: <br> Your Generosity Makes a World of Difference."</h5>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <img class="card-img-top img-fluid" src="images/b4.png" alt="">
+                        <div class="card-img-overlay">
+                            <h5 class="card-title">Image 2</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md mb-3">
+                    <div class="card">
+                        <img class="card-img-top img-fluid" src="images/b2.png" alt="">
+                        <div class="card-img-overlay">
+                            <h5 class="card-title">"Embrace Life, Embrace Care: <br> VitaCare - Your Partner in Lifesaving Moments."</h5>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <img class="card-img-top img-fluid" src="images/b5.png" alt="">
+                        <div class="card-img-overlay">
+                            <h5 class="card-title">"Donate Blood, Save Lives: Your Generosity Makes a World of Difference." Drop, a Smile's Start: <br> Happy to Donate, Happy to Impart."</h5>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md mb-3">
+                    <div class="card">
+                        <img class="card-img-top img-fluid" src="images/b3.png" alt="">
+                        <div class="card-img-overlay">
+                            <h5 class="card-title">Image 5</h5>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <img class="card-img-top img-fluid" src="images/b6.png" alt="">
+                        <div class="card-img-overlay">
+                            <h5 class="card-title">Happy Hearts, Saving Lives: <br> Donating Blood, Playing a Vital Part</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row-cols-1 row-cols-md-2 mt-5 mx-5">
+                <div class="col-md w-100 text-light">
+                    <h3 >Criteria to donate blood</h3>
+                    <ul>
         <li>You are aged between 18 and 65.</li>
         <li>weight at least 50 kg.</li>
         <li>You must be in good health at the time you donate.</li>
@@ -81,22 +135,17 @@
         Following pregnancy, the deferral period should last as many months as the duration of the pregnancy.
         It is not advisable to donate blood while breast-feeding. Following childbirth, the deferral period is at least 9 months (as for pregnancy) and until 3 months after your baby is significantly weaned (i.e. getting most of his/her nutrition from solids or bottle feeding).</li>
             </ul>
+                </div>
+            </div>
+        </div>
+    </main>
 
+    <!-- footer starts here -->
+    <?php include 'includes/footer.php' ?>
 
-
-    </div>
-    
-</div>
-</main>
-
-<!-- footer starts here -->
-<?php
-    include 'includes/footer.php'
-   ?>
-
-<script src="javascript/jquery.js"></script>  
-<script src="javascript/activeHover.js"></script>
-<script src="fontawesome/js/all.min.js"></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="javascript/jquery.js"></script>
+    <script src="javascript/activeHover.js"></script>
+    <script src="fontawesome/js/all.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>

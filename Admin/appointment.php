@@ -46,7 +46,7 @@ if (!$result) {
 
       <table class="table table-hover-Info">
       <?php
-if($appo_data = mysqli_fetch_array($result)){
+if(mysqli_num_rows($result) > 0) {
   echo '<thead>';
   echo'<tr class="text-light " style="background-color: #000077;">';
   echo '<th scope="col">User ID</th>';
@@ -60,6 +60,7 @@ if($appo_data = mysqli_fetch_array($result)){
   echo '</thead>';
   echo '<tbody>';
   echo '<tbody>';
+  while($appo_data = mysqli_fetch_array($result)) {
   echo "<tr class='p-2'>";
   echo "<td>".$appo_data['appo_id']."</td>";
   echo "<td>".$appo_data['appo_name']."</td>";
@@ -68,6 +69,7 @@ if($appo_data = mysqli_fetch_array($result)){
   echo "<td>".$appo_data['appo_date']."</td>";
   echo "<td>".$appo_data['appo_time']."</td>";
   echo "</tr>";
+  }
 }
 else{
   echo "<h3 class='text-center mt-5'>No Data Found</h3>";

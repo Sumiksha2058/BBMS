@@ -63,7 +63,7 @@ include ('includes/a_dashboard.php');
                         <!-- <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             <i class="fa fa-plus me-2"></i>Add Donor
                         </button> -->
-                        <a href="../register.php"><button class="btn btn-success" >Add Donor</button></a>
+                        <a href="../register.php"><button class="btn btn-success" ><i class="fa fa-plus" aria-hidden="true"></i> Add Donor</button></a>
                     </div>
                 </div>
           

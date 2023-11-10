@@ -33,10 +33,10 @@ if(isset($_SESSION['email'])){
            $oldpass = md5($oldpass);
            $email = $_SESSION['email'];
 
-           $sql = "SELECT password FROM donor WHERE email = '{$email}' AND password ='{$oldpass}' ";
+           $sql = "SELECT password FROM users WHERE email = '{$email}' AND password ='{$oldpass}' ";
            $result = mysqli_query($conn, $sql);
 
-           $sql_2 = "UPDATE donor SET password = ? WHERE email = ?";
+           $sql_2 = "UPDATE users SET password = ? WHERE email = ?";
             $stmt = mysqli_prepare($conn, $sql_2);
 
             if ($stmt) {

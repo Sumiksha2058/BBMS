@@ -11,7 +11,7 @@ include 'includes/config.php';
 
 $email = $_SESSION['email'];
 // Fetch donor information from the database
-$sql = "SELECT fullname,gender, contact, email, blood_group FROM users WHERE email = '$email';";;
+$sql = "SELECT fullname,gender, contact, email, blood_group FROM users WHERE email = '$email'";
 $result = mysqli_query($conn, $sql);
 
 if ($result && mysqli_num_rows($result) > 0) {
@@ -45,20 +45,21 @@ if ($result && mysqli_num_rows($result) > 0) {
     <link rel="stylesheet" href="fontawesome/css/all.min.css">
     <link rel="preconnect" href="https://font/RecipientDashboard/Rprofile.phps.googleapis.com">
     <script src="javascript/jquery.js"></script>
-
+    <script src="javascript/search.js"></script>
     
 </head>
 <body >
-<div class="col col-md-4 float-end" id="searchResults"></div>
+<div class="col col-md-4 float-end pl-3" id="searchResults"></div>
 <?php 
 include ('../RecipientDashboard/includes/head.php');
 include ('../RecipientDashboard/includes/r_dashboard.php'); 
 ?>      
 
 
-<main id="main_container">   
+<main id="main_container" style="background-color: #f8f9fa;">   
 
-<div class="main-area p-4"  style="background-color: #f8f9fa;">
+<div class="main-area p-4">
+    <div class="main_container">
     <div class="inner-wrapper p-4">
     <div class="container-fluid text-light">
         <div class="profile-card text-dark">
@@ -70,11 +71,12 @@ include ('../RecipientDashboard/includes/r_dashboard.php');
             <button type="button" class="btn btn-danger mt-3" onclick="location.href='delete.php'">Delete Account</button>
         </div>
     </div>
-
+    </div>
   
     </div>
 </div>
 </main>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

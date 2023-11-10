@@ -32,13 +32,13 @@
                                 </a>
                             </li>
 
-                            <li class="nav-item mb-4">
+                            <!-- <li class="nav-item mb-4">
                                 <a href="Dcertificate.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'certificate.php') ? 'active' : ''; ?> text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
                                     <i class="fa fa-certificate d-inline d-xl-none d-md-none" data-bs-toggle="tooltip"
                                         data-bs-placement="right" title="Certificate" aria-hidden="false"></i>
                                     <span class="ms-2 d-none d-md-inline">Certificate</span>
                                 </a>
-                            </li>
+                            </li> -->
 
                             <li class="nav-item mb-4">
                                 <a href="Dchangepassword.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'Dchangepassword.php') ? 'active' : ''; ?> text-light pb-2" id="nav-link" data-bs-toggle="tooltip">

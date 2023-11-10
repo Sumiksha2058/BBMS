@@ -51,7 +51,6 @@ if (!$result) {
                 echo "<th scope='col'>ID</th>";
                 echo "<th scope='col'>Email</th>";
                 echo "<th scope='col'>Blood Type</th>";
-                echo "<th scope='col'>Received Date</th>";
                 echo "<th scope='col'>Storage Date</th>";
                 echo "<th scope='col'>Expiry Date</th>";
                 // Add more table headers for the user data if needed
@@ -64,7 +63,6 @@ if (!$result) {
                     echo "<td>".$request_data['user_id']."</td>";
                     echo "<td>".$request_data['email']."</td>";
                     echo "<td>".$request_data['blood_group']."</td>";
-                    echo "<td>".$request_data['requested_date']."</td>";
                     echo "<td>".$request_data['bloodStorage_date']."</td>";
                     echo "<td>".$request_data['bloodExpiry_date']."</td>";
                     // Add more table cells for the user data if needed

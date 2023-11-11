@@ -45,11 +45,11 @@ if ($result && mysqli_num_rows($result) > 0) {
     <link rel="stylesheet" href="fontawesome/css/all.min.css">
     <link rel="preconnect" href="https://font/RecipientDashboard/Rprofile.phps.googleapis.com">
     <script src="javascript/jquery.js"></script>
-    <script src="javascript/search.js"></script>
-    
+
 </head>
 <body >
-<div class="col col-md-4 float-end pl-3" id="searchResults"></div>
+
+
 <?php 
 include ('../RecipientDashboard/includes/head.php');
 include ('../RecipientDashboard/includes/r_dashboard.php'); 
@@ -60,8 +60,11 @@ include ('../RecipientDashboard/includes/r_dashboard.php');
 
 <div class="main-area p-4">
     <div class="main_container">
+         <!-- searching container -->
+          <div class="col col-md-4 float-end " id="searchResults"></div>
     <div class="inner-wrapper p-4">
     <div class="container-fluid text-light">
+
         <div class="profile-card text-dark">
             <h2> <?php echo $userType; ?> Profile</h2>
             <div class="user-name"><i class="fa fa-user" aria-hidden="true"></i> <?php echo $fullname; ?></div>
@@ -76,9 +79,10 @@ include ('../RecipientDashboard/includes/r_dashboard.php');
     </div>
 </div>
 </main>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="javascript/searchHandler.js"></script>
+<script src="javascript/activeHover.js"></script>
+<script src="fontawesome/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
+    <script src="javascript/search.js"></script>
 </body>
 </html>

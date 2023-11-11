@@ -108,13 +108,13 @@ include 'includes/head.php'
                     <label for="password" class="form-label fs-auto">Password</label>
                     <div class="input-group">
                         <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
-                        <div class="input-group-prepend">
+                        <!-- <div class="input-group-prepend">
                             <div class="input-group-text">
                                 <a href="#" class="text-dark" id="click-eye">
                                     <i class="fa fa-eye color-dark" id="icon" aria-hidden="true"></i>
                                 </a>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div id="passwordHelpBlock" class="form-text">
                         <?php if (isset($_GET['error'])) { ?>
@@ -127,13 +127,13 @@ include 'includes/head.php'
                     <label for="confirmPassword" class="form-label fs-auto">Confirm Password</label>
                     <div class="input-group">
                         <input type="password" class="form-control" name="con_password" id="confirmPassword" placeholder="Re-enter Password" required>
-                        <div class="input-group-prepend">
+                        <!-- <div class="input-group-prepend">
                             <div class="input-group-text">
                                 <a href="#" class="text-dark" id="click-eye">
                                     <i class="fa fa-eye color-dark" id="icon" aria-hidden="true"></i>
                                 </a>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 

@@ -38,7 +38,8 @@
                                 <a href="donor_list.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'donor_list.php') ? 'active' : ''; ?>  text-light pb-2" id="nav-link" data-bs-toggle="tooltip">
                                    <i class="fa fa-certificate d-inline d-xl-none d-md-none" data-bs-toggle="tooltip"
                                         data-bs-placement="right" title="Request blood" aria-hidden="false"></i>
-                                    <strong class="ms-2 d-none d-md-inline">Donor</strong>
+                                    <strong class="m(!$stmt) {
+        die("Error in query preparation: " . $conn->error);s-2 d-none d-md-inline">Donor</strong>
                                 </a>
                             </li>
 

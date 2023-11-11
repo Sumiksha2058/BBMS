@@ -24,9 +24,6 @@ if (isset($_POST['login'])) {
     // Escape special characters to prevent SQL injection
     $email = mysqli_real_escape_string($conn, $email);
 
-    // Update the hashing method to password_hash
-    $password = password_hash($password, PASSWORD_DEFAULT);
-
     // Query template
     $sql = "SELECT * FROM users WHERE email = '$email' AND user_type = '$userType'";
 
@@ -39,29 +36,40 @@ if (isset($_POST['login'])) {
 
     // Check if a single row was returned
     if (mysqli_num_rows($result) == 1) {
-        // Login successful
-        session_start();
-        $_SESSION['user_type'] = $userType;
-        $_SESSION['email'] = $email;
+        // Fetch user data
+        $row = mysqli_fetch_assoc($result);
 
-        // Redirect based on user type
-        if ($userType === 'donor') {
-            header("Location: DonationDashboard/Dprofile.php");
-            exit();
-        } elseif ($userType === 'recipient') {
-            header("Location: RecipientDashboard/Rprofile.php");
-            exit();
-        }
-    } else {
-        // Login failed
-        $error_message = "Invalid Email or Password";
+        // Verify the password using password_verify
+        if (password_verify($password, $row['password'])) {
+            // Login successful
+            session_start();
+            $_SESSION['user_type'] = $userType;
+            $_SESSION['email'] = $email;
+        
+            // Redirect based on user type
+            if ($userType === 'donor') {
+                header("Location: DonationDashboard/Dprofile.php");
+                exit();
+            } 
+            if ($userType === 'recipient') {
+                header("Location: RecipientDashboard/Rprofile.php");
+                exit();
+            }
+        } 
     }
+
+    // Login failed
+    $error_message = "Invalid Email or Password";
+
+    // Pass the error message as a query parameter
+    header("Location: login.php?error=" . urlencode($error_message));
+    exit();
 
     // Close the database connection
     mysqli_close($conn);
 }
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

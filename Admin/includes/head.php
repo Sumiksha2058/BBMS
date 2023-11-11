@@ -10,10 +10,17 @@
         <div class="collapse navbar-collapse text-wrap" id="navbarSupportedContent">
 
 
-        <div class="col d-flex justify-content-center">
-              <input class="form-control me-2 w-50" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>           
-              </div>
+        <ul class="navbar-nav fs-5 ms-auto text-center d-flex ">
+            <li class="nav-item">
+           
+<form method="post" action class="d-flex mr-5" id="searchForm">
+            
+<input type="text" class="form-control me-2" id="searchInput" name="searchInput" placeholder="Enter contact number, blood type, or donor's full name">
+        <button type="submit" name="search" class="btn btn-primary">Search</button>
+            </form>
+            
+            </li>
+          </ul>
         <ul class="navbar-nav fs-5 ms-auto text-center">
 
 

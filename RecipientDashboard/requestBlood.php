@@ -64,6 +64,7 @@ if (isset($_POST["request"])) {
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="fontawesome/css/all.min.css">
+    <script src="javascript/jquery.js"></script>
 </head>
 <body>
 
@@ -74,6 +75,8 @@ if (isset($_POST["request"])) {
 
 <main id="main_container">
     <div class="main-area p-4">
+          <!-- searching container -->
+          <div class="col col-md-4 float-end " id="searchResults"></div>
         <div class="inner-wrapper p-4">
             <div class="container-fluid shadow-lg bg-light w-50 text-dark py-3 rounded">
                 <div class="row  rounded text-dark p-3 items-center mb-3">
@@ -120,9 +123,10 @@ if (isset($_POST["request"])) {
             </div>
         </div>
     </div>
-
+    <script src="javascript/searchHandler.js"></script>
+<script src="javascript/activeHover.js"></script>
+<script src="fontawesome/js/all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
-    <script src="fontawesome/js/all.min.js"></script>
-
+    <script src="javascript/search.js"></script>
 </body>
 </html>

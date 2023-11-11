@@ -21,14 +21,12 @@ if ($result && mysqli_num_rows($result) > 0) {
     $fullname = $row['fullname'];
     $contact = $row['contact'];
     $email = $row['email'];
-    $bloodType = $row['donorBlood'];
     $userType = $row['user_type'];
 } else {
     // Handle the case when donor information is not found in the database
     $fullname = "N/A";
     $contact = "N/A";
     $email = "N/A";
-    $bloodType = "N/A";
     $userType = "N/A";
 }
 
@@ -69,8 +67,8 @@ if ($result && mysqli_num_rows($result) > 0) {
         <div class="profile-card text-dark">
             <h2> <?php echo $userType; ?> Profile</h2>
             <div class="user-name"><i class="fa fa-user" aria-hidden="true"></i> <?php echo $fullname; ?></div>
-            <p><strong>Blood Type:</strong> <?php echo $bloodType; ?></p>
-            <p><strong>Email ID:</strong><?php echo $email; ?></p>
+            <p><strong>Contact:</strong> <?php echo $contact; ?></p>
+            <p><strong>Email ID:</strong> <?php echo $email; ?></p>
             <!-- <button type="button" class="btn btn-primary mt-3" data-toggle="modal" data-target="#editModal">Edit Account</button> -->
             <button type="button" class="btn btn-danger mt-3" onclick="location.href='delete.php'">Delete Account</button>
 

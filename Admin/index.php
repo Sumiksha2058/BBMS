@@ -21,7 +21,7 @@ include("includes/config.php");
     <link rel="stylesheet" href="fontawesome/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="javascript/jquery.js"></script>
 </head>
 <body>
 
@@ -34,11 +34,11 @@ include("includes/config.php");
     ?>
 
 <main id="main_container">
-
+  
+<div class="col col-md-4 float-end " id="searchResults"></div>
 <div class="main-area p-4">
     <div class="inner-wrapper p-4">
-      
-
+    
         <div class="container overflow-hidden">
   <div class="row gy-5  text-light" id="small_container" >
     <div class="col-4 " >
@@ -187,11 +187,10 @@ include("includes/config.php");
 </div>
 
 </main>
-
-<script src="javascript/jquery.js"></script>
+<script src="javascript/searchHandler.js"></script>
 <script src="javascript/activeHover.js"></script>
 <script src="fontawesome/js/all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>
-
+    <script src="javascript/search.js"></script>
 </body>
 </html>

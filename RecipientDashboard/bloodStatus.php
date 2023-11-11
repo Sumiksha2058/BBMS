@@ -30,18 +30,25 @@ if (!$result) {
     <link rel="stylesheet" href="fontawesome/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <script src="javascript/jquery.js"></script>
 </head>
 <body>
-<div class="col col-md-4 float-end" id="searchResults"></div>
+
 <?php 
 include ('../RecipientDashboard/includes/head.php');
 include ('../RecipientDashboard/includes/r_dashboard.php'); 
 ?>  
 
 <main id="main_container">
+         
 <div class="main-area p-4">
+     <!-- searching container -->
+     <div class="col col-md-4 float-end " id="searchResults"></div>
+   <div class="main_container">
     <div class="inner-wrapper p-4 ">
+   
         <div class="container-fluid text-dark">
+            
             <div class="row">
                 <div class="col">
            <h1>Request Status</h1>
@@ -81,9 +88,11 @@ include ('../RecipientDashboard/includes/r_dashboard.php');
       </table>
 </div>
 </div>
+   </div>
 </div>
           </div>
 </main>
+<script src="javascript/searchHandler.js"></script>
 <script src="javascript/activeHover.js"></script>
 <script src="fontawesome/js/all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"></script>

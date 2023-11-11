@@ -54,7 +54,7 @@ if (isset($_POST['submitForm'])) {
             array_push($errors, "Error: Account already exit!");
         } else {
             // Hash the password (you may want to use a more secure hashing method)
-            $password = md5($password);
+           $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
             if ($userType === 'donor' || $userType === 'recipient') {
                 // Proceed with the INSERT query

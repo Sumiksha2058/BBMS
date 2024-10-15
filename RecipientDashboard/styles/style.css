@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100;0,500;1,700&family=Lato:wght@100&display=swap');
+
+*,::after,::before {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f8f9fa !important;
+    padding-top: 85px;
+    margin: 0;
+    font-family: 'Exo', sans-serif;
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+    font-family: 'Exo', sans-serif;
+}
+
+.navbar {
+    background-color: #2F3936 !important;
+    padding: .26em 7em !important;
+}
+
+li {
+    list-style: none;
+}
+
+.wrapper {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+}
+
+#sidebar {
+    max-width: 264px;
+    min-width: 264px;
+    background-color: #2F3936;
+    transition: all 0.35s ease-in-out;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 999;
+}
+
+#sidebar.collapsed {
+    margin-left: -246px;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    margin-left: 264px;
+    transition: all 0.35s ease-in-out;
+}
+
+.main.collapsed {
+    margin-left: 0;
+}
+
+.sidebar-logo {
+    padding: 1.15rem 1.15rem;
+}
+
+.sidebar-logo a {
+    color: #e9ecef;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.sidebar-nav {
+    padding: 0;
+}
+
+.sidebar-header {
+    color: #e9ecef;
+    font-size: .75rem;
+    padding: 1.5rem 1.5rem .375rem;
+}
+
+a.sidebar-link {
+    padding: 0.625rem 1.625rem;
+    color: #e9ecef;
+    display: block;
+}
+
+a.sidebar-link:hover, a.sidebar-link.active {
+    background-color: #DE4A4A;
+    color: #ffffff;
+}
+
+.nav-link {
+    color: #ffffff !important;
+}
+
+.nav-link.active {
+    background-color: #DE4A4A !important;
+    color: #fff !important;
+}
+
+.nav-link:hover {
+    background-color: #DE4A4A !important;
+    color: #ffffff !important;
+}
+
+/* Profile Page Styles */
+.page-container {
+    padding: 20px;
+}
+
+.profile-content {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.edit-buttons {
+    color: green;
+}
+
+.cancel-buttons {
+    color: red;
+}
+
+.form-control:focus {
+    border-color: #0056b3;
+    box-shadow: none;
+}
+
+.notification {
+    display: none;
+    margin-top: 10px;
+}
+
+.icon {
+    margin-right: 8px;
+}

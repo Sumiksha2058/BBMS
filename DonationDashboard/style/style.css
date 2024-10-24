@@ -8,7 +8,11 @@
 
 body{
     background-color: #f8f9fa !important;
+<<<<<<< HEAD
     /* padding-top: 85px; */
+=======
+    padding-top: 85px;
+>>>>>>> 21c9f55e987de28b2f99d0a3f1763085c3cd466b
 }
 .navbar{
     background-color: #2F3936 !important;
@@ -20,6 +24,7 @@ body{
     color: #ffffff !important;
     margin-right: 5px;
 }
+<<<<<<< HEAD
 .sidebar {
     position: sticky;
     top: 0;
@@ -32,6 +37,8 @@ body{
     margin-bottom: 20px;
 }
 
+=======
+>>>>>>> 21c9f55e987de28b2f99d0a3f1763085c3cd466b
 
 
 .row h1,h3,h4{
@@ -118,7 +125,11 @@ footer{
 
 #dashbord{
     padding-top: 2em;
+<<<<<<< HEAD
     background-color: #d6b2b2;
+=======
+    background-color: #242424;
+>>>>>>> 21c9f55e987de28b2f99d0a3f1763085c3cd466b
     width: 20%;
     height: 100% !important;
     position: fixed;

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <!-- <?php
+=======
+<?php
+>>>>>>> 21c9f55e987de28b2f99d0a3f1763085c3cd466b
 ini_set('display_errors', '1');
 error_reporting(E_ALL);
 
@@ -62,7 +66,11 @@ if (isset($_POST['login'])) {
     $error_message = "Invalid Email or Password";
 
     // Pass the error message as a query parameter
+<<<<<<< HEAD
     header("Location: index.php?error=" . urlencode($error_message));
+=======
+    header("Location: login.php?error=" . urlencode($error_message));
+>>>>>>> 21c9f55e987de28b2f99d0a3f1763085c3cd466b
     exit();
 
     // Close the database connection
@@ -83,6 +91,7 @@ if (isset($_POST['login'])) {
     <link rel="stylesheet" href="fontawesome/css/all.min.css">
 </head>
 <body class="bg-light">
+<<<<<<< HEAD
     <?php include 'includes/head.php'; ?>
     
     <main>
@@ -209,3 +218,76 @@ if (isset($_POST['login'])) {
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html> -->
+=======
+    <!-- this is heading section -->
+    <?php
+    include 'includes/head.php';
+    ?>
+    
+    <!-- main container starts from here -->
+    <div class="container d-flex justify-content-center mt-4">
+        <div class="row px-6 my-2 text-dark bg-light w-50 md-w-100 shadow p-3 mb-5 bg-body rounded-3" id="login_wrapper">
+            <div class="col mt-3 ">
+                <h1 class="text-center">Login</h1>
+            </div>
+            <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" class="mt-3 row needs-validation"  novalidate>
+            <?php if (isset($_GET['error'])) { ?>
+                                <p class="alert alert-danger ">  <?php echo $_GET['error']; ?></p>
+                            <?php } ?>
+                <div class="mb-3">
+                    <label for="userType" class="form-label">User Type</label>
+                    <select class="form-select" id="userType" name="userType">
+                        <option value="donor">Donor</option>
+                        <option value="recipient">Recipient</option>
+                    </select>
+                </div>
+
+                <div class="sm-6 mb-3">
+                    <label for="LoginEmail1" class="form-label">Email address</label>
+                    <div class="form-group">
+                        <input type="email" class="form-control" name="Loginemail" id="LoginEmail1" aria-describedby="emailHelp">
+                    </div>
+                </div>
+                <div class="sm-6 mb-3">
+                    <label for="LoginPassword" class="form-label">Password</label>
+                    <div class="input-group">
+                        <input type="password" class="form-control" name="Loginpassword" id="LoginPassword">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <a href="#" class="text-dark" id="click-eye">
+                                    <i class="fa fa-eye color-dark" id="icon" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 text-center">
+                    <span>Don't have an account? <a href="register.php">Register Now</a></span>
+                </div>
+                <div class="mb-3 text-right">
+                    <div class="form-group">
+                        <button type="submit" name="login" class="btn btn-primary mb-3">Login</button>
+                        <button type="reset" class="btn btn-primary mb-3">Cancel</button>
+                    </div>
+                </div>
+                
+            </form>
+            
+        </div>
+    </div>
+  
+
+
+    <!-- footer starts here -->
+    <?php
+    include 'includes/footer.php';
+    ?>
+
+    <script src="javascript/jquery.js"></script>
+    <script src="javascript/passport_hide_show.js"></script>
+    <script src="fontawesome/js/all.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="javascript/validation.js"></script>
+</body>
+</html>
+>>>>>>> 21c9f55e987de28b2f99d0a3f1763085c3cd466b

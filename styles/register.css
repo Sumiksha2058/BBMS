@@ -8,9 +8,21 @@
 
 body{
     background-color: transparent !important;
+<<<<<<< HEAD
     padding-top: 85px;  
 }
 
+=======
+    padding-top: 85px;
+   
+}
+.navbar{
+    background-color: #2F3936 !important;
+    box-shadow: 0px 2px 7px #cbcfce;
+    padding: .26em 7em !important;
+   
+}
+>>>>>>> 21c9f55e987de28b2f99d0a3f1763085c3cd466b
 .nav-link{
     color: #ffffff !important;
     margin-right: 5px;
@@ -33,12 +45,27 @@ font-family: exo;
     font-style:italic !important;
 }
 
+<<<<<<< HEAD
+=======
+
+
+
+
+
+>>>>>>> 21c9f55e987de28b2f99d0a3f1763085c3cd466b
 footer{
     background-color: #2F3936 !important;
 }
 
+<<<<<<< HEAD
 /* footer */
 
+=======
+
+/* footer */
+
+
+>>>>>>> 21c9f55e987de28b2f99d0a3f1763085c3cd466b
 a#nav-link{
     font-family: exo;
     font-style: normalS;
@@ -77,7 +104,14 @@ a#nav-link:hover{
     transition: .5s;
 }
 
+<<<<<<< HEAD
 /* .container {
+=======
+
+
+
+.container {
+>>>>>>> 21c9f55e987de28b2f99d0a3f1763085c3cd466b
     margin: 2em;
     width: 80%;
     height: auto;
@@ -86,7 +120,11 @@ a#nav-link:hover{
     border-radius: 7px;
     box-shadow: 4px 3px 9px 2px #2a2a2bd8;
     transition: 0.5s;
+<<<<<<< HEAD
 } */
+=======
+}
+>>>>>>> 21c9f55e987de28b2f99d0a3f1763085c3cd466b
 
 label{
     font-size: auto;

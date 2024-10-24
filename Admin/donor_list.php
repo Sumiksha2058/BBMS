@@ -2,7 +2,11 @@
 include 'includes/config.php';
 include 'functions/add_donor.php';
 
+<<<<<<< HEAD
 $query = "SELECT u.user_id, u.email, u.blood_group, u.requested_date, u.* 
+=======
+$query = "SELECT u.user_id, u.email, u.blood_group, u.requested_date, d.bloodStorage_date, d.bloodExpiry_date, u.* 
+>>>>>>> 21c9f55e987de28b2f99d0a3f1763085c3cd466b
           FROM donors d 
           JOIN users u ON d.user_id = u.user_id
           WHERE u.approval_status = 'approved' AND u.user_type = 'donor'";

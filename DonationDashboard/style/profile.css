@@ -1,10 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100;0,500;1,700&family=Lato:wght@100&display=swap');
 body {
+<<<<<<< HEAD
     background-color: #EADDDD !important;
 }
 
 .profile-card {
     max-width: auto;
+=======
+    background-color: #f8f9fa !important;
+}
+
+.profile-card {
+    max-width: 400px;
+>>>>>>> 21c9f55e987de28b2f99d0a3f1763085c3cd466b
     margin: 25px auto;
     padding: 30px;
     border-radius: 10px;

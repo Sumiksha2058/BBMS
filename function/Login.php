@@ -7,7 +7,7 @@ ini_set('display_errors', '1');
 error_reporting(E_ALL);
 
 // Start the session
-session_start(); 
+// session_start(); 
 
 // Define the input_filter function
 function input_filter($data) { 

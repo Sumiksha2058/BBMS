@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+<!-- <<<<<<< HEAD
 <!-- <?php
 =======
 <?php
@@ -290,4 +290,4 @@ if (isset($_POST['login'])) {
     <script src="javascript/validation.js"></script>
 </body>
 </html>
->>>>>>> 21c9f55e987de28b2f99d0a3f1763085c3cd466b
+>>>>>>> 21c9f55e987de28b2f99d0a3f1763085c3cd466b -->

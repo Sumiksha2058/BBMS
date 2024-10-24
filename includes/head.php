@@ -1,9 +1,7 @@
-<<<<<<< HEAD
+
 <?php
 include 'function/Login.php';
 ?>
-=======
->>>>>>> 21c9f55e987de28b2f99d0a3f1763085c3cd466b
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +11,7 @@ include 'function/Login.php';
     <title>VitaCare</title>
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-<<<<<<< HEAD
+
     <link rel="shortcut icon" href="VitaCare.ico" type="image/x-icon">
     <link rel="stylesheet" href="fontawesome/css/all.min.css">
     <script src="javascript/page.js"></script>
@@ -22,16 +20,16 @@ include 'function/Login.php';
             background-color: #b97272 !important;
         }
     </style>
-=======
+
      <link rel="shortcut icon" href="VitaCare.ico" type="image/x-icon">
      <link rel="stylesheet" href="fontawesome/css/all.min.css">
 <script src="javascript/page.js"></script>
->>>>>>> 21c9f55e987de28b2f99d0a3f1763085c3cd466b
+
 </head>
 <body>
 
 <header>
-<<<<<<< HEAD
+
     <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.php"><img src="images/VitaCare.png" alt="Logo"></a>
@@ -59,7 +57,7 @@ include 'function/Login.php';
 </li>
 
        
-=======
+
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-#2F3936" id="navbar">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.php"><img src="images/VitaCare.png" alt="Logo"></a>
@@ -71,29 +69,22 @@ include 'function/Login.php';
             <li class="nav-item">
               <a class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'index.php') ? 'active' : ''; ?>" aria-current="page" href="index.php">Home</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'donor.php') ? 'active' : ''; ?>" href="donor.php">Donors</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'recepient.php') ? 'active' : ''; ?>" href="recepient.php">Recipient</a>
-            </li>
+         
+          
             <li class="nav-item">
               <a class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'appointment.php') ? 'active' : ''; ?>" href="appointment.php">Book Appointment</a>
             </li>
-            <li class="nav-item ">
-              <a class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'contact.php') ? 'active' : ''; ?>" href="contact.php">Contact Us</a>
-            </li>
+         
             <li class="nav-item">
               <a class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'register.php') ? 'active' : ''; ?>" href="register.php">Register Here</a>
             </li>
             
-            
->>>>>>> 21c9f55e987de28b2f99d0a3f1763085c3cd466b
+
           </ul>
         </div>
       </div>
     </nav>
-<<<<<<< HEAD
+
 </header>
 <!-- Login Modal -->
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
@@ -146,7 +137,7 @@ include 'function/Login.php';
 
 </body>
 </html>
-=======
+
     
 </header>
 <div id="page"></div>
@@ -159,4 +150,3 @@ include 'function/Login.php';
 
 </body>
 </html>
->>>>>>> 21c9f55e987de28b2f99d0a3f1763085c3cd466b

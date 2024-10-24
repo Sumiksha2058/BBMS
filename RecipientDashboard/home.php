@@ -10,12 +10,19 @@ if (!isset($_SESSION['email'])) {
 $email = $_SESSION['email'];
 
 // Fetch the current user's details including their latitude and longitude
-$stmt = $conn->prepare("SELECT user_id, fullname, latitude, longitude FROM users WHERE email = ? && user_type='donor'");
+$stmt = $conn->prepare("SELECT user_id, fullname, latitude, longitude FROM users WHERE email = ? AND user_type='donor'");
 $stmt->bind_param("s", $email);
 $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 $stmt->close();
+
+// Check if user details were fetched successfully
+if (!$user) {
+    // Handle the case when the user details are not found
+    echo "User details not found.";
+    exit();
+}
 
 // Fetch all blood requests
 $query = "

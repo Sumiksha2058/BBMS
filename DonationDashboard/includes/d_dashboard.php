@@ -1,29 +1,29 @@
 
-<aside id="sidebar" class="js-sidebar"style="background-color: #D6B2B2; ">
+<aside id="sidebar" class="js-sidebar"style="background-color: #D6B2B2; position: fixed; top: 100; left: 120; height: 100%; width: 250px;">
             <!-- Content For Sidebar -->
-            <div class="h-100">
+            <div class="h-100 ">
                 <div class="sidebar-logo">
                     <a href="#">VitaCare</a>
                 </div>
-                <ul class="sidebar-nav">
-                    <li class="sidebar-header">
+                <ul class="sidebar-nav ">
+                    <li class="sidebar-header text-dark">
                         Donor Dashboard
                     </li>
                     <li class="sidebar-item">
-                        <a href="index.php" class="sidebar-link">
+                        <a href="index.php" class="sidebar-link text-dark">
                             <i class="fa-solid fa-home pe-2"></i>
                             Home
                         </a>
                     </li>
 
                     <li class="sidebar-item">
-                        <a href="Dprofile.php" class="sidebar-link">
+                        <a href="Dprofile.php" class="sidebar-link text-dark">
                             <i class="fa-solid fa-user pe-2"></i>
                             Profile
                         </a>
                     </li>
-                    <li class="sidebar-item">
-                        <a href="Appointment.php" class="sidebar-link">
+                    <li class="sidebar-item text-dark">
+                        <a href="Appointment.php" class="sidebar-link text-dark">
                             <i class="fa-solid fa-user pe-2"></i>
                             Appointment
                         </a>
@@ -32,7 +32,7 @@
                         --------------------------------
                     </li>
                     <li class="sidebar-item">
-                        <a href="Setting.php" class="sidebar-link">
+                        <a href="Setting.php" class="sidebar-link text-dark">
                             <i class="fa-solid fa-gear pe-2"></i>
                             Setting
                         </a>

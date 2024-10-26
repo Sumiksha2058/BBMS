@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100;0,500;1,700&family=Lato:wght@100&display=swap');
 
-<<<<<<< HEAD
+
 *,::after,::before {
     box-sizing: border-box;
 }
@@ -140,7 +140,7 @@ a.sidebar-link:hover, a.sidebar-link.active {
 .icon {
     margin-right: 8px;
 }
-=======
+
 *{
     margin: 0;
     padding: 0;
@@ -300,4 +300,3 @@ footer{
 
 
 
->>>>>>> 21c9f55e987de28b2f99d0a3f1763085c3cd466b

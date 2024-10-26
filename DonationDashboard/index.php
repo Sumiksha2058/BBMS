@@ -18,7 +18,6 @@ $result = $stmt->get_result();
 if ($result->num_rows === 0) {
     die("No user found.");
 }
-
 $user = $result->fetch_assoc();
 $stmt->close();
 
@@ -58,7 +57,7 @@ $bloodRequests = $conn->query($query);
 include 'indexONE.php';
 ?>
 <main class="col-md-9 ms-sm-auto col-lg-10 px-4 mt-3">
-        <div class="my-4">
+        <div class="my-4 text-dark">
                 <h2>Welcome, <?php echo htmlspecialchars($user['fullname']); ?>!
             </h2>
             </div>

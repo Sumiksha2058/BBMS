@@ -4,18 +4,16 @@ include 'functions/update_profile.php';
 // session_start();
 
 if (!isset($_SESSION['email'])) {
-    header("location: .../VitaCare/Rprofile.php");
+    header("Location: ../VitaCare/Rprofile.php");
     exit();
 }
 
 $email = $_SESSION['email'];
 
-// Using prepared statements to fetch user information
+// Using prepared statements to fetch user information including blood group
 $stmt = $conn->prepare("
-    SELECT u.*, bg.blood_group 
-    FROM users u
-    LEFT JOIN blood_groups bg ON u.blood_group_id = bg.blood_group_id
-    WHERE u.email = ?");
+    SELECT * FROM users WHERE email = ?
+");
 $stmt->bind_param("s", $email);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -26,7 +24,10 @@ if ($result->num_rows === 0) {
 
 $user = $result->fetch_assoc();
 $stmt->close();
+
+// Now you can access user information including blood group as $user['blood_group']
 ?>
+
 <?php include 'index.php'; ?>
 
 <main id="main_container">

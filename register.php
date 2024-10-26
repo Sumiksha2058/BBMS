@@ -21,7 +21,7 @@ include 'includes/head.php'
 ?>
 
 <!-- Container for Form and Image -->
-<div class="container shadow-lg bg-body w-75 my-3 rounded" id="image">
+<div class="container shadow-lg bg-none w-80 my-3 rounded" id="image">
     <div class="row justify-content-center align-items-center">
         <div class="col-md-6 d-flex justify-content-center">
             <img src="images/signupbg.jpg" class="img-fluid rounded" alt="Signup Background">
@@ -46,8 +46,9 @@ include 'includes/head.php'
             <form method="post" action="register.php" id="registrationForm" class="needs-validation" novalidate>
 
                 <!-- User Type -->
-                <div class="mb-3">
-                    <label for="userType" class="form-label">Select User Type:</label>
+                <div class="row mb-3">
+                <div class="col-md-4">
+                    <label for="userType" class="form-label">User Type:</label>
                     <select name="userType" class="form-select" required>
                         <option value="donor" <?php echo ($userTypeValue === 'donor') ? 'selected' : ''; ?>>Donor</option>
                         <option value="recipient" <?php echo ($userTypeValue === 'recipient') ? 'selected' : ''; ?>>Recipient</option>
@@ -55,13 +56,13 @@ include 'includes/head.php'
                 </div>
 
                 <!-- Row 1: Full Name and Age -->
-                <div class="row mb-3">
-                    <div class="col-md-6">
+                
+                    <div class="col-md-4">
                         <label for="fullName" class="form-label fs-auto">Full Name</label>
                         <input type="text" name="fullname" class="form-control" id="fullName" value="<?php echo htmlspecialchars($fullnameValue); ?>" placeholder="Enter your full name" required>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label for="age" class="form-label fs-auto">Age</label>
                         <input type="number" class="form-control" name="age" id="age" value="<?php echo htmlspecialchars($ageValue); ?>" placeholder="Enter Your Age" required>
                     </div>
@@ -69,7 +70,7 @@ include 'includes/head.php'
 
                 <!-- Gender -->
                 <div class="row mb-3">
-                    <div class="mb-3">
+                    <div class="col-md-4">
                         <label class="form-label">Gender</label>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" value="Male" name="gender" id="genderMale" <?php echo ($genderValue === 'Male') ? 'checked' : ''; ?> required>
@@ -84,11 +85,7 @@ include 'includes/head.php'
                             <label class="form-check-label" for="genderOther">Other</label>
                         </div>
                     </div>
-                </div>
-
-                <!-- Row 2: Blood Group and Email -->
-                <div class="row mb-3">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label for="bloodGroup" class="form-label fs-auto">Blood Group</label>
                         <select class="form-select" name="donorBlood" id="bloodGroup" required>
                             <option selected>Select blood group</option>
@@ -102,12 +99,12 @@ include 'includes/head.php'
                             <option value="AB-" <?php echo ($blood_group === 'AB-') ? 'selected' : ''; ?>>AB-</option>
                         </select>
                     </div>
-
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label for="email" class="form-label fs-auto">Email</label>
                         <input type="email" class="form-control" name="email" id="email" value="<?php echo htmlspecialchars($emailValue); ?>" placeholder="Enter your email" required>
                     </div>
                 </div>
+
 
                 <!-- Row 3: Contact and Password -->
                 <div class="row mb-3">
@@ -140,8 +137,8 @@ include 'includes/head.php'
                 </div>
 
                 <!-- Buttons -->
-                <div class="d-flex justify-content-between">
-                    <button type="submit" name="submitForm" class="btn btn-primary fs-auto">Register</button>
+                <div class="d-flex justify-content-right ">
+                    <button type="submit" name="submitForm" class="btn btn-primary fs-auto me-2">Register</button>
                     <button type="reset" class="btn btn-secondary fs-auto">Cancel</button>
                 </div>
             </form>

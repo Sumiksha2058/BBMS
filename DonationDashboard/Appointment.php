@@ -1,5 +1,5 @@
 <?php
-include 'includes/config.php'; // Ensure $conn is initialized here (mysqli)
+include 'includes/config.php';
 session_start();
 
 if (!isset($_SESSION['email'])) {

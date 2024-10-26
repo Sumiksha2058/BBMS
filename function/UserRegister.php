@@ -125,7 +125,7 @@ if (!is_null($errors) && count($errors) > 0) {
         }
     } else {
         // Handle the case where 'userType' is not set
-        array_push($errors, "User type is not set.");
+        // array_push($errors, "User type is not set.");
     }
 
 

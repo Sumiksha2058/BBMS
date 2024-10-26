@@ -30,7 +30,7 @@ include 'includes/r_dashboard.php';
             include 'includes/header.php';
             ?>
 
-            <main class="content px-3 py-2">
+            <main class="content px-3 py-2" style="margin:4em 18.5em;">
                 <div class="container-fluid">
                     <div class="row">
             <!-- <a href="#" class="theme-toggle">

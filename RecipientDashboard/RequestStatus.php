@@ -63,13 +63,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<?php
-include 'index.php';
-?>
-<!-- Display Appointment Details -->
+
+<?php include 'index.php'; ?>
 <main id="main_container" class="container my-4">
-        <div class="page-container">
-            <div class="appointment-container my-2">
+    <div class="page-container">
+    <div class="appointment-container my-2">
                 <h4 class="fw-bold text-dark">Appointment Requests</h4>
                 <hr>
                 <?php if (!empty($appointments)): ?>
@@ -99,31 +97,10 @@ include 'index.php';
                 <?php endif; ?>
             </div>
 
-            <div id="response-message"></div>
-        </div>
-    </main>
+    </div>
+</main>
 
-<script>
-// JavaScript function to handle button clicks (this is now unused)
-function respondToAppointment(recipientName, action) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "", true); // Post to the same file
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            document.getElementById('response-message').innerHTML = xhr.responseText;
-            document.getElementById('appointment-card-' + recipientName).style.display = 'none';
-        } else {
-            alert("Error: " + xhr.responseText);
-        }
-    };
-    
-    // Send the request with recipient name and action (accept/reject)
-    xhr.send("recipientName=" + encodeURIComponent(recipientName) + "&action=" + encodeURIComponent(action));
-}
-</script>
-
-<!-- Include Bootstrap and any other necessary JS/CSS files -->
-<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+<?php
+$stmt->close();
+$conn->close();
+?>

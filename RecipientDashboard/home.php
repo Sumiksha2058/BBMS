@@ -259,7 +259,12 @@ $conn->close();
 <?php include('index.php'); ?>
 
 <div class="main-container">
-    <!-- <h2>Welcome, <?php echo htmlspecialchars($user['fullname']); ?>!</h2> -->
+<div class="col-md-6">
+    <form method="GET" action="functions/serachDonor.php" class="d-flex" onsubmit="searchDonor(event)">
+        <input class="form-control me-2 bg-light" type="search" id="searchInput" placeholder="Search Donor" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+</div>
     
    
     <button class="btn mt-3 w-10" style="width:50px" data-bs-toggle="modal" data-bs-target="#requestModal"> <img class="post_btn" src="images\createpostbtn.png" alt="click to add post" /></button>
@@ -404,6 +409,55 @@ $conn->close();
 <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+// JavaScript to handle donor search with binary search
+function searchDonor(event) {
+    event.preventDefault();
+    
+    // Get the search input
+    let searchInput = document.getElementById("searchInput").value.toLowerCase();
+    
+    // Fetch all notification tables (for simplicity, search will be done on both tables)
+    let acceptedTable = document.getElementById("acceptedNotifications");
+    let totalTable = document.getElementById("totalNotifications");
+
+    // Get all rows in the accepted notifications table
+    let acceptedRows = Array.from(acceptedTable.getElementsByTagName("tr"));
+    let totalRows = Array.from(totalTable.getElementsByTagName("tr"));
+
+    // Function to perform binary search
+    function binarySearch(rows, target) {
+        let left = 0;
+        let right = rows.length - 1;
+        while (left <= right) {
+            let mid = Math.floor((left + right) / 2);
+            let rowName = rows[mid].cells[0].textContent.toLowerCase();
+            if (rowName === target) {
+                return mid;
+            } else if (rowName < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return -1; // Not found
+    }
+
+    // Perform binary search on accepted rows and total rows
+    function filterRows(rows) {
+        const index = binarySearch(rows, searchInput);
+        if (index !== -1) {
+            rows[index].style.display = ""; // Show the row if found
+        } else {
+            rows.forEach(row => row.style.display = "none"); // Hide all if no match
+        }
+    }
+
+    // Filter rows in both tables
+    filterRows(acceptedRows);
+    filterRows(totalRows);
+}
+
+
     $(document).ready(function() {
         // Handle click event for active donor names
         $('.active-donor').click(function() {

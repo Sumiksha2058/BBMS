@@ -1,69 +1,36 @@
 <?php
+// Include your database connection file
+include_once 'includes/config.php';
+
+// Get latitude and longitude from AJAX request
+$latitude = isset($_POST['latitude']) ? $_POST['latitude'] : '';
+$longitude = isset($_POST['longitude']) ? $_POST['longitude'] : '';
+
 // Check if latitude and longitude are provided
-$donors = [];
-
-if (isset($_POST['latitude']) && isset($_POST['longitude'])) {
-    // Get latitude and longitude from POST request
-    $userLat = $_POST['latitude'];
-    $userLon = $_POST['longitude'];
-
-    // SQL query to get active donors from the database
+if ($latitude != '' && $longitude != '') {
+    // SQL query to get active donors based on location
+    // You can add more complex logic based on your database schema
     $query = "
-        SELECT user_id, fullname, latitude, longitude 
+     SELECT user_id, fullname, latitude, longitude 
         FROM users 
         WHERE user_type = 'donor' 
         AND status = 1;
     ";
+    
+    // Prepare the query
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(':latitude', $latitude, PDO::PARAM_STR);
+    $stmt->bindParam(':longitude', $longitude, PDO::PARAM_STR);
+    
+    // Execute the query
+    $stmt->execute();
+    
+    // Fetch the results
+    $donors = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    $result = $conn->query($query);
-
-    if ($result === false) {
-        echo json_encode(['error' => 'Database query failed']);
-        exit;
-    }
-
-    // Loop through the donors and calculate the distance
-    while ($donor = $result->fetch_assoc()) {
-        // Get the donor's latitude and longitude
-        $donorLat = $donor['latitude'];
-        $donorLon = $donor['longitude'];
-
-        // Calculate the distance between the user and the donor using the haversine formula
-        $distance = haversineDistance($userLat, $userLon, $donorLat, $donorLon);
-
-        // Check if the donor is within 10 km radius
-        if ($distance <= 10) {
-            // Add donor info with the calculated distance
-            $donors[] = [
-                'fullname' => $donor['fullname'],
-                'latitude' => $donorLat,
-                'longitude' => $donorLon,
-                'distance' => number_format($distance, 2)
-            ];
-        }
-    }
-}
- else {
-    echo json_encode(['error' => 'Latitude and longitude not provided']);
-}
-
-// Function to calculate the distance using the Haversine formula
-function haversineDistance($lat1, $lon1, $lat2, $lon2) {
-    $earthRadius = 6371; // Radius of the Earth in kilometers
-
-    // Convert degrees to radians
-    $dLat = deg2rad($lat2 - $lat1);
-    $dLon = deg2rad($lon2 - $lon1);
-
-    // Apply Haversine formula
-    $a = sin($dLat / 2) * sin($dLat / 2) +
-         cos(deg2rad($lat1)) * cos(deg2rad($lat2)) *
-         sin($dLon / 2) * sin($dLon / 2);
-    $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
-
-    // Calculate the distance
-    $distance = $earthRadius * $c;
-
-    return $distance;
+    // Return results as JSON
+    echo json_encode($donors);
+} else {
+    echo json_encode(['error' => 'No geolocation data provided']);
 }
 ?>

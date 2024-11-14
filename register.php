@@ -133,7 +133,7 @@ include 'includes/head.php'
 
                 <!-- Login Link -->
                 <div class="text-center mb-3 w-100">
-                    <span>Already registered? <a href="login.php"><span>Login Here</span></a></span>
+                    <span >Already registered?<a href="#loginModal"><span class="btn border-none"  type="button" data-bs-toggle="modal" data-bs-target="#loginModal">Login Here</span></a></span>
                 </div>
 
                 <!-- Buttons -->

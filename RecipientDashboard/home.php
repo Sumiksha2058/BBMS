@@ -16,15 +16,16 @@ if (!isset($_SESSION['email'])) {
 $email = $_SESSION['email'];
 
 // Using prepared statements to fetch user information
-$stmt = $conn->prepare("SELECT user_id, fullname FROM users WHERE email = ? AND user_type = 'recipient'");
-$stmt->bind_param("s", $email);
+// Fetch user information
+$stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
+$stmt->bind_param("s", $email); // 's' means string type for the parameter
 $stmt->execute();
 $result = $stmt->get_result();
 
-// Check if user exists
 if ($result->num_rows === 0) {
     die("No user found.");
 }
+
 
 $user = $result->fetch_assoc();
 $stmt->close();
@@ -123,13 +124,6 @@ if ($bloodRequests->num_rows > 0) {
     }
 }
 
-
-// Fetch all active donor blood requests
-// $query = "
-//     SELECT a.user_id, a.requested_blood_group, a.message, a.created_at,u.fullname, u.address 
-//    FROM blood_requests AS a
-//    JOIN users AS u ON a.user_id = u.user_id WHERE u.user_type = 'donor'
-// ";
 // Check if latitude and longitude are provided
 $donors = [];
 
@@ -142,7 +136,8 @@ if (isset($_POST['latitude']) && isset($_POST['longitude'])) {
     $query = "
         SELECT user_id, fullname, latitude, longitude 
         FROM users 
-        WHERE user_type = 'donor' AND status = 1
+        WHERE user_type = 'donor' 
+        AND status = 1;
     ";
 
     $result = $conn->query($query);
@@ -161,15 +156,19 @@ if (isset($_POST['latitude']) && isset($_POST['longitude'])) {
         // Calculate the distance between the user and the donor using the haversine formula
         $distance = haversineDistance($userLat, $userLon, $donorLat, $donorLon);
 
-        // Add donor info with the calculated distance
-        $donors[] = [
-            'name' => $donor['fullname'],
-            'latitude' => $donorLat,
-            'longitude' => $donorLon,
-            'distance' => number_format($distance, 2)
-        ];
+        // Check if the donor is within 10 km radius
+        if ($distance <= 10) {
+            // Add donor info with the calculated distance
+            $donors[] = [
+                'fullname' => $donor['fullname'],
+                'latitude' => $donorLat,
+                'longitude' => $donorLon,
+                'distance' => number_format($distance, 2)
+            ];
+        }
     }
-} else {
+}
+ else {
     echo json_encode(['error' => 'Latitude and longitude not provided']);
 }
 
@@ -192,6 +191,7 @@ function haversineDistance($lat1, $lon1, $lat2, $lon2) {
 
     return $distance;
 }
+
 
 // Close the database connection
 $conn->close();
@@ -379,40 +379,24 @@ $conn->close();
 
 <div class="sidebar">
     <h4>Active Donors</h4>
-    <ul class="list-group">
-        <?php
-        // Assuming $userLat and $userLon are defined from the user's geolocation
-        // Loop through all active donor requests and display them with distances
-        foreach ($donors as $request) {
-            // Get the donor name and location data
-            $donorName = htmlspecialchars($request['name']);
-            $donorLat = $request['latitude'];
-            $donorLon = $request['longitude'];
+    <ul class="list-group text-dark">
+    <?php
+        if (!empty($donors)) {
+            echo "<ul>";
+            foreach ($donors as $donor) {
+               
+                echo "<li class='list-group-item active-donor'>" . htmlspecialchars($donor['fullname']) . " / " . $donor['distance'] . " km</li>";
 
-            // Calculate the distance between the user and the donor
-            $distance = haversineDistance($userLat, $userLon, $donorLat, $donorLon);
-
-            // Format the distance to 2 decimal places
-            $distanceFormatted = number_format($distance, 2);
-
-            // Display the donor name with distance
-            echo "<li class='list-group-item active-donor' data-donor-name='$donorName'>$donorName - $distanceFormatted km</li>";
+            //    echo "<p class 'text-dark'>"; 
+                
+            //     echo htmlspecialchars($donor_name['fullname']);
+                
+            //    echo "</p>";
+            }
+            echo "</ul>";
+        } else {
+            echo "<p>No active donors found within 10 km.</p>";
         }
-
-        // Haversine function to calculate the distance between two points (lat/lon in kilometers)
-        // function haversineDistance($lat1, $lon1, $lat2, $lon2) {
-        //     $earthRadius = 6371; // Radius of the Earth in kilometers
-        //     $dLat = deg2rad($lat2 - $lat1);  // Difference in latitude
-        //     $dLon = deg2rad($lon2 - $lon1);  // Difference in longitude
-
-        //     $a = sin($dLat / 2) * sin($dLat / 2) +
-        //          cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * 
-        //          sin($dLon / 2) * sin($dLon / 2);
-        //     $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
-        //     $distance = $earthRadius * $c;  // Distance in kilometers
-
-        //     return $distance;
-        // }
         ?>
     </ul>
 </div>
@@ -454,7 +438,7 @@ if (navigator.geolocation) {
 
         // Send the coordinates to PHP via AJAX for processing
         $.ajax({
-            url: 'your_php_script.php', // Update this with the actual script that handles the AJAX request
+            url: 'get_active_donors.php', // Update this with the actual script that handles the AJAX request
             method: 'POST',
             data: {
                 latitude: userLat,

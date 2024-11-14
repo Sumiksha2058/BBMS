@@ -157,7 +157,7 @@ $stmt->close();
 
     // AJAX call to save user information
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "update_profile.php", true); // Adjust path as necessary
+    xhr.open("POST", "functions/update_profile.php", true); // Adjust path as necessary
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
     xhr.onload = function() {

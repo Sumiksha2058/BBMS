@@ -15,6 +15,21 @@
         #navbar {
             background-color: #b97272 !important;
         }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+        .card-title {
+            font-weight: bold;
+        }
+        .text-teal {
+            color: #17a2b8;
+        }
+        .text-orange {
+            color: #fd7e14;
+        }
     </style>
 </head>
 
@@ -30,7 +45,7 @@ include 'includes/r_dashboard.php';
             include 'includes/header.php';
             ?>
 
-            <main class="content px-3 py-2" style="margin:4em 18.5em;">
+            <main class="content px-3 py-2" style="margin:5em 5.5em;">
                 <div class="container-fluid">
                     <div class="row">
             <!-- <a href="#" class="theme-toggle">

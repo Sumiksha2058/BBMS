@@ -47,39 +47,81 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 // Fetch all blood requests from the database
-$query = "SELECT blood_requests.*, users.fullname FROM blood_requests 
-          JOIN users ON blood_requests.user_id = users.user_id 
-          ORDER BY blood_requests.created_at DESC";
+
+$query = "
+   SELECT r.request_id, r.requested_blood_group, r.message, r.created_at, u.fullname 
+   FROM blood_requests AS r
+   JOIN users AS u ON r.user_id = u.user_id
+";
 
 $bloodRequests = $conn->query($query);
+$allRequests = [];
+
+// Check for blood requests
+if ($bloodRequests->num_rows > 0) {
+    $allRequests = [];  // Initialize an array to store the requests
+
+    // Fetch all requests
+    while ($request = $bloodRequests->fetch_assoc()) {
+        $allRequests[] = [
+            'name' => $request['fullname'],
+            'requested_blood_group' => $request['requested_blood_group'],
+            'message' => $request['message'],
+            'created_at' => $request['created_at'],
+        ];
+    }
+
+    // Sort by created_at in descending order (newest first)
+    usort($allRequests, function($a, $b) {
+        return strtotime($b['created_at']) - strtotime($a['created_at']);
+    });
+}
+
+
 ?>
 <?php
 include 'indexONE.php';
 ?>
 <main class="col-md-9 ms-sm-auto col-lg-10 px-4 mt-3">
-        <div class="my-4 text-dark">
-                <h2>Welcome, <?php echo htmlspecialchars($user['fullname']); ?>!
-            </h2>
+    <div class="row">
+        <div class="col md-6">
+            <div class="my-4 text-dark">
+                 <h2>Welcome, <?php echo htmlspecialchars($user['fullname']); ?>!</h2>
             </div>
+</div>
+    <div class="col md-6">
+    <div class="my-4 text-dark">
+                <nav class="navbar">
+                <div class="container-fluid">
+                    <form class="d-flex">
+                        <input class="form-control me-2 bg-light" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-dark" type="submit">Search</button>
+                    </form>
+                </div>
+                </nav>
+    </div>
+    </div>
+
+</div>
             <!-- Display Blood Requests (Posts) -->
-            <div class="posts mt-4">
-                <?php if ($bloodRequests->num_rows > 0): ?>
-                    <?php while ($request = $bloodRequests->fetch_assoc()): ?>
-                        <div class="mb-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title"><?php echo htmlspecialchars($request['requested_blood_group']); ?> Blood Needed</h5>
-                                    <p class="card-text"><?php echo htmlspecialchars($request['message']); ?></p>
-                                    <p class="text-muted">Posted by: <?php echo htmlspecialchars($request['fullname']); ?></p>
-                                    <p class="text-muted">Posted on: <?php echo date('F d, Y', strtotime($request['created_at'])); ?></p>
-                                </div>
+            <div class="posts mt-4 w-80">
+            <?php if (count($allRequests) > 0): ?>
+                <?php foreach ($allRequests as $request): ?>
+                    <div class="mb-4">
+                        <div class="card" style="background-color: #d6b2b2;">
+                            <div class="card-body">
+                                <h5 class="card-title text-dark"><?php echo htmlspecialchars($request['requested_blood_group']); ?> Blood Needed</h5>
+                                <p class="card-text text-dark"><?php echo htmlspecialchars($request['message']); ?></p>
+                                <p class="text-dark">Posted by: <?php echo htmlspecialchars($request['name']); ?></p>
+                                <p class="text-dark">Posted on: <?php echo date('F d, Y', strtotime($request['created_at'])); ?></p>
                             </div>
                         </div>
-                    <?php endwhile; ?>
-                <?php else: ?>
-                    <p class="text-muted">No blood donation requests available yet.</p>
-                <?php endif; ?>
-            </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p class="text-muted text-dark">No blood donation requests available from nearby donors yet.</p>
+            <?php endif; ?>
+        </div>
         </main>
     </div>
                 

@@ -54,7 +54,7 @@
 
 
 
-            <!-- Image gallery with Bootstrap cards -->
+            <!-- Image gallery -->
             <div class="row row-md-6 mt-2 text-center mx-5 d-flex justify-content-center " id="dgallary">
                 <div class="col-md mb-3 width-auto">
                     <div class="card">

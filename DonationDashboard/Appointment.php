@@ -34,7 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $date = $_POST['date']; 
         $time = $_POST['time']; 
 
-        // Prepare your SQL statement
         $sql = "INSERT INTO vc_appointment (appo_name, appo_email, appo_phone, appo_bloodtype, appo_date, appo_time) VALUES (?, ?, ?, ?, ?, ?)";
 
         // Prepare statement
@@ -61,29 +60,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <?php include 'indexONE.php'; ?>
-<div class="container mt-5">
-    <h2 class="mb-4">Your Appointment Details</h2>
+<main id="main_container" class="container my-4">
+        <div class="page-container">
+            <div class="appointment-container my-2">
+    <h2 class="mb-4 text-dark text-center">Save lives by donating blood!</h2>
+    <h3 class="mb-4 text-dark text-center">Join us at the up comming blood donation</h3>
+    <h4 class="mb-4 text-dark">Scheduled appointments</h4>
     
     <?php
     // Fetch recipient requests
     $recipientRequests = $conn->query("SELECT ad.*, u.* FROM active_donor_table AS ad JOIN vitacare_db.users AS u ON ad.user_id = u.user_id WHERE u.user_type = 'recipient'"); // Adjust table name as needed
-    if ($recipientRequests && $recipientRequests->num_rows > 0) {
+    if ($recipientRequests && $recipientRequests->num_rows > 0) {   
         while ($row = $recipientRequests->fetch_assoc()) {
-            echo "<div>";
-            echo "<p>Recipient Name: " . htmlspecialchars($row['fullname']) . "</p>";
-            echo "<p>Contact: " . htmlspecialchars($row['contact']) . "</p>";
-            echo "<p>Requested Blood Type: " . htmlspecialchars($row['blood_group']) . "</p>";
-            echo "<p>Needed Time: " . htmlspecialchars($row['needed_time']) . "</p>";
-            echo "<p>Appointment Date: " . htmlspecialchars($row['requested_date']) . "</p>";
-            echo "<form action='update_request_status.php' method='POST'>";
+          
+            echo "<div class='card mb-4 text-dark'>";
+            echo "<div class='card-body'>"; 
+            echo "<h6 class='card-title text-teal'>Recipient Name: " . htmlspecialchars($row['fullname']) . "</h6>";
+            echo "<p class='card-text'>Contact: " . htmlspecialchars($row['contact']) . "</p>";
+            echo "<p class='card-text'>Requested Blood Type: " . htmlspecialchars($row['blood_group']) . "</p>";
+            echo "<p class='card-text'>Needed Time: " . htmlspecialchars($row['needed_time']) . "</p>";
+            echo "<p class='card-text'>Appointment Date: " . htmlspecialchars($row['requested_date']) . "</p>";
+            echo "<form action='functions/accept_request.php' method='POST' style='display: inline-block;'>";
             echo "<input type='hidden' name='appointment_id' value='" . htmlspecialchars($row['id']) . "' />";
-            echo "<button type='submit' name='action' value='accept'>Accept</button>";
-            echo "<button type='submit' name='action' value='reject'>Reject</button>";
+            echo "<button class='btn btn-success me-2' type='submit' title='Accept Request'>";
+            echo "<i class='fas fa-check-circle'></i> Accept</button>";
             echo "</form>";
+            
+            echo "<form action='functions/reject_request.php' method='POST' style='display: inline-block;'>";
+            echo "<input type='hidden' name='appointment_id' value='" . htmlspecialchars($row['id']) . "' />";
+            echo "<button class='btn btn-danger' type='submit' title='Reject Request'>";
+            echo "<i class='fas fa-times-circle'></i> Reject</button>";
+            echo "</form>";
+            echo "</div>";
             echo "</div>";
         }
     } else {
         echo "No pending requests.";
     }
+  
     ?>
 </div>
+</div>
+</main

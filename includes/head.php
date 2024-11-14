@@ -29,35 +29,6 @@ include 'function/Login.php';
 <body>
 
 <header>
-
-    <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="index.php"><img src="images/VitaCare.png" alt="Logo"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav fs-5 ms-auto text-center">
-            <li class="nav-item">
-              <a class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'index.php') ? 'active' : ''; ?>" aria-current="page" href="index.php">
-                <i class="fas fa-home"></i> Home
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'appointment.php') ? 'active' : ''; ?>" href="appointment.php">
-                <i class="fas fa-calendar-check"></i> Book Appointment
-              </a>
-            </li>
-
-            <li class="nav-item">
-    <button class="btn btn-light border-none" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">
-        <i class="fas fa-user"></i> Receive Blood
-    </button>
-</li>
-
-       
-
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-#2F3936" id="navbar">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.php"><img src="images/VitaCare.png" alt="Logo"></a>
@@ -66,17 +37,20 @@ include 'function/Login.php';
         </button>
         <div class="collapse navbar-collapse containt-fluid"  id="navbarSupportedContent">
           <ul class="navbar-nav fs-5 ms-auto text-center">
-            <li class="nav-item">
-              <a class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'index.php') ? 'active' : ''; ?>" aria-current="page" href="index.php">Home</a>
-            </li>
-         
-          
-            <li class="nav-item">
-              <a class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'appointment.php') ? 'active' : ''; ?>" href="appointment.php">Book Appointment</a>
-            </li>
          
             <li class="nav-item">
-              <a class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'register.php') ? 'active' : ''; ?>" href="register.php">Register Here</a>
+            <a class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'index.php') ? 'active' : ''; ?>" aria-current="page" href="index.php">
+                <i class="fas fa-home"></i> 
+                <span style="weight: bold; font-size: 22px;">Home</span> 
+              </a>
+            </li>
+         
+            <li class="nav-item">
+            <button class="btn btn-none border-none" type="button" data-bs-toggle="modal" data-bs-target="#loginModal">
+                    <img src="images/reciveButton.png" style="width:50px;" alt=""> 
+                    
+                    <span style="weight: bold; font-size: 22px;">Receive Blood</span> 
+                </button>
             </li>
             
 

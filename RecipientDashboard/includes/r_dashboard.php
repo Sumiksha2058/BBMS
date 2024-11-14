@@ -30,7 +30,7 @@
                     </li>
 
                     <li class="sidebar-item">
-                        <a href="Rprofile.php" class="sidebar-link">
+                        <a href="RecipientHistory.php" class="sidebar-link">
                         <i class="fas fa-history"></i>
                             Recipient History
                         </a>
@@ -38,27 +38,13 @@
 
 
                     <li class="sidebar-header divider">
-                        --------------------------------
+                     <hr>
                     </li>
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link collapsed" data-bs-target="#multi" data-bs-toggle="collapse"
-                            aria-expanded="false"><i class="fa-solid fa-share-nodes pe-2"></i>
+                        <a href="Setting.php" class="sidebar-link collapsed">
+                        <i class="fa-solid fa-gear pe-2"></i>
                             Setting
                         </a>
-                        <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                            <li class="sidebar-item">
-                                <a href="#" class="sidebar-link collapsed" data-bs-target="#level-1"
-                                    data-bs-toggle="collapse" aria-expanded="false">Level 1</a>
-                                <ul id="level-1" class="sidebar-dropdown list-unstyled collapse">
-                                    <li class="sidebar-item">
-                                        <a href="#" class="sidebar-link">Level 1.1</a>
-                                    </li>
-                                    <li class="sidebar-item">
-                                        <a href="#" class="sidebar-link">Level 1.2</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
                     </li>
                 </ul>
             </div>

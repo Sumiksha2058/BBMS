@@ -31,9 +31,9 @@ $stmt->close();
 
 $submissionMessage = ""; // Variable to hold submission message
 
-// Handle the form submission
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Retrieve and sanitize the form inputs
+// Handle Blood Request Form Submission
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_blood_request'])) {
+    // Retrieve and sanitize the form inputs for blood request
     $bloodType = mysqli_real_escape_string($conn, $_POST['blood_group']);
     $message = mysqli_real_escape_string($conn, $_POST['message']);
 
@@ -53,66 +53,67 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         echo "Error: " . $stmt->error;
     }
-
-    // Close the statement
     $stmt->close();
 }
-$submissionMessage = ""; // Variable to hold submission message
-
-// Handle the form submission
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Retrieve and sanitize the form inputs
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
+    // Retrieve and sanitize the form inputs for active donor request
     $donor_name = mysqli_real_escape_string($conn, $_POST['donor_name']);
     $contact_number = mysqli_real_escape_string($conn, $_POST['contact_number']);
     $blood_group = mysqli_real_escape_string($conn, $_POST['blood_group']);
     $message = mysqli_real_escape_string($conn, $_POST['message']);
     $recipient_name = mysqli_real_escape_string($conn, $_POST['recipient_name']);
 
+    // Check if needed_time is set in POST; if not, set to NULL or a default value
+    $needed_time = isset($_POST['needed_time']) ? mysqli_real_escape_string($conn, $_POST['needed_time']) : null; // Use null if not set
+
     // Validate form fields
-    if (empty($bloodType) || empty($message)) {
+    if (empty($donor_name) || empty($contact_number) || empty($blood_group) || empty($message) || empty($recipient_name)) {
         echo "All fields are required!";
         exit();
     }
 
-    // Prepare the SQL statement to insert into blood_requests table
-    $stmt = $conn->prepare("INSERT INTO `active_donor_table` (
-  `user_id`,
-  `donor_name`,
-  `contact_number`,
-  `blood_group`,
-  `message`,
-  `recipient_name`
-) VALUES (?, ?, ?,?,?,? 
-);
-");
-    $stmt->bind_param("isssss", $user['user_id'], $donor_name, $contact_number,$blood_group,$message,$recipient_name);
+    // Set default values for created_at and request_status
+    $created_at = date('Y-m-d H:i:s'); // Default to the current timestamp
+    $request_status = 'pending'; // Default request status
+
+    // Prepare the SQL statement to insert into active_donor_table
+    $stmt = $conn->prepare("INSERT INTO active_donor_table (user_id, donor_name, contact_number, blood_group, message, created_at, needed_time, request_status, recipient_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+    // Bind parameters
+    $stmt->bind_param("issssssss", 
+        $user['user_id'],  // user_id (int)
+        $donor_name,      // donor_name (string)
+        $contact_number,  // contact_number (string)
+        $blood_group,     // blood_group (string)
+        $message,         // message (string)
+        $created_at,      // created_at (timestamp)
+        $needed_time,     // needed_time (time or string), can be NULL
+        $request_status,  // request_status (string)
+        $recipient_name   // recipient_name (string)
+    );
 
     // Execute the statement
     if ($stmt->execute()) {
         $submissionMessage = "Blood request to active donor submitted successfully."; // Set success message
     } else {
-        echo "Error: " . $stmt->error;
+        echo "Error: " . $stmt->error; // Output error message
     }
-
-    // Close the statement
     $stmt->close();
 }
 
 
-// Fetch all active blood requests with approved status
+// Fetch all post blood requests
 $query = "
    SELECT r.request_id, r.requested_blood_group, r.message, r.created_at, u.fullname 
    FROM blood_requests AS r
    JOIN users AS u ON r.user_id = u.user_id
 ";
-
 $bloodRequests = $conn->query($query);
 $allRequests = [];
 
 // Check for blood requests
 if ($bloodRequests->num_rows > 0) {
     while ($request = $bloodRequests->fetch_assoc()) {
-        // Include all blood requests without calculating distance
         $allRequests[] = [
             'name' => $request['fullname'],
             'requested_blood_group' => $request['requested_blood_group'],
@@ -120,6 +121,76 @@ if ($bloodRequests->num_rows > 0) {
             'created_at' => $request['created_at'],
         ];
     }
+}
+
+
+// Fetch all active donor blood requests
+// $query = "
+//     SELECT a.user_id, a.requested_blood_group, a.message, a.created_at,u.fullname, u.address 
+//    FROM blood_requests AS a
+//    JOIN users AS u ON a.user_id = u.user_id WHERE u.user_type = 'donor'
+// ";
+// Check if latitude and longitude are provided
+$donors = [];
+
+if (isset($_POST['latitude']) && isset($_POST['longitude'])) {
+    // Get latitude and longitude from POST request
+    $userLat = $_POST['latitude'];
+    $userLon = $_POST['longitude'];
+
+    // SQL query to get active donors from the database
+    $query = "
+        SELECT user_id, fullname, latitude, longitude 
+        FROM users 
+        WHERE user_type = 'donor' AND status = 1
+    ";
+
+    $result = $conn->query($query);
+
+    if ($result === false) {
+        echo json_encode(['error' => 'Database query failed']);
+        exit;
+    }
+
+    // Loop through the donors and calculate the distance
+    while ($donor = $result->fetch_assoc()) {
+        // Get the donor's latitude and longitude
+        $donorLat = $donor['latitude'];
+        $donorLon = $donor['longitude'];
+
+        // Calculate the distance between the user and the donor using the haversine formula
+        $distance = haversineDistance($userLat, $userLon, $donorLat, $donorLon);
+
+        // Add donor info with the calculated distance
+        $donors[] = [
+            'name' => $donor['fullname'],
+            'latitude' => $donorLat,
+            'longitude' => $donorLon,
+            'distance' => number_format($distance, 2)
+        ];
+    }
+} else {
+    echo json_encode(['error' => 'Latitude and longitude not provided']);
+}
+
+// Function to calculate the distance using the Haversine formula
+function haversineDistance($lat1, $lon1, $lat2, $lon2) {
+    $earthRadius = 6371; // Radius of the Earth in kilometers
+
+    // Convert degrees to radians
+    $dLat = deg2rad($lat2 - $lat1);
+    $dLon = deg2rad($lon2 - $lon1);
+
+    // Apply Haversine formula
+    $a = sin($dLat / 2) * sin($dLat / 2) +
+         cos(deg2rad($lat1)) * cos(deg2rad($lat2)) *
+         sin($dLon / 2) * sin($dLon / 2);
+    $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+
+    // Calculate the distance
+    $distance = $earthRadius * $c;
+
+    return $distance;
 }
 
 // Close the database connection
@@ -160,15 +231,6 @@ $conn->close();
             overflow-y: auto;
         }
 
-        .active-dot {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            background-color: green;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-
         @media (max-width: 768px) {
             .sidebar {
                 position: relative;
@@ -183,16 +245,25 @@ $conn->close();
                 margin-top: 20px;
             }
         }
+        button .btn{
+            width: 216px !important;
+            height: 71px !important;
+        }
+        .post_btn{
+            width: 206px !important;
+            height: 71px !important;
+        }
     </style>
 </head>
 <body>
-<?php include('index.php'); ?>    
+<?php include('index.php'); ?>
 
 <div class="main-container">
-    <h2>Welcome, <?php echo htmlspecialchars($user['fullname']); ?>!</h2>
+    <!-- <h2>Welcome, <?php echo htmlspecialchars($user['fullname']); ?>!</h2> -->
     
-    <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#requestModal">Create Blood Request</button>
-    
+   
+    <button class="btn mt-3 w-10" style="width:50px" data-bs-toggle="modal" data-bs-target="#requestModal"> <img class="post_btn" src="images\createpostbtn.png" alt="click to add post" /></button>
+ 
     <!-- Blood Request Modal -->
     <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="requestModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -221,7 +292,7 @@ $conn->close();
                             <label for="message" class="form-label">Message:</label>
                             <textarea id="message" name="message" class="form-control" rows="3" required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit Request</button>
+                        <button type="submit" name="submit_blood_request" class="btn btn-primary">Submit Request</button>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -231,7 +302,7 @@ $conn->close();
         </div>
     </div>
 
-    <div class="posts mt-4">
+    <div class="posts mt-4 w-50">
         <?php if (count($allRequests) > 0): ?>
             <?php foreach ($allRequests as $request): ?>
                 <div class="mb-4">
@@ -249,51 +320,162 @@ $conn->close();
             <p class="text-muted text-dark">No blood donation requests available from nearby donors yet.</p>
         <?php endif; ?>
     </div>
+
+    <!-- Active Donor Request Modal -->
+    <div class="modal fade" id="donorRequestModal" tabindex="-1" aria-labelledby="donorRequestModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="donorRequestModalLabel">Active Donor Request Form</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="donorRequestForm" method="POST" action="">
+                        <div class="mb-3">
+                            <label for="donor_name" class="form-label">Donor Name:</label>
+                            <input type="text" id="donor_name" name="donor_name" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="contact_number" class="form-label">Contact Number:</label>
+                            <input type="text" id="contact_number" name="contact_number" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="blood_group" class="form-label">Blood Group:</label>
+                            <select id="blood_group" name="blood_group" class="form-select" required>
+                                <option value="">Select Blood Group</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                            </select>
+                        </div>
+                        <div class="mb-3 mt-2">
+                            <label for="recipient_name" class="form-label">Recipient Name:</label>
+                            <input type="text" id="recipient_name" name="recipient_name" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="needed_time" class="form-label">Needed Time:</label>
+                            <input type="time" id="needed_time" name="needed_time" class="form-control">
+                        </div>
+
+                        <div class="mb-3 mt-2">
+                            <label for="message" class="form-label">Message:</label>
+                            <textarea id="message" name="message" class="form-control" rows="3"></textarea>
+                        </div>
+                        <button type="submit" name="submit" class="btn btn-primary">Submit Request</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="sidebar">
     <h4>Active Donors</h4>
     <ul class="list-group">
         <?php
-        // To store unique active donor names
-        $uniqueDonors = [];
-        
-        // Loop through all requests and collect unique donor names
-        foreach ($allRequests as $request) {
+        // Assuming $userLat and $userLon are defined from the user's geolocation
+        // Loop through all active donor requests and display them with distances
+        foreach ($donors as $request) {
+            // Get the donor name and location data
             $donorName = htmlspecialchars($request['name']);
-            if (!in_array($donorName, $uniqueDonors)) {
-                $uniqueDonors[] = $donorName; // Add to unique donors
-                echo "<li class='list-group-item' onclick='requestBlood(\"$donorName\")'>
-                      <span class='active-dot'></span>$donorName</li>";
-            }
+            $donorLat = $request['latitude'];
+            $donorLon = $request['longitude'];
+
+            // Calculate the distance between the user and the donor
+            $distance = haversineDistance($userLat, $userLon, $donorLat, $donorLon);
+
+            // Format the distance to 2 decimal places
+            $distanceFormatted = number_format($distance, 2);
+
+            // Display the donor name with distance
+            echo "<li class='list-group-item active-donor' data-donor-name='$donorName'>$donorName - $distanceFormatted km</li>";
         }
 
-        // If no unique donors, display a message
-        if (count($uniqueDonors) === 0) {
-            echo "<li class='list-group-item'>No active donors available.</li>";
-        }
+        // Haversine function to calculate the distance between two points (lat/lon in kilometers)
+        // function haversineDistance($lat1, $lon1, $lat2, $lon2) {
+        //     $earthRadius = 6371; // Radius of the Earth in kilometers
+        //     $dLat = deg2rad($lat2 - $lat1);  // Difference in latitude
+        //     $dLon = deg2rad($lon2 - $lon1);  // Difference in longitude
+
+        //     $a = sin($dLat / 2) * sin($dLat / 2) +
+        //          cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * 
+        //          sin($dLon / 2) * sin($dLon / 2);
+        //     $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+        //     $distance = $earthRadius * $c;  // Distance in kilometers
+
+        //     return $distance;
+        // }
         ?>
     </ul>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    // Function to request blood from the selected donor
-    function requestBlood(donorName) {
-        alert(`Requesting blood from ${donorName}.`);
-    }
-
-    // Show alert if the blood request was submitted successfully
-    <?php if (!empty($submissionMessage)): ?>
-        alert("<?php echo addslashes($submissionMessage); ?>");
-    <?php endif; ?>
-
-    // Function to set the default message when the modal opens
-    $('#requestModal').on('show.bs.modal', function () {
-        var message = "I’m undergoing a critical procedure and require B+ blood. Donations can be made at the hospital's donation center. Contact 9818455889 for more information.";
-        $('#message').val(message); // Set the message in the textarea
+    $(document).ready(function() {
+        // Handle click event for active donor names
+        $('.active-donor').click(function() {
+            // Get donor name from data attribute
+            var donorName = $(this).data('donor-name');
+            
+            // Populate the recipient name field (optional)
+            $('#recipient_name').val(donorName);
+            
+            // Show the donor request modal
+            $('#donorRequestModal').modal('show');
+        });
     });
+
+    document.getElementById('blood_group').addEventListener('change', function() {
+        let bloodType = this.value;
+        if (bloodType) {
+            // auto-generated message 
+            document.getElementById('message').value = `Urgent! We are in need of ${bloodType} blood for a patient at local hospital who requires an immediate transfusion. ` +
+                                                       `If you or someone you know has this blood type, your support could make a life-saving difference. ` +
+                                                       `Please reach out as soon as possible. Thank you for your kindness and generosity.`;
+        } else {
+            document.getElementById('message').value = ""; // Clear if no blood type selected
+        }
+    });
+
+    // Get user's current location using geolocation
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+        const userLat = position.coords.latitude;
+        const userLon = position.coords.longitude;
+
+        // Send the coordinates to PHP via AJAX for processing
+        $.ajax({
+            url: 'your_php_script.php', // Update this with the actual script that handles the AJAX request
+            method: 'POST',
+            data: {
+                latitude: userLat,
+                longitude: userLon
+            },
+            success: function(response) {
+                var donors = JSON.parse(response);
+                displayDonors(donors);
+            },
+            error: function(xhr, status, error) {
+                console.log("Error in sending geolocation to server:", error);
+            }
+        });
+    }, function(error) {
+        console.log("Error getting location: " + error.message);
+    });
+} else {
+    console.log("Geolocation is not supported by this browser.");
+}
 </script>
+
 </body>
 </html>
+

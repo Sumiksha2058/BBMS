@@ -12,8 +12,23 @@
     <script src="https://kit.fontawesome.com/ae360af17e.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css">
     <style>
-        #navbar {
+            #navbar {
             background-color: #b97272 !important;
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+        .card-title {
+            font-weight: bold;
+        }
+        .text-teal {
+            color: #17a2b8;
+        }
+        .text-orange {
+            color: #fd7e14;
         }
     </style>
 </head>

@@ -1,72 +1,170 @@
 @import url('https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100;0,500;1,700&family=Lato:wght@100&display=swap');
 
-*{
+/* Global Styles */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body{
+body {
     background-color: #EADDDD !important;
     padding-top: 85px;
 }
-.navbar{
-    background-color: #b97272 !important;
 
-    background-color: #CC6666 !important;
-    padding-top: 85px;
-}
-.navbar{
+/* Navbar */
+.navbar {
     background-color: #2F3936 !important;
-
     box-shadow: 0px 2px 7px #cbcfce;
-    padding: .26em 7em !important;
-   
+    padding: 0.26em 7em !important;
 }
-.nav-link{
+
+.nav-link {
     color: #E5E4E2 !important;
     margin-right: 7px;
 }
 
-.main_wapper{
+a#nav-link {
+    font-family: 'Exo', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+}
+
+a.nav-link.active {
+    color: #FFDB58 !important;
+    border-radius: 12px !important;
+}
+
+/* Main Wrapper */
+.main_wapper {
     background-color: #fff !important;
 }
 
-#tube{
-
-    width: 682px;
-    height: 420px;
-    width: 358px;
+/* Image Style for Tube */
+#tube {
+    width: 558px;
     height: 534px;
     border-radius: 2em;
 }
 
-.row h1,h3,h4{
-font-family: exo;
-
-}
-.row h1{
-    font-style:italic !important;
+/* Typography */
+.row h1, h3, h4 {
+    font-family: 'Exo', sans-serif;
 }
 
-.divider{
-width: 20%;
-
+.row h1 {
+    font-style: italic !important;
 }
-.row-cols-2 p{
-    font-family: 'lato',sans-serif;
+
+.row p {
+    font-family: 'Lato', sans-serif;
     font-style: normal;
     font-weight: 700;
-    }
+}
 
+/* Divider */
+.divider {
+    width: 20%;
+}
+
+/* Donation Page */
+.container-i {
+    margin-left: 3em;
+}
+
+#row {
+    display: flex !important;
+    justify-content: center !important;
+}
+
+#row .col-ms {
+    flex: 33.3%;
+    width: auto;
+    overflow: hidden;
+    height: 100%;
+    padding: 4px 19px;
+}
+
+.row .col img {
+    width: 100%;
+    height: 100%;
+}
+
+.container-fluid {
+    width: auto;
+}
+
+#dgallary {
+    margin: 0 6em !important;
+}
+
+/* Recipient Page */
+table {
+    border-radius: 5px;
+}
+
+/* Appointment Page */
+.appo h1 {
+    margin-top: 2.5em !important;
+    color: #CC6666 !important;
+    font-style: normal !important;
+    font-weight: 700;
+}
+
+input[type=text], input[type=email], input[type=date], input[type=time] {
+    border: none;
+    border-bottom: solid 1px #242424;
+}
+
+.appoImg img {
+    width: 600px;
+    height: 550px;
+}
+
+.appobtn {
+    background-color: #CC6666 !important;
+    color: #ffffff !important;
+}
+
+/* Footer */
+footer {
+    background-color: #222222;
+}
+
+.image {
+    background-image: url(images/reg.png) !important;
+}
+
+/* Dashboard */
+#dashbord_wapper {
+    margin-left: 0;
+    height: 100vh;
+}
+
+#dashbord {
+    padding-top: 2em;
+    background-color: #242424;
+    width: 20%;
+    height: 100% !important;
+    position: fixed;
+    overflow: hidden; 
+    box-shadow: 4px 4px 17px #1b1717;
+}
+
+.main_container {
+    overflow: auto;
+}
+
+/* Horizontal Divider Style */
 .style { 
     height: 30px; 
     border-style: solid; 
     border-color: #080808; 
     border-width: 1px 0 0 0; 
     border-radius: 20px; 
-  } 
-  .style:before { 
+} 
+
+.style:before { 
     display: block; 
     content: ""; 
     height: 30px; 
@@ -75,104 +173,32 @@ width: 20%;
     border-color: #1b1717; 
     border-width: 0 0 1px 0; 
     border-radius: 20px; 
-  }
-  
-/* donation page */
-.container-i{
-margin-left: 3em;
-}
-#row{
-    display: flex !important;
-    justify-content: center !important;
-}
-#row .col-ms{
- flex: 33.3%;
-width: auto;
-overflow: hidden;
-height: 100%;
-padding: 4px 19px;
-
-}
-.row .col img{
-    width: 100%;
-    height: 100%;
-}
-.container-fluid{
-    width: auto;
-} 
-#dgallary{
-    margin: 0 6em !important;
-}
-/* recipient */
-table{
-    border-radius: 5px;
 }
 
-/* appointment page */
-.appo h1{
-   margin-top: 2.5em !important;
-   color: #CC6666 !important;
-   font-style:normal !important;
-   font-weight: 700;
+/* Ticker Animation */
+.ticker {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
 }
 
-input[type=text],input[type=email],input[type=date],input[type=time]{
-    border: none;
-    border-bottom: solid 1px #242424;
-}
-.appoImg img{
-    width: 600px;
-    height:550;
+.ticker-text {
+    display: inline-block;
+    padding-left: 100%;
+    animation: ticker-animation 30s linear infinite;
 }
 
-.appobtn{
-    background-color: #CC6666 !important;
-    color: #ffffff !important;
+@keyframes ticker-animation {
+    0% {
+        transform: translateX(100%);
+    }
+    10% {
+        transform: translateX(0%); /* Pause momentarily at start */
+    }
+    90% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(-100%); /* Pause at end before repeating */
 }
-
-
-footer{
-    background-color: #2F3936;
 }
-.image{
-    background-image: url(images/reg.png) !important;
-}
-
-/* footer */
-
-#dashbord_wapper {
-    margin-left: 0;
-    height: 100vh;
-  }
-
-#dashbord{
-    padding-top: 2em;
-    background-color: #242424;
-    width: 20%;
-    height: 100% !important;
-    position: fixed;
-    overflow: hidden; 
-    box-shadow: 4px 4px 17px #1b1717;
-    
-}
-.main_container{
-    overflow:auto;
-}
-a#nav-link{
-    font-family: exo;
-    font-style: normal;
-    font-weight: 500;
-}
-a.nav-link.active{
-    color: #FFDB58 !important;
-    /* background-color: #14141869 !important; */
-    border-radius: 12px !important;
-    
-    
-}
-
-
-
-
-
-

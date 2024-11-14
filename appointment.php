@@ -29,8 +29,8 @@ include 'function/ReqAppointment.php';
         <div class="container">
             <div class="row">
             <div class="col col-sm-5 col-md-6  appo">
-                  <h1 class="fs-auto">Book Appointment</h1>
-                 
+                  <h4 class="fw-bold text-dark">Book Appointment</h4>
+                  <hr>
                   <!-- form of appointment -->
 
                   <form action="appointment.php" method="post" class="mt-3 row g-3 needs-validation" novalidate>

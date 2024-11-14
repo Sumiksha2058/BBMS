@@ -67,30 +67,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 include 'index.php';
 ?>
 <!-- Display Appointment Details -->
-<main id="main_container">
-    <div class="page-container">
-        <div class="appointment-container my-2">
-            <h2>Appointment Requests</h2>
-            <?php if (!empty($appointments)): ?>
-                <?php foreach ($appointments as $appointment): ?>
-                    <div class="card mb-3" id="appointment-card-<?php echo htmlspecialchars($appointment['donor_name']); ?>" style="background-color: white;">
-                        <div class="card-body">
-                            <h5 class="card-title">Recipient Name: <?php echo htmlspecialchars($appointment['donor_name']); ?></h5>
-                            <h6 class="card-text"><strong>Contact Number:</strong>  <?php echo htmlspecialchars($appointment['contact_number']); ?></h6>
-                            <p class="card-text"><strong>Date:</strong> <?php echo date("F j, Y", strtotime($appointment['created_at'])); ?></p>
-                            <p class="card-text"><strong>Time:</strong> <?php echo date("g:i A", strtotime($appointment['needed_time'])); ?></p>
-                            <p class="card-text"><strong>Request Status:</strong> <?php echo htmlspecialchars($appointment['request_status']); ?></p>
-                        </div>
+<main id="main_container" class="container my-4">
+        <div class="page-container">
+            <div class="appointment-container my-2">
+                <h4 class="fw-bold text-dark">Appointment Requests</h4>
+                <hr>
+                <?php if (!empty($appointments)): ?>
+                    <div class="row">
+                        <?php foreach ($appointments as $appointment): ?>
+                            <div class="col-md-12">
+                                <div class="card mb-4 text-dark" id="appointment-card-<?php echo htmlspecialchars($appointment['donor_name']); ?>">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-teal">Donor Name: <?php echo htmlspecialchars($appointment['donor_name']); ?></h5>
+                                        <h6 class="card-text"><strong>Contact Number:</strong> <?php echo htmlspecialchars($appointment['contact_number']); ?></h6>
+                                        <p class="card-text"><strong>Date:</strong> <?php echo date("F j, Y", strtotime($appointment['created_at'])); ?></p>
+                                        <p class="card-text"><strong>Time:</strong> <?php echo date("g:i A", strtotime($appointment['needed_time'])); ?></p>
+                                        <p class="card-text"><strong>Request Status:</strong> 
+                                            <span class="text-orange"   ><?php echo htmlspecialchars($appointment['request_status']); ?></span>
+                                        </p>
+                                    </div>
+                                    <div class="card-footer bg-transparent">
+                                        <a href="tel:<?php echo htmlspecialchars($appointment['contact_number']); ?>" class="card-link text-muted">Call Donor</a>
+                                        <i class="bi bi-telephone float-end"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <p>No appointments available.</p>
-            <?php endif; ?>
-        </div>
+                <?php else: ?>
+                    <p>No appointments available.</p>
+                <?php endif; ?>
+            </div>
 
-        <div id="response-message"></div>
-    </div>
-</main>
+            <div id="response-message"></div>
+        </div>
+    </main>
 
 <script>
 // JavaScript function to handle button clicks (this is now unused)

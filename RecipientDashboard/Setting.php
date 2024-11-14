@@ -52,15 +52,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deactivateAccount'])) 
     if ($deactivateResult['status'] === 'success') {
         // Logout and redirect to a different page if account is successfully deactivated
         session_destroy();
-        header("location: ../VitaCare/goodbye.php");
+        header("location: ../BBMS/.php");
         exit();
     }
 }
 ?>
 
-<?php include 'indexONE.php'; ?>
+<?php include 'index.php'; ?>
 
-<div class="accordion m-4" id="settingsAccordion">
+<div class="accordion" id="settingsAccordion">
     <!-- Password Change Section -->
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingOne">

@@ -1,4 +1,4 @@
-<?php include 'includes/head.php'; ?>
+<?php include 'includes\head.php';?>
 <?php include 'includes/config.php'; // Database connection ?>
 <main>
   <div class="container" id="main_wrapper">
@@ -111,13 +111,13 @@
     </div>
 
     <!-- About Us and News Feed Section -->
-    <div class="row row-cols-1 row-cols-md-2 mt-5">
-      <div class="col-md">
+    <div class="row row-cols row-cols">
+      <div class="col-md-6">
         <img class="img-fluid pb-4" id="tube" src="images/AboutUsImg.png" alt="Blood Tube">
       </div>
       
-      <div class="col-md">
-        <div class="table-responsive" style="max-height: 100%; overflow-y: auto;">
+      <div class="col-md-6">
+        <div class="table-responsive overflow-auto" style="max-height: 100%; overflow-y: auto;">
           <table class="table table-bordered table-striped rounded" id="scrollableTable">
             <thead>
               <tr><th scope="col"><h4>News Feed</h4></th></tr>

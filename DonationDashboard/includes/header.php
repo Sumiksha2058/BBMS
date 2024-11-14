@@ -5,13 +5,15 @@
     <div class="navbar-collapse navbar">
         <ul class="navbar-nav">
             <li class="nav-item dropdown">
-                <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
-                    <h5>Hello, <?php echo htmlspecialchars($user['fullname']); ?></h5>
+                <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0  text-light">
+                    <h5>Hello, <?php echo htmlspecialchars($user['fullname']); ?> <i class="fa-solid fa-caret-down"></i></h5> 
+                    
                 </a>
-                <div class="dropdown-menu dropdown-menu-end">
+
+                <div class="dropdown-menu bg-light dropdown-menu-end">
                     <a href="#" class="dropdown-item">Profile</a>
                     <a href="#" class="dropdown-item">Setting</a>
-                    <a href="#" class="dropdown-item">Logout</a>
+                    <a href="Dlogout.php" class="dropdown-item">Logout</a>
                 </div>
             </li>
         </ul>

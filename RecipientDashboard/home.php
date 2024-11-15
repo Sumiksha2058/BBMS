@@ -49,53 +49,72 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_blood_request']
 
     // Execute the statement
     if ($stmt->execute()) {
-        $submissionMessage = "Blood request submitted successfully."; // Set success message
+        $submissionMessage = "Blood request submitted successfully.";
     } else {
         echo "Error: " . $stmt->error;
     }
     $stmt->close();
 }
 
-// Fetch all blood requests (posts)
+// Handle Active Donor Request Submission
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
+    $donor_name = mysqli_real_escape_string($conn, $_POST['donor_name']);
+    $contact_number = mysqli_real_escape_string($conn, $_POST['contact_number']);
+    $blood_group = mysqli_real_escape_string($conn, $_POST['blood_group']);
+    $message = mysqli_real_escape_string($conn, $_POST['message']);
+    $recipient_name = mysqli_real_escape_string($conn, $_POST['recipient_name']);
+    $needed_time = isset($_POST['needed_time']) ? mysqli_real_escape_string($conn, $_POST['needed_time']) : null;
+    $created_at = date('Y-m-d H:i:s');
+    $request_status = 'pending';
+
+    // Validate form fields
+    if (empty($donor_name) || empty($contact_number) || empty($blood_group) || empty($message) || empty($recipient_name)) {
+        echo "All fields are required!";
+        exit();
+    }
+
+    // Prepare the SQL statement
+    $stmt = $conn->prepare("INSERT INTO active_donor_table (user_id, donor_name, contact_number, blood_group, message, created_at, needed_time, request_status, recipient_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("issssssss", $user['user_id'], $donor_name, $contact_number, $blood_group, $message, $created_at, $needed_time, $request_status, $recipient_name);
+
+    // Execute the statement
+    if ($stmt->execute()) {
+        $submissionMessage = "Blood request to active donor submitted successfully.";
+    } else {
+        echo "Error: " . $stmt->error;
+    }
+    $stmt->close();
+}
+
+// Fetch all post blood requests
 $query = "
-   SELECT r.request_id, r.requested_blood_group, r.message, r.created_at, u.fullname 
-   FROM blood_requests AS r
-   JOIN users AS u ON r.user_id = u.user_id
+    SELECT r.request_id, r.requested_blood_group, r.message, r.created_at, u.fullname 
+    FROM blood_requests AS r
+    JOIN users AS u ON r.user_id = u.user_id
 ";
 $bloodRequests = $conn->query($query);
 $allRequests = [];
 
-// Check for blood requests
 if ($bloodRequests->num_rows > 0) {
     while ($request = $bloodRequests->fetch_assoc()) {
-        $allRequests[] = [
-            'name' => $request['fullname'],
-            'requested_blood_group' => $request['requested_blood_group'],
-            'message' => $request['message'],
-            'created_at' => $request['created_at'],
-        ];
+        $allRequests[] = $request;
     }
 }
 
-// Fetch all active donors (donor specific request)
-$queryDonors = "
-SELECT * FROM users WHERE status = 1 AND user_type = 'donor' AND status = 1
-";
-$activeDonors = $conn->query($queryDonors);
+// Fetch all active donors
+$query = "SELECT fullname FROM users WHERE status = 1 AND user_type = 'donor'";
+$activeDonors = $conn->query($query);
 $allActiveDonors = [];
 
-// Check for active donors
 if ($activeDonors->num_rows > 0) {
     while ($donor = $activeDonors->fetch_assoc()) {
-        $allActiveDonors[] = [
-            'name' => $donor['fullname'],
-        ];
+        $allActiveDonors[] = $donor;
     }
 }
 
-// Close the database connection
 $conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -145,6 +164,14 @@ $conn->close();
                 margin-top: 20px;
             }
         }
+        button .btn{
+            width: 216px !important;
+            height: 71px !important;
+        }
+        .post_btn{
+            width: 206px !important;
+            height: 71px !important;
+        }
     </style>
 </head>
 <body>
@@ -154,7 +181,7 @@ $conn->close();
     <!-- <h2>Welcome, <?php echo htmlspecialchars($user['fullname']); ?>!</h2> -->
     
    
-    <button class="btn mt-3 w-10" style="width:50px" data-bs-toggle="modal" data-bs-target="#requestModal"> <img style="width:140px;" class="post_btn" src="images\createpostbtn.png" alt="click to add post" /></button>
+    <button class="btn mt-3 w-10" style="width:50px" data-bs-toggle="modal" data-bs-target="#requestModal"> <img class="post_btn" src="images\createpostbtn.png" alt="click to add post" /></button>
  
     <!-- Blood Request Modal -->
     <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="requestModalLabel" aria-hidden="true">
@@ -162,7 +189,7 @@ $conn->close();
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="requestModalLabel">Blood Request Form</h5>
-                    <button type="button"  class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="bloodRequestForm" method="POST" action="">
@@ -202,7 +229,7 @@ $conn->close();
                         <div class="card-body">
                             <h5 class="card-title text-dark"><?php echo htmlspecialchars($request['requested_blood_group']); ?> Blood Needed</h5>
                             <p class="card-text text-dark"><?php echo htmlspecialchars($request['message']); ?></p>
-                            <p class="text-dark">Posted by: <?php echo htmlspecialchars($request['name']); ?></p>
+                            <p class="text-dark">Posted by: <?php echo htmlspecialchars($request['fullname']); ?></p>
                             <p class="text-dark">Posted on: <?php echo date('F d, Y', strtotime($request['created_at'])); ?></p>
                         </div>
                     </div>
@@ -213,57 +240,53 @@ $conn->close();
         <?php endif; ?>
     </div>
 
-    <!-- Active Donor Request Modal -->
-    <div class="modal fade" id="donorRequestModal" tabindex="-1" aria-labelledby="donorRequestModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="donorRequestModalLabel">Active Donor Request Form</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="donorRequestForm" method="POST" action="">
-                        <div class="mb-3">
-                            <label for="donor_name" class="form-label">Donor Name:</label>
-                            <input type="text" id="donor_name" name="donor_name" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="contact_number" class="form-label">Contact Number:</label>
-                            <input type="text" id="contact_number" name="contact_number" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="blood_group" class="form-label">Blood Group:</label>
-                            <select id="blood_group" name="blood_group" class="form-select" required>
-                                <option value="">Select Blood Group</option>
-                                <option value="A+">A+</option>
-                                <option value="A-">A-</option>
-                                <option value="B+">B+</option>
-                                <option value="B-">B-</option>
-                                <option value="AB+">AB+</option>
-                                <option value="AB-">AB-</option>
-                                <option value="O+">O+</option>
-                                <option value="O-">O-</option>
-                            </select>
-                        </div>
-                        <div class="mb-3 mt-2">
-                            <label for="recipient_name" class="form-label">Recipient Name:</label>
-                            <input type="text" id="recipient_name" name="recipient_name" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="needed_time" class="form-label">Needed Time:</label>
-                            <input type="time" id="needed_time" name="needed_time" class="form-control">
-                        </div>
 
-                        <div class="mb-3 mt-2">
-                            <label for="message" class="form-label">Message:</label>
-                            <textarea id="message" name="message" class="form-control" rows="3"></textarea>
-                        </div>
-                        <button type="submit" name="submit" class="btn btn-primary">Submit Request</button>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
+<!-- Active Donor Request Modal -->
+<div class="modal fade" id="donorRequestModal" tabindex="-1" aria-labelledby="donorRequestModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="donorRequestModalLabel">Active Donor Request Form</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="donor_name" class="form-label">Donor Name:</label>
+                        <input type="text" id="donor_name" name="donor_name" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="contact_number" class="form-label">Contact Number:</label>
+                        <input type="text" id="contact_number" name="contact_number" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="blood_group" class="form-label">Blood Group:</label>
+                        <select id="blood_group" name="blood_group" class="form-select" required>
+                            <option value="">Select Blood Group</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="recipient_name" class="form-label">Recipient Name:</label>
+                        <input type="text" id="recipient_name" name="recipient_name" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="needed_time" class="form-label">Needed Time:</label>
+                        <input type="time" id="needed_time" name="needed_time" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message:</label>
+                        <textarea id="message" name="message" class="form-control" rows="3"></textarea>
+                    </div>
+                    <button type="submit" name="submit" class="btn btn-primary">Submit Request</button>
+                </form>
             </div>
         </div>
     </div>
@@ -272,14 +295,56 @@ $conn->close();
 <div class="sidebar">
     <h4>Active Donors</h4>
     <ul class="list-group">
-        <?php foreach ($allActiveDonors as $donor): ?>
-           <button> <li class="list-group-item">
-                <strong><?php echo htmlspecialchars($donor['name']); ?></strong>         
-            </li></button>
-        <?php endforeach; ?>
+        <?php
+        $uniqueDonors = []; // Track unique donors
+        foreach ($allActiveDonors as $donor) {
+            $donorName = htmlspecialchars($donor['fullname']);
+            if (!in_array($donorName, $uniqueDonors)) {
+                $uniqueDonors[] = $donorName;
+                echo "<li class='list-group-item active-donor' data-bs-toggle='modal' data-bs-target='#donorRequestModal' style='cursor: pointer'; data-donor-name='$donorName'>$donorName</li>";
+
+            }
+        }
+        ?>
     </ul>
 </div>
 
 <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    // When a donor name is clicked
+    $('.active-donor').click(function() {
+        // Get the donor name from the clicked list item
+        var donorName = $(this).data('donor-name');
+        
+        // Set the donor name in the modal's donor_name input field
+        $('#donor_name').val(donorName);
+        
+        // Set the recipient name (from the session data) in the modal's recipient_name input field
+        var recipientName = "<?php echo htmlspecialchars($user['fullname']); ?>";
+        $('#recipient_name').val(recipientName);
+
+        // Show the Active Donor Request Modal
+        $('#donorRequestModal').modal('show');
+    });
+});
+
+document.getElementById('blood_group').addEventListener('change', function() {
+    let bloodType = this.value;
+    let messageField = document.getElementById('message');
+
+    if (bloodType) {
+        // Auto-generated message based on selected blood group
+        let message = `Urgent! We are in need of ${bloodType} blood for a patient at a local hospital who requires an immediate transfusion. If you or someone you know has this blood type, your support could make a life-saving difference. Please reach out as soon as possible. Thank you for your kindness and generosity.`;
+
+        messageField.value = message;
+    } else {
+        messageField.value = ""; // Clear if no blood type selected
+    }
+});
+
+</script>
+
 </body>
 </html>

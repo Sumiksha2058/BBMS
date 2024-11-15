@@ -37,7 +37,7 @@ if (!$stmt->execute()) {
 $result = $stmt->get_result();
 
 // Fetch total notifications from the active donor table
-$stmt = $conn->prepare("SELECT ad.*, u.* FROM active_donor_table AS ad JOIN vitacare_db.users AS u ON ad.user_id = u.user_id WHERE u.user_type = 'recipient'");
+$stmt = $conn->prepare("SELECT user_id, fullname, latitude, longitude FROM users WHERE user_type = 'donor' AND status = 1");
 $stmt->execute();
 $totalResult = $stmt->get_result();
 

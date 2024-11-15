@@ -82,6 +82,18 @@ if ($bloodRequests->num_rows > 0) {
 <?php
 include 'indexONE.php';
 ?>
+<style>
+     .avatar-circle {
+        width: 45px;
+        height: 45px;
+        background-color: #007bff; /* Change this color as desired */
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+     }
+</style>
 <main class="col-md-9 ms-sm-auto col-lg-10 px-4 mt-3">
     <div class="row">
         <div class="col md-6">
@@ -105,23 +117,34 @@ include 'indexONE.php';
 </div>
             <!-- Display Blood Requests (Posts) -->
             <div class="posts mt-4 w-80">
-            <?php if (count($allRequests) > 0): ?>
-                <?php foreach ($allRequests as $request): ?>
-                    <div class="mb-4">
-                        <div class="card" style="background-color: #d6b2b2;">
-                            <div class="card-body">
-                                <h5 class="card-title text-dark"><?php echo htmlspecialchars($request['requested_blood_group']); ?> Blood Needed</h5>
-                                <p class="card-text text-dark"><?php echo htmlspecialchars($request['message']); ?></p>
-                                <p class="text-dark">Posted by: <?php echo htmlspecialchars($request['name']); ?></p>
-                                <p class="text-dark">Posted on: <?php echo date('F d, Y', strtotime($request['created_at'])); ?></p>
+        <?php if (count($allRequests) > 0): ?>
+            <?php foreach ($allRequests as $request): ?>
+                <div class="mb-4">
+                    <div class="card" style="background-color: #d6b2b2;">
+                        <div class="card-body" id="searchPost">
+
+                            <div  class="d-flex align-items-center">
+                            <h4 class="card-title text-teal d-flex align-items-center">
+                                <span class="avatar-circle text-white me-2">
+                                        <?php echo strtoupper(substr($request['name'], 0, 1)); ?>    
+                                </span>
+                            </h4>
+                           
+                                    <div class="flex-grow-1">
+                                    <h5 class="mb-1 fw-bold text-primary"> <?php echo htmlspecialchars($request['name']); ?></h5>
+                                    <p class="text-dark"><?php echo date('F d, Y', strtotime($request['created_at'])); ?></p>   
+                                </div>
                             </div>
+                            <h5 class="card-title text-dark"><?php echo htmlspecialchars($request['requested_blood_group']); ?> Blood Needed</h5>
+                            <p class="card-text text-dark"><?php echo htmlspecialchars($request['message']); ?></p>
                         </div>
                     </div>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <p class="text-muted text-dark">No blood donation requests available from nearby donors yet.</p>
-            <?php endif; ?>
-        </div>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p class="text-muted text-dark">No blood donation requests available from nearby donors yet.</p>
+        <?php endif; ?>
+    </div>
         </main>
     </div>
                 

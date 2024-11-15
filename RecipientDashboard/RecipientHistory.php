@@ -11,7 +11,7 @@ $email = $_SESSION['email'];
 
 // Fetch user information
 $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
-$stmt->bind_param("s", $email); // 's' means string type for the parameter
+$stmt->bind_param("s", $email);
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -25,11 +25,15 @@ $stmt->close();
 
 // Fetch accepted notifications from the active donor table
 $stmt = $conn->prepare("SELECT ad.*, u.* FROM active_donor_table AS ad JOIN vitacare_db.users AS u ON ad.user_id = u.user_id WHERE u.user_type = 'recipient' && ad.request_status = 'accept'");
-
+// Check if the statement was prepared successfully
 if ($stmt === false) {
     die('Prepare failed: ' . htmlspecialchars($conn->error));
 }
 
+// Bind the email parameter
+// $stmt->bind_param("s", $email);
+
+// Execute the statement and check for execution errors
 if (!$stmt->execute()) {
     die('Execute failed: ' . htmlspecialchars($stmt->error));
 }
@@ -37,7 +41,7 @@ if (!$stmt->execute()) {
 $result = $stmt->get_result();
 
 // Fetch total notifications from the active donor table
-$stmt = $conn->prepare("SELECT user_id, fullname, latitude, longitude FROM users WHERE user_type = 'donor' AND status = 1");
+$stmt = $conn->prepare("SELECT ad.*, u.* FROM active_donor_table AS ad JOIN vitacare_db.users AS u ON ad.user_id = u.user_id WHERE u.user_type = 'recipient'");
 $stmt->execute();
 $totalResult = $stmt->get_result();
 
@@ -51,7 +55,7 @@ include 'functions/serachDonor.php';
         <div class="appointment-container my-2">
             <div class="row">
                 <div class="col-md-6">
-                    <h4 class="mb-4 text-dark">Accepted Notification</h4>
+                    <h4 class="mb-4 text-dark">Accepted Notifications</h4>
                 </div>
                 <div class="col-md-6">
                     <form method="GET" action="functions/serachDonor.php" class="d-flex" onsubmit="searchDonor(event)">
@@ -65,29 +69,18 @@ include 'functions/serachDonor.php';
 
             <hr class="divider text-dark">
 
-            <table class="table table-striped table-hover">
+            <table class="table table-striped table-hover ">
                 <thead>
                     <tr class="text-dark" style="background-color: #D6B2B2;">
-                        <th>Recipient Name</th>
+                        <th>Donor Name</th>
                         <th>Date</th>
                         <th>Blood Group</th>
                     </tr>
                 </thead>
-                <tbody id="acceptedNotifications">
+                <tbody>
                     <?php
                     if ($result->num_rows > 0) {
-                        $donors = [];
                         while ($notification = $result->fetch_assoc()) {
-                            $donors[] = $notification;
-                        }
-
-                        // Sort donors array by donor name (ascending order)
-                        usort($donors, function($a, $b) {
-                            return strcmp(strtolower($a['donor_name']), strtolower($b['donor_name']));
-                        });
-
-                        // Display sorted notifications
-                        foreach ($donors as $notification) {
                             echo "<tr class='text-dark'>
                                     <td class='text-dark'>" . htmlspecialchars($notification['donor_name']) . "</td>
                                     <td class='text-dark'>" . htmlspecialchars($notification['needed_time']) . "</td>
@@ -101,31 +94,21 @@ include 'functions/serachDonor.php';
                 </tbody>
             </table>
 
-            <h4 class="mb-4 text-dark">Total Notification</h4>
+            <h4 class="mb-4 text-dark">Total Donors</h4>
             <hr class="divider text-dark">
-            <table class="table table-striped table-hover">
+        
+            <table class="table table-striped table-hover ">
                 <thead>
                     <tr class="text-dark" style="background-color: #D6B2B2;">
-                        <th>Recipient Name</th>
+                        <th>Donor Name</th>
                         <th>Date</th>
                         <th>Blood Group</th>
                     </tr>
                 </thead>
-                <tbody id="totalNotifications">
+                <tbody>
                     <?php
                     if ($totalResult->num_rows > 0) {
-                        $totalDonors = [];
                         while ($notification = $totalResult->fetch_assoc()) {
-                            $totalDonors[] = $notification;
-                        }
-
-                        // Sort donors array by donor name (ascending order)
-                        usort($totalDonors, function($a, $b) {
-                            return strcmp(strtolower($a['donor_name']), strtolower($b['donor_name']));
-                        });
-
-                        // Display sorted notifications
-                        foreach ($totalDonors as $notification) {
                             echo "<tr class='text-dark'>
                                     <td class='text-dark'>" . htmlspecialchars($notification['donor_name']) . "</td>
                                     <td class='text-dark'>" . htmlspecialchars($notification['needed_time']) . "</td>
@@ -138,12 +121,13 @@ include 'functions/serachDonor.php';
                     ?>
                 </tbody>
             </table>
+        
         </div>
     </div>
 </main>
 
 <script>
-// JavaScript to handle donor search with binary search
+// JavaScript to handle donor search
 function searchDonor(event) {
     event.preventDefault();
     
@@ -158,32 +142,16 @@ function searchDonor(event) {
     let acceptedRows = Array.from(acceptedTable.getElementsByTagName("tr"));
     let totalRows = Array.from(totalTable.getElementsByTagName("tr"));
 
-    // Function to perform binary search
-    function binarySearch(rows, target) {
-        let left = 0;
-        let right = rows.length - 1;
-        while (left <= right) {
-            let mid = Math.floor((left + right) / 2);
-            let rowName = rows[mid].cells[0].textContent.toLowerCase();
-            if (rowName === target) {
-                return mid;
-            } else if (rowName < target) {
-                left = mid + 1;
-            } else {
-                right = mid - 1;
-            }
-        }
-        return -1; // Not found
-    }
-
-    // Perform binary search on accepted rows and total rows
+    // Function to filter rows based on the search term
     function filterRows(rows) {
-        const index = binarySearch(rows, searchInput);
-        if (index !== -1) {
-            rows[index].style.display = ""; // Show the row if found
-        } else {
-            rows.forEach(row => row.style.display = "none"); // Hide all if no match
-        }
+        rows.forEach(row => {
+            let donorName = row.cells[0].textContent.toLowerCase();
+            if (donorName.includes(searchInput)) {
+                row.style.display = ""; // Show row if it matches
+            } else {
+                row.style.display = "none"; // Hide row if no match
+            }
+        });
     }
 
     // Filter rows in both tables

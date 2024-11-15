@@ -104,11 +104,11 @@
     </div>
 
     <!-- Headline section -->
-    <div class="row row-cols-1 row-cols-md-2 mt-5">
+    <!-- <div class="row row-cols-1 row-cols-md-2 mt-5">
       <div class="col-md-12">
         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut aspernatur debitis neque consequuntur vitae impedit, accusantium mollitia in odio. Est, nihil.</p>
       </div>
-    </div>
+    </div> -->
 
     <!-- About Us and News Feed Section -->
     <div class="row row-cols row-cols">

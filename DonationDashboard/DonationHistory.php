@@ -58,7 +58,7 @@ $totalResult = $stmt->get_result();
                     <tr class="text-dark" style="background-color: #D6B2B2;">
                         <th>Recipient Name</th>
                         <th>Date</th>
-                        <th>Location</th>
+                        <th>Blood Group</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -68,7 +68,7 @@ $totalResult = $stmt->get_result();
                             echo "<tr class='text-dark'>
                                     <td class='text-dark'>" . htmlspecialchars($notification['recipient_name']) . "</td>
                                     <td class='text-dark'>" . htmlspecialchars($notification['needed_time']) . "</td>
-                                    <td class='text-dark'>" . htmlspecialchars($notification['address']) . "</td>
+                                    <td class='text-dark'>" . htmlspecialchars($notification['blood_group']) . "</td>
                                   </tr>";
                         }
                     } else {
@@ -85,7 +85,7 @@ $totalResult = $stmt->get_result();
                     <tr class="text-dark" style="background-color: #D6B2B2;">
                         <th>Recipient Name</th>
                         <th>Date</th>
-                        <th>Location</th>
+                        <th>Blood Group</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -151,17 +151,18 @@ $conn->close();
 <?php include('index.php'); ?>
 
 <div class="main-container">
-    <button class="btn mt-3 " style="width:50px" data-bs-toggle="modal" data-bs-target="#requestModal">
-        <img class="post_btn" style="width:120px;" src="images\createpostbtn.png" alt="click to add post" />
-    </button>
-
+    <!-- <h2>Welcome, <?php echo htmlspecialchars($user['fullname']); ?>!</h2> -->
+    
+   
+    <button class="btn mt-3 w-10" style="width:50px" data-bs-toggle="modal" data-bs-target="#requestModal"> <img style="width:140px;" class="post_btn" src="images\createpostbtn.png" alt="click to add post" /></button>
+ 
     <!-- Blood Request Modal -->
     <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="requestModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="requestModalLabel">Blood Request Form</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button"  class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="bloodRequestForm" method="POST" action="">
@@ -193,7 +194,6 @@ $conn->close();
         </div>
     </div>
 
-    <!-- Display Blood Requests (Posts) -->
     <div class="posts mt-4 w-50">
         <?php if (count($allRequests) > 0): ?>
             <?php foreach ($allRequests as $request): ?>
@@ -213,16 +213,69 @@ $conn->close();
         <?php endif; ?>
     </div>
 
+    <!-- Active Donor Request Modal -->
+    <div class="modal fade" id="donorRequestModal" tabindex="-1" aria-labelledby="donorRequestModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="donorRequestModalLabel">Active Donor Request Form</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="donorRequestForm" method="POST" action="">
+                        <div class="mb-3">
+                            <label for="donor_name" class="form-label">Donor Name:</label>
+                            <input type="text" id="donor_name" name="donor_name" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="contact_number" class="form-label">Contact Number:</label>
+                            <input type="text" id="contact_number" name="contact_number" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="blood_group" class="form-label">Blood Group:</label>
+                            <select id="blood_group" name="blood_group" class="form-select" required>
+                                <option value="">Select Blood Group</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                            </select>
+                        </div>
+                        <div class="mb-3 mt-2">
+                            <label for="recipient_name" class="form-label">Recipient Name:</label>
+                            <input type="text" id="recipient_name" name="recipient_name" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="needed_time" class="form-label">Needed Time:</label>
+                            <input type="time" id="needed_time" name="needed_time" class="form-control">
+                        </div>
+
+                        <div class="mb-3 mt-2">
+                            <label for="message" class="form-label">Message:</label>
+                            <textarea id="message" name="message" class="form-control" rows="3"></textarea>
+                        </div>
+                        <button type="submit" name="submit" class="btn btn-primary">Submit Request</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="sidebar">
     <h4>Active Donors</h4>
     <ul class="list-group">
         <?php foreach ($allActiveDonors as $donor): ?>
-            <li class="list-group-item">
-                <strong><?php echo htmlspecialchars($donor['name']); ?></strong>
-              
-            </li>
+           <button> <li class="list-group-item">
+                <strong><?php echo htmlspecialchars($donor['name']); ?></strong>         
+            </li></button>
         <?php endforeach; ?>
     </ul>
 </div>

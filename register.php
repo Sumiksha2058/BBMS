@@ -1,6 +1,6 @@
-<?php
+<!-- <?php
 include 'function/UserRegister.php';
-?>
+?> -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -43,7 +43,7 @@ include 'includes/head.php'
                 <p class="alert alert-success"><?php echo $_GET['success']; ?></p>
             <?php } ?>
 
-            <form method="post" action="register.php" id="registrationForm" class="needs-validation" novalidate>
+            <form method="post" action="function/UserRegister.php" id="registrationForm" class="needs-validation" novalidate>
 
                 <!-- User Type -->
                 <div class="row mb-3">

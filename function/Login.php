@@ -54,7 +54,7 @@ if (isset($_POST['login'])) {
                 }
 
                 // Redirect based on user type
-                $redirectPage = ($userType === 'donor') ? "DonationDashboard/index.php" : "RecipientDashboard/index.php";
+                $redirectPage = ($userType === 'donor') ? "DonationDashboard/index.php" : "RecipientDashboard/home.php";
                 header("Location: $redirectPage");
                 exit();
             } else {

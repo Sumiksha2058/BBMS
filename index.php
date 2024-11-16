@@ -156,11 +156,11 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-
+<!-- 
   <?php
     include 'includes/head.php';
    ?>
-    
+     -->
     <!-- main container starts from here -->
 <main>
     <div class="container " id="mian_wapper">

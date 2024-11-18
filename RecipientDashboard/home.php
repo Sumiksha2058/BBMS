@@ -29,6 +29,11 @@ if ($result->num_rows === 0) {
 $user = $result->fetch_assoc();
 $stmt->close();
 
+// if (empty($user['latitude']) || empty($user['longitude'])) {
+//     die("Latitude and longitude are not set for this user.");
+// }
+
+
 $submissionMessage = ""; // Variable to hold submission message
 
 // Handle Blood Request Form Submission
@@ -55,6 +60,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit_blood_request']
     }
     $stmt->close();
 }
+
+// Fetch all post blood requests
+$query = "
+    SELECT r.request_id, r.requested_blood_group, r.message, r.created_at, u.fullname 
+    FROM blood_requests AS r
+    JOIN users AS u ON r.user_id = u.user_id
+";
+$bloodRequests = $conn->query($query);
+$allRequests = [];
+
 
 // Handle Active Donor Request Submission
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
@@ -86,33 +101,72 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
     $stmt->close();
 }
 
-// Fetch all post blood requests
-$query = "
-    SELECT r.request_id, r.requested_blood_group, r.message, r.created_at, u.fullname 
-    FROM blood_requests AS r
-    JOIN users AS u ON r.user_id = u.user_id
-";
-$bloodRequests = $conn->query($query);
-$allRequests = [];
+// Function to calculate distance between two latitude/longitude points using Haversine formula
+function calculateDistance($lat1, $lon1, $lat2, $lon2) {
+    $earthRadius = 6371; // Radius of the Earth in kilometers
 
-if ($bloodRequests->num_rows > 0) {
-    while ($request = $bloodRequests->fetch_assoc()) {
-        $allRequests[] = $request;
-    }
+    // Convert degrees to radians
+    $lat1 = deg2rad($lat1);
+    $lon1 = deg2rad($lon1);
+    $lat2 = deg2rad($lat2);
+    $lon2 = deg2rad($lon2);
+
+    // Haversine formula
+    $dLat = $lat2 - $lat1;
+    $dLon = $lon2 - $lon1;
+
+    $a = sin($dLat / 2) * sin($dLat / 2) +
+         cos($lat1) * cos($lat2) *
+         sin($dLon / 2) * sin($dLon / 2);
+    $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+
+    $distance = $earthRadius * $c; // Distance in kilometers
+    return $distance;
 }
 
-// Fetch all active donors
-$query = "SELECT fullname FROM users WHERE status = 1 AND user_type = 'donor'";
-$activeDonors = $conn->query($query);
+// Fetch recipient latitude and longitude
+$stmt = $conn->prepare("SELECT latitude, longitude FROM users WHERE email = ?");
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$result = $stmt->get_result();
+$recipient = $result->fetch_assoc();
+$recipientLatitude = $recipient['latitude'];
+$recipientLongitude = $recipient['longitude'];
+$stmt->close();
+
+// Fetch active donors and calculate distance
+$query = "
+SELECT user_id, fullname, latitude, longitude
+FROM users
+WHERE latitude IS NOT NULL AND longitude IS NOT NULL AND user_type = 'donor' AND status = 1
+";
+$stmt = $conn->prepare($query);
+$stmt->execute();
+$result = $stmt->get_result();
 $allActiveDonors = [];
 
-if ($activeDonors->num_rows > 0) {
-    while ($donor = $activeDonors->fetch_assoc()) {
+if ($result->num_rows > 0) {
+    while ($donor = $result->fetch_assoc()) {
+        $donorLatitude = $donor['latitude'];
+        $donorLongitude = $donor['longitude'];
+        
+        // Calculate distance only if recipient's coordinates exist
+        if (isset($recipientLatitude, $recipientLongitude)) {
+            $distance = calculateDistance($recipientLatitude, $recipientLongitude, $donorLatitude, $donorLongitude);
+            $donor['distance'] = round($distance, 2);  // Add distance to donor
+        }
+
         $allActiveDonors[] = $donor;
     }
 }
+$stmt->close();
+
+
+
+
 
 $conn->close();
+
 ?>
 
 
@@ -295,17 +349,13 @@ $conn->close();
 <div class="sidebar">
     <h4>Active Donors</h4>
     <ul class="list-group">
-        <?php
-        $uniqueDonors = []; // Track unique donors
-        foreach ($allActiveDonors as $donor) {
-            $donorName = htmlspecialchars($donor['fullname']);
-            if (!in_array($donorName, $uniqueDonors)) {
-                $uniqueDonors[] = $donorName;
-                echo "<li class='list-group-item active-donor' data-bs-toggle='modal' data-bs-target='#donorRequestModal' style='cursor: pointer'; data-donor-name='$donorName'>$donorName</li>";
-
-            }
-        }
-        ?>
+        <?php foreach ($allActiveDonors as $donor): ?>
+            <li class='list-group-item active-donor' data-bs-toggle='modal' data-bs-target='#donorRequestModal' 
+    style='cursor: pointer;' data-donor-name='<?php echo htmlspecialchars($donor['fullname']); ?>' 
+    data-donor-distance='<?php echo $donor['distance']; ?>'>
+    <?php echo htmlspecialchars($donor['fullname']) . ' / ' . $donor['distance'] . ' km'; ?>
+</li>
+        <?php endforeach; ?>
     </ul>
 </div>
 

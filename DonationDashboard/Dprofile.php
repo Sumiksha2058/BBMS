@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <main id="main_container">
     <div class="page-container">
-        <div class="profile-content">
+        <div class="profile-content mt-4">
             <h4 class="fw-bold text-dark">User Profile</h4>
             <hr>
 
